@@ -40,21 +40,38 @@ class _loginScreenState extends State<loginScreen> {
               const Spacer(flex: 2),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 48),
-                child: TextFormField(
+                child: new TextField(
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    labelText: 'E-mail',
-                    errorText: 'Error message',
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                    labelText: 'Email',
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: Colors.white, width: 1.0),
                     ),
+                    focusedBorder: const OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white)),
                   ),
                 ),
+                // child: new TextField(
+                //   style: TextStyle(color: Colors.white),
+                //   decoration: InputDecoration(
+                //     labelText: 'E-mail',
+                //     errorText: 'Error message',
+                //     enabledBorder: const OutlineInputBorder(
+                //       borderSide: BorderSide(color: Colors.white),
+                //     ),
+                //     focusedBorder: OutlineInputBorder(
+                //       borderSide: const BorderSide(
+                //         color: Colors.white,
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ),
               Padding(
                 padding: const EdgeInsets.only(
                     left: 48, right: 48, bottom: 60, top: 16),
-                child: TextFormField(
+                child: TextField(
                   style: TextStyle(color: Color(0xffb3b3b3)),
                   decoration: InputDecoration(
                     labelText: 'Password',
