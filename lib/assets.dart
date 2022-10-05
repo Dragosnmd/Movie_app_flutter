@@ -1,9 +1,10 @@
 class Assets {
   static const String _images = 'assets/images/';
 
-  static const String background = '${_images}Background.svg';
+  static const String background = '${_images}background.png';
   static const String login = '${_images}login.svg';
   static const String loginLogo = '${_images}loginLogo.png';
+  static const String popCornBucket = '${_images}popCornBucket.png';
   static const String search = '${_images}search.png';
   static const String appScreen1 = '${_images}whiteAppScreen_adobe_express.svg';
   static const String appScreen2 = '${_images}appScreen2.svg';
