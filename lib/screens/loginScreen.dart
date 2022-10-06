@@ -15,97 +15,97 @@ class _loginScreenState extends State<loginScreen> {
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        constraints: const BoxConstraints.expand(),
-        color: const Color(0xffE41F2D),
-        child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const HeaderComponent(),
-              RichText(
-                  text: TextSpan(
-                      text: 'Welcome',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 28,
-                      ))),
-              RichText(
-                  text: TextSpan(
-                      text: 'Please enter your credentials',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ))),
-              const Spacer(flex: 2),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 48),
-                child: new TextField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(color: Colors.white, width: 1.0),
-                    ),
-                    focusedBorder: const OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white)),
+      backgroundColor: const Color(0xffE41F2D),
+      body: Column(
+          // crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const HeaderComponent(),
+            RichText(
+                //Text
+                text: TextSpan(
+                    text: 'Welcome',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28,
+                    ))),
+            RichText(
+                //change to Text
+                text: TextSpan(
+                    text: 'Please enter your credentials',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ))),
+            const Spacer(flex: 2),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 48),
+              child: new TextField(
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(color: Colors.white, width: 1.0),
                   ),
-                ),
-                // child: new TextField(
-                //   style: TextStyle(color: Colors.white),
-                //   decoration: InputDecoration(
-                //     labelText: 'E-mail',
-                //     errorText: 'Error message',
-                //     enabledBorder: const OutlineInputBorder(
-                //       borderSide: BorderSide(color: Colors.white),
-                //     ),
-                //     focusedBorder: OutlineInputBorder(
-                //       borderSide: const BorderSide(
-                //         color: Colors.white,
-                //       ),
-                //     ),
-                //   ),
-                // ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 48, right: 48, bottom: 60, top: 16),
-                child: TextField(
-                  style: TextStyle(color: Color(0xffb3b3b3)),
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    errorText: 'Error message',
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 5)),
-                    suffixIcon: Icon(
-                      Icons.remove_red_eye_outlined,
-                    ),
-                  ),
+                  focusedBorder: const OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.white)),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 60),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xfff7c04a),
-                    padding: EdgeInsets.symmetric(horizontal: 75),
+              // child: new TextField(
+              //   style: TextStyle(color: Colors.white),
+              //   decoration: InputDecoration(
+              //     labelText: 'E-mail',
+              //     errorText: 'Error message',
+              //     enabledBorder: const OutlineInputBorder(
+              //       borderSide: BorderSide(color: Colors.white),
+              //     ),
+              //     focusedBorder: OutlineInputBorder(
+              //       borderSide: const BorderSide(
+              //         color: Colors.white,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 48, right: 48, bottom: 60, top: 16),
+              child: TextFormField(
+                style: TextStyle(color: Color(0xffb3b3b3)),
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  // errorText: 'Error message',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white, width: 5)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white, width: 5)),
+                  suffixIcon: Icon(
+                    Icons.remove_red_eye_outlined,
                   ),
-                  child: const Text('Login'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
-                    );
-                  },
                 ),
               ),
-              const Spacer(
-                flex: 1,
-              )
-            ]),
-      ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 60),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xfff7c04a),
+                  padding: EdgeInsets.symmetric(horizontal: 75),
+                ),
+                child: const Text('Login'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  );
+                },
+              ),
+            ),
+            const Spacer(
+              flex: 1,
+            )
+          ]),
     );
   }
 }
