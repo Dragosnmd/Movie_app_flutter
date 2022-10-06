@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/assets.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:movie_app/screens/loginScreen.dart';
-import 'package:movie_app/widgets/stars.dart';
+import 'package:movie_app/screens/screens.dart';
 import 'package:tmdb_api/tmdb_api.dart';
-import 'package:flutter/widgets.dart';
-import '../widgets/MovieList.dart';
 import '../widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
