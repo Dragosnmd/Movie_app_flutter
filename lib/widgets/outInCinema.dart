@@ -1,58 +1,35 @@
 import 'package:flutter/material.dart';
 
 class OutInCinema extends StatelessWidget {
-  final List outInCinema;
+  final List content;
+  final String _baseURL = 'https://image.tmdb.org/t/p/w500';
 
-  const OutInCinema({Key? key, required this.outInCinema}) : super(key: key);
+  // final _pageController = PageController();
+
+  const OutInCinema({Key? key, required this.content}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Container(
-              constraints: const BoxConstraints(minWidth: 72),
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(4),
-                      topRight: Radius.circular(4)),
-                  color: Colors.red),
-            ),
-          ),
-          SizedBox(height: 10),
-          Container(
-              height: 200,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: outInCinema.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      padding: EdgeInsets.all(5),
-                      width: 100,
-                      child: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      'https://image.tmdb.org/t/p/w500' +
-                                          outInCinema[index]['backdrop_path']),
-                                  fit: BoxFit.cover),
-                            ),
-                            height: 150,
-                          ),
-                          SizedBox(height: 5),
-                        ],
-                      ),
-                    );
-                  }))
-        ],
-      ),
-    );
+        child: Column(
+      children: <Widget>[
+        Container(
+            margin: EdgeInsets.symmetric(vertical: 16),
+            height: 240,
+            // decoration: BoxDecoration(color: Colors.green),
+            child: PageView.builder(
+              itemCount: content.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              _baseURL + content[index]['backdrop_path']),
+                          fit: BoxFit.cover)),
+                );
+              },
+            ))
+      ],
+    ));
   }
 }

@@ -34,13 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
     Map topRatedResult = await tmdbWithCustomLogs.v3.movies.getTopRated();
     Map popularMoviesResult = await tmdbWithCustomLogs.v3.movies.getPopular();
     Map airingTodayResult = await tmdbWithCustomLogs.v3.movies.getNowPlaying();
-    // Map outInCinema = await tmdbWithCustomLogs.v3.movies.getLatest();
+    Map outInCinemaResult = await tmdbWithCustomLogs.v3.movies.getLatest();
 
     setState(() {
       topRatedMovies = topRatedResult['results'];
       popularMovies = popularMoviesResult['results'];
       airingToday = airingTodayResult['results'];
-      // outInCinema = outInCinemaResult['results'];
+      outInCinema = outInCinemaResult['results'];
     });
     print(topRatedResult);
   }
@@ -68,6 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: ListView(
         children: [
+          OutInCinema(content: outInCinema),
           Stars(title: 'stars'),
           MovieList(title: 'Top Rated Movies', content: topRatedMovies),
           MovieList(title: 'Popular Movies', content: popularMovies),

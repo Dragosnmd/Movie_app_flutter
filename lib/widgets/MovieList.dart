@@ -18,16 +18,16 @@ class MovieList extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Container(
               child: Text(title),
-              constraints: const BoxConstraints(minWidth: 72),
-              decoration: const BoxDecoration(
+              constraints: BoxConstraints(minWidth: 72),
+              decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(4),
                       topRight: Radius.circular(4)),
-                  color: Colors.red),
+                  color: Theme.of(context).primaryColor),
             ),
           ),
           SizedBox(height: 8),
-          Container(
+          SizedBox(
               height: 192,
               child: ListView.builder(
                   padding: EdgeInsets.all(8),

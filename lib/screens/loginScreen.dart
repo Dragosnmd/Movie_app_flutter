@@ -14,59 +14,65 @@ class _loginScreenState extends State<loginScreen> {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
+    return Theme(
+        data: ThemeData(
+            backgroundColor: Color(0xffE41F2D),
+            brightness: Brightness.dark,
+            // primaryColor: Colors.white,
+            primarySwatch: Colors.grey),
+        child: LoginContent());
+  }
+}
+
+class HeaderComponent extends StatelessWidget {
+  const HeaderComponent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      //fit: StackFit.expand,
+      alignment: Alignment.center,
+      children: [
+        Image.asset(Assets.whiteAppScreen,
+            width: double.infinity, fit: BoxFit.fill),
+        Image.asset(Assets.popCornBucket)
+      ],
+    );
+  }
+}
+
+class LoginContent extends StatelessWidget {
+  const LoginContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffE41F2D),
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Column(
           // crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const HeaderComponent(),
-            RichText(
-                //Text
-                text: TextSpan(
-                    text: 'Welcome',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 28,
-                    ))),
-            RichText(
-                //change to Text
-                text: TextSpan(
-                    text: 'Please enter your credentials',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ))),
-            const Spacer(flex: 2),
+            Text('Welcome',
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineMedium
+                    ?.copyWith(color: Colors.white)),
+            Text('Please enter your credentials',
+                style: Theme.of(context).textTheme.titleMedium),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 48),
-              child: new TextField(
+              child: TextFormField(
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  enabledBorder: const OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(color: Colors.white, width: 1.0),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white, width: 1.0),
                   ),
-                  focusedBorder: const OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white)),
                 ),
               ),
-              // child: new TextField(
-              //   style: TextStyle(color: Colors.white),
-              //   decoration: InputDecoration(
-              //     labelText: 'E-mail',
-              //     errorText: 'Error message',
-              //     enabledBorder: const OutlineInputBorder(
-              //       borderSide: BorderSide(color: Colors.white),
-              //     ),
-              //     focusedBorder: OutlineInputBorder(
-              //       borderSide: const BorderSide(
-              //         color: Colors.white,
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ),
             Padding(
               padding: const EdgeInsets.only(
@@ -75,11 +81,12 @@ class _loginScreenState extends State<loginScreen> {
                 style: TextStyle(color: Color(0xffb3b3b3)),
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  // errorText: 'Error message',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 5)),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white, width: 1)),
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 5)),
+                      borderSide: BorderSide(color: Colors.white, width: 1)),
+                  errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white, width: 1)),
                   suffixIcon: Icon(
                     Icons.remove_red_eye_outlined,
                   ),
@@ -106,23 +113,6 @@ class _loginScreenState extends State<loginScreen> {
               flex: 1,
             )
           ]),
-    );
-  }
-}
-
-class HeaderComponent extends StatelessWidget {
-  const HeaderComponent({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      //fit: StackFit.expand,
-      alignment: Alignment.center,
-      children: [
-        Image.asset(Assets.whiteAppScreen,
-            width: double.infinity, fit: BoxFit.fill),
-        Image.asset(Assets.popCornBucket)
-      ],
     );
   }
 }
