@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Map topRatedResult = await tmdbWithCustomLogs.v3.movies.getTopRated();
     Map popularMoviesResult = await tmdbWithCustomLogs.v3.movies.getPopular();
     Map airingTodayResult = await tmdbWithCustomLogs.v3.movies.getNowPlaying();
-    Map outInCinemaResult = await tmdbWithCustomLogs.v3.movies.getLatest();
+    Map outInCinemaResult = await tmdbWithCustomLogs.v3.movies.getUpcoming();
 
     setState(() {
       topRatedMovies = topRatedResult['results'];
@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
       airingToday = airingTodayResult['results'];
       outInCinema = outInCinemaResult['results'];
     });
-    print(topRatedResult);
+    // print(ou);
   }
 
   @override
@@ -73,6 +73,18 @@ class _HomeScreenState extends State<HomeScreen> {
           MovieList(title: 'Top Rated Movies', content: topRatedMovies),
           MovieList(title: 'Popular Movies', content: popularMovies),
           MovieList(title: 'Airing Today', content: airingToday)
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_border),
+            label: 'Favorites',
+          ),
         ],
       ),
     );
