@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MovieList extends StatelessWidget {
   final String title;
@@ -48,6 +49,11 @@ class MovieList extends StatelessWidget {
                                   fit: BoxFit.cover),
                             ),
                             height: 160,
+                            child: GestureDetector(
+                              onTap: () {
+                                context.goNamed('detailPage');
+                              },
+                            ),
                           ),
                           SizedBox(height: 4),
                         ],

@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.red,
@@ -31,9 +32,20 @@ final GoRouter _router = GoRouter(
       //routes: []
     ),
     GoRoute(
-      name: 'homescreen',
-      path: '/',
-      builder: (context, state) => const HomeScreen(),
-    ),
+        name: 'homescreen',
+        path: '/',
+        builder: (context, state) => const HomeScreen(),
+        routes: [
+          GoRoute(
+            name: 'detailPage',
+            path: 'detailPage',
+            builder: (context, state) => DetailPage(),
+          ),
+          GoRoute(
+            name: 'favorites',
+            path: 'favorites',
+            builder: (context, state) => Favorites(),
+          )
+        ]),
   ],
 );
