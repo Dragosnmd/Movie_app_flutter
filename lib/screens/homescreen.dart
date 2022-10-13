@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/assets.dart';
+import 'package:dio/dio.dart';
+import 'package:movie_app/models/movie.dart';
 import 'package:movie_app/screens/screens.dart';
+import 'package:provider/provider.dart';
 import 'package:tmdb_api/tmdb_api.dart';
+import '../models/favorite_Model.dart';
 import '../widgets/widgets.dart';
 import 'package:go_router/go_router.dart';
 
@@ -31,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   loadMovies() async {
     TMDB tmdbWithCustomLogs = TMDB(
       ApiKeys(apikey, accesToken),
-      logConfig: ConfigLogger(showLogs: true, showErrorLogs: true),
+      logConfig: const ConfigLogger(showLogs: true, showErrorLogs: true),
     );
     Map topRatedResult = await tmdbWithCustomLogs.v3.movies.getTopRated();
     Map popularMoviesResult = await tmdbWithCustomLogs.v3.movies.getPopular();
@@ -53,44 +57,62 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Provider.of<FavoritesModel>(context, listen: false)
+              .add(Movie(id: 1, name: 'Movie 1', posterPath: 'abcd'));
+        },
+      ),
       appBar: AppBar(
-        backgroundColor: Color(0xFFE41F2D),
+        backgroundColor: const Color(0xFFE41F2D),
         elevation: 5,
         leading: Container(
           child: GestureDetector(
             onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => loginScreen())),
+                MaterialPageRoute(builder: (context) => const LoginScreen())),
             child: Image.asset(Assets.loginLogo),
           ),
         ),
         actions: [
           GestureDetector(
-            onTap: () {
-              context.goNamed('favorites');
-            },
-            child: Icon(
-              Icons.favorite_border,
-              size: 30,
-            ),
-          ),
-          SizedBox(
+              onTap: () {
+                context.goNamed('favorites');
+              },
+              child: Stack(
+                children: [
+                  Icon(Icons.favorite_border, size: 30),
+                  Consumer<FavoritesModel>(builder: (context, value, child) {
+                    return Container(
+                        width: 16,
+                        height: 16,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.blue),
+                        child: Text(
+                          value.favoritesMovies.length.toString(),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 10),
+                        ));
+                  })
+                ],
+              )),
+          const SizedBox(
             width: 8,
           ),
           GestureDetector(
             onTap: () => print('tapped'),
-            child: Icon(
+            child: const Icon(
               Icons.search,
               size: 30,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 8,
           )
         ],
       ),
       body: ListView(
         children: [
-          OutInCinema(content: outInCinema),
+          // OutInCinema(movieList: []),
           Stars(title: 'Stars'),
           MovieList(title: 'Top Rated Movies', content: topRatedMovies),
           MovieList(title: 'Popular Movies', content: popularMovies),
