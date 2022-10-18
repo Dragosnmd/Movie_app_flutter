@@ -12,14 +12,17 @@ class Favorites extends StatefulWidget {
 class _FavoritesState extends State<Favorites> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<FavoritesModel>(builder: (context, value, child) {
-      return ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: value.favoritesMovies.length,
-        itemBuilder: (context, index) {
-          return Text(value.favoritesMovies[index].name);
-        },
-      );
-    });
+    return Scaffold(
+      appBar: AppBar(),
+      body: Consumer<FavoritesModel>(builder: (context, value, child) {
+        return ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: value.favoritesMovies.length,
+          itemBuilder: (context, index) {
+            return Text(value.favoritesMovies[index].name);
+          },
+        );
+      }),
+    );
   }
 }

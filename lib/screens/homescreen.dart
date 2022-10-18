@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/assets.dart';
 import 'package:dio/dio.dart';
-import 'package:movie_app/models/movie.dart';
+import 'package:movie_app/models/movie_mocked.dart';
 import 'package:movie_app/screens/screens.dart';
 import 'package:provider/provider.dart';
 import 'package:tmdb_api/tmdb_api.dart';
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Provider.of<FavoritesModel>(context, listen: false)
-              .add(Movie(id: 1, name: 'Movie 1', posterPath: 'abcd'));
+              .add(MovieMocked(id: 1, name: 'Movie 1', posterPath: 'abcd'));
         },
       ),
       appBar: AppBar(
@@ -79,20 +79,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 context.goNamed('favorites');
               },
               child: Stack(
+                // alignment: AlignmentDirectional.center,
                 children: [
                   Icon(Icons.favorite_border, size: 30),
-                  Consumer<FavoritesModel>(builder: (context, value, child) {
-                    return Container(
-                        width: 16,
-                        height: 16,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.blue),
-                        child: Text(
-                          value.favoritesMovies.length.toString(),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 10),
-                        ));
-                  })
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    child: Consumer<FavoritesModel>(
+                        builder: (context, value, child) {
+                      return Container(
+                          width: 16,
+                          height: 16,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.blue),
+                          child: Text(
+                            value.favoritesMovies.length.toString(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 10),
+                          ));
+                    }),
+                  )
                 ],
               )),
           const SizedBox(
@@ -119,18 +125,6 @@ class _HomeScreenState extends State<HomeScreen> {
           MovieList(title: 'Airing Today', content: airingToday)
         ],
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: const [
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.home),
-      //       label: 'Home',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.favorite_border),
-      //       label: 'Favorites',
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

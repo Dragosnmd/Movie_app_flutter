@@ -15,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final Size screenSize = MediaQuery.of(context).size;
     return Theme(
         data: ThemeData(
-            backgroundColor: Color(0xffE41F2D),
+            backgroundColor: Colors.green,
             brightness: Brightness.dark,
             // primaryColor: Colors.white,
             primarySwatch: Colors.grey),
