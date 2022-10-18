@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
-import 'package:movie_app/models/movie_mocked.dart';
+
+import '../../../data/models/movie_mocked.dart';
 
 part 'favorites_movie_store.g.dart';
 

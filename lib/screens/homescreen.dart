@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/assets.dart';
 import 'package:dio/dio.dart';
-import 'package:movie_app/models/movie_mocked.dart';
+import 'package:movie_app/movies/data/movie_mocked.dart';
+import 'package:movie_app/movies/models/favorite_model.dart';
+
 import 'package:movie_app/screens/screens.dart';
+import 'package:movie_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:tmdb_api/tmdb_api.dart';
-import '../models/favorite_Model.dart';
-import '../widgets/widgets.dart';
+
 import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -50,7 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
       outInCinema = outInCinemaResult['results'];
       // starsInCinema = starsInCinemaResult['result'];
     });
-    print(starsInCinema);
   }
 
   @override
@@ -120,9 +121,10 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           // OutInCinema(movieList: []),
           Stars(title: 'Stars'),
-          MovieList(title: 'Top Rated Movies', content: topRatedMovies),
-          MovieList(title: 'Popular Movies', content: popularMovies),
-          MovieList(title: 'Airing Today', content: airingToday)
+          MovieList(title: 'Popular Movies'),
+
+          MovieList(title: 'Popular Movies'),
+          MovieList(title: 'Airing Today')
         ],
       ),
     );

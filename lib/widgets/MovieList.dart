@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
+// import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:movie_app/movies/presentation/movies_view_model.dart';
 
-class MovieList extends StatelessWidget {
+class MovieList extends StatefulWidget {
   final String title;
-  final List content;
-  final String _baseURL = 'https://image.tmdb.org/t/p/w500';
 
-  const MovieList({super.key, required this.title, required this.content});
+  const MovieList({super.key, required this.title});
 
+  @override
+  State<MovieList> createState() => _MovieListState();
+}
+
+class _MovieListState extends State<MovieList> {
+  final viewModel = MoviesViewModel();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,7 +25,7 @@ class MovieList extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Container(
-              child: Text(title),
+              child: Text(widget.title),
               constraints: BoxConstraints(minWidth: 72),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -30,36 +37,49 @@ class MovieList extends StatelessWidget {
           SizedBox(height: 8),
           SizedBox(
               height: 192,
-              child: ListView.builder(
-                  padding: EdgeInsets.all(8),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: content.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      padding: EdgeInsets.all(5),
-                      width: 100,
-                      child: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              image: DecorationImage(
-                                  image: NetworkImage(_baseURL +
-                                      content[index]['backdrop_path']),
-                                  fit: BoxFit.cover),
+              child: Observer(builder: (context) {
+                if (viewModel.isLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (viewModel.error != null) {
+                  return Center(
+                    child: Text(viewModel.error!),
+                  );
+                }
+                return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    padding: EdgeInsets.all(8),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: viewModel.movies.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        padding: EdgeInsets.all(5),
+                        width: 100,
+                        child: Column(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                        viewModel.movies[index].posterPath),
+                                    fit: BoxFit.cover),
+                              ),
+                              height: 160,
+                              child: GestureDetector(
+                                onTap: () {
+                                  context.goNamed('detailPage');
+                                },
+                              ),
                             ),
-                            height: 160,
-                            child: GestureDetector(
-                              onTap: () {
-                                context.goNamed('detailPage');
-                              },
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                        ],
-                      ),
-                    );
-                  }))
+                            SizedBox(height: 4),
+                          ],
+                        ),
+                      );
+                    });
+              }))
         ],
       ),
     );

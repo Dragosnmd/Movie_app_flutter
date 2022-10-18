@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/favorite_Model.dart';
+import '../movies/models/favorite_model.dart';
 
 class Favorites extends StatefulWidget {
   const Favorites({super.key});
