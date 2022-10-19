@@ -13,7 +13,7 @@ mixin _$FavoritesMovies on _FavoritesMovies, Store {
       ActionController(name: '_FavoritesMovies', context: context);
 
   @override
-  void add(dynamic movie) {
+  void add(MovieMocked movie) {
     final _$actionInfo = _$_FavoritesMoviesActionController.startAction(
         name: '_FavoritesMovies.add');
     try {

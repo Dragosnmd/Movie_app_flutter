@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:movie_app/assets.dart';
 import 'package:dio/dio.dart';
 import 'package:movie_app/movies/data/movie_mocked.dart';
 import 'package:movie_app/movies/models/favorite_model.dart';
+import 'package:movie_app/movies/presentation/movies_view_model.dart';
 
 import 'package:movie_app/screens/screens.dart';
 import 'package:movie_app/widgets/widgets.dart';
@@ -19,41 +21,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List topRatedMovies = [];
-  List popularMovies = [];
-  List airingToday = [];
-  List outInCinema = [];
-  List starsInCinema = [];
-  final String apikey = 'f1b8b13e0f1c7935c17d5b9e5b4f24e5';
-  final accesToken =
-      'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMWI4YjEzZTBmMWM3OTM1YzE3ZDViOWU1YjRmMjRlNSIsInN1YiI6IjYyZTkzZmNmMWFkOTNiMDA1ZTEwNGE2MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.b3-dWmZq9mQurGHDtZoMrFOi1kcSSvIK7R0JQ97uF4I';
-
-  @override
-  void initState() {
-    super.initState();
-    loadMovies();
-  }
-
-  loadMovies() async {
-    TMDB tmdbWithCustomLogs = TMDB(
-      ApiKeys(apikey, accesToken),
-      logConfig: const ConfigLogger(showLogs: true, showErrorLogs: true),
-    );
-    Map topRatedResult = await tmdbWithCustomLogs.v3.movies.getTopRated();
-    Map popularMoviesResult = await tmdbWithCustomLogs.v3.movies.getPopular();
-    Map airingTodayResult = await tmdbWithCustomLogs.v3.movies.getNowPlaying();
-    Map outInCinemaResult = await tmdbWithCustomLogs.v3.movies.getUpcoming();
-    Map starsInCinemaResult = await tmdbWithCustomLogs.v3.people.getPopular();
-
-    setState(() {
-      topRatedMovies = topRatedResult['results'];
-      popularMovies = popularMoviesResult['results'];
-      airingToday = airingTodayResult['results'];
-      outInCinema = outInCinemaResult['results'];
-      // starsInCinema = starsInCinemaResult['result'];
-    });
-  }
-
+  final viewModel = MoviesViewModel();
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
@@ -119,12 +87,34 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: ListView(
         children: [
-          // OutInCinema(movieList: []),
+          OutInCinema(
+            title: 'out in cinema',
+          ),
           Stars(title: 'Stars'),
-          MovieList(title: 'Popular Movies'),
-
-          MovieList(title: 'Popular Movies'),
-          MovieList(title: 'Airing Today')
+          Observer(builder: (context) {
+            return viewModel.topRatedMovies.map(
+                initial: (_) => Center(child: CircularProgressIndicator()),
+                loading: (_) => Center(child: CircularProgressIndicator()),
+                error: (value) => Text(value.error),
+                success: (value) =>
+                    MovieList(title: 'Top Rated Movies', movies: value.data));
+          }),
+          Observer(builder: (context) {
+            return viewModel.popularMovies.map(
+                initial: (_) => Center(child: CircularProgressIndicator()),
+                loading: (_) => Center(child: CircularProgressIndicator()),
+                error: (value) => Text(value.error),
+                success: (value) =>
+                    MovieList(title: 'Popular Movies', movies: value.data));
+          }),
+          Observer(builder: (context) {
+            return viewModel.nowPlayingMovies.map(
+                initial: (_) => Center(child: CircularProgressIndicator()),
+                loading: (_) => Center(child: CircularProgressIndicator()),
+                error: (value) => Text(value.error),
+                success: (value) =>
+                    MovieList(title: 'Airing Today', movies: value.data));
+          }),
         ],
       ),
     );
