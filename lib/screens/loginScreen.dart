@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobx/mobx.dart';
 import 'package:movie_app/assets.dart';
+import 'package:movie_app/helpers/resource.dart';
+import 'package:movie_app/screens/login_view_model.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -40,8 +44,15 @@ class HeaderComponent extends StatelessWidget {
   }
 }
 
-class LoginContent extends StatelessWidget {
+class LoginContent extends StatefulWidget {
   const LoginContent({super.key});
+
+  @override
+  State<LoginContent> createState() => _LoginContentState();
+}
+
+class _LoginContentState extends State<LoginContent> {
+  final viewModel = LoginViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -116,9 +127,27 @@ class LoginContent extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
                         child: const Text('Login'),
-                        onPressed: () {
-                          context.goNamed('homescreen');
-                        },
+                        // ReactionBuilder(
+                        //   builder: (context) {
+                        //     return Reaction(
+                        //       (_) => viewModel.login
+                        //     )
+                        //   },
+                        //     child: null,)
+                        onPressed: () => {context.goNamed('homescreen')},
+                        //   onPressed: () {
+                        //     ReactionBuilder(
+                        //       builder: (context){
+                        //     return reaction((_) => viewModel.logIn() is ResourceSuccess, (data){
+                        //   if (data) {
+                        //     final ResourceSuccess login response = (viewModel.isLoading as ResourceSuccess);
+                        //     if (response.data.TokenRequest && response.data.hadSessionToken){
+                        //       context.goNamed('homescreen');
+                        //     }
+                        //   }
+                        //     })}
+                        // )
+                        // },
                       ),
                     ),
                   ],

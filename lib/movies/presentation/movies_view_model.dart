@@ -12,6 +12,7 @@ abstract class MoviesViewModelBase with Store {
     getMovies();
     getMoviesRated();
     getNowPlayingMovies();
+    getOutInCinema();
   }
 
   final repository = MovieRepository();
@@ -32,6 +33,9 @@ abstract class MoviesViewModelBase with Store {
 
   @observable
   Resource<List<Movie>> nowPlayingMovies = Resource.initial();
+
+  @observable
+  Resource<List<Movie>> outInCinema = Resource.initial();
 
   // @action
   Future<void> getMovies({final int page = 1}) async {
@@ -64,6 +68,17 @@ abstract class MoviesViewModelBase with Store {
           data: (await repository.getNowPlayingMovies()).asObservable());
     } catch (ex) {
       nowPlayingMovies = Resource.error(error: ex.toString());
+    }
+  }
+
+  Future<void> getOutInCinema({final int page = 1}) async {
+    outInCinema = Resource.loading();
+    try {
+      await Future.delayed(const Duration(seconds: 1));
+      outInCinema = Resource.success(
+          data: (await repository.getOutInCinema()).asObservable());
+    } catch (ex) {
+      outInCinema = Resource.error(error: ex.toString());
     }
   }
 }

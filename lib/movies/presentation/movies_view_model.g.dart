@@ -105,6 +105,22 @@ mixin _$MoviesViewModel on MoviesViewModelBase, Store {
     });
   }
 
+  late final _$outInCinemaAtom =
+      Atom(name: 'MoviesViewModelBase.outInCinema', context: context);
+
+  @override
+  Resource<List<Movie>> get outInCinema {
+    _$outInCinemaAtom.reportRead();
+    return super.outInCinema;
+  }
+
+  @override
+  set outInCinema(Resource<List<Movie>> value) {
+    _$outInCinemaAtom.reportWrite(value, super.outInCinema, () {
+      super.outInCinema = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
@@ -113,7 +129,8 @@ error: ${error},
 movies: ${movies},
 popularMovies: ${popularMovies},
 topRatedMovies: ${topRatedMovies},
-nowPlayingMovies: ${nowPlayingMovies}
+nowPlayingMovies: ${nowPlayingMovies},
+outInCinema: ${outInCinema}
     ''';
   }
 }

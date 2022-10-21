@@ -15,4 +15,8 @@ class MovieRepository {
   Future<List<Movie>> getNowPlayingMovies({int page = 1}) async {
     return await api.getNowPlayingMovies(page: page);
   }
+
+  Future<List<Movie>> getOutInCinema({int page = 1}) async {
+    return await api.getOutInCinema(page: page);
+  }
 }

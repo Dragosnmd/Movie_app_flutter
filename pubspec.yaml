@@ -23,6 +23,7 @@ dependencies:
   flutter_mobx: ^2.0.6+4
   networking: ^0.0.10+1
   freezed_annotation: ^2.2.0
+  intl: ^0.17.0
 
 
 dev_dependencies:

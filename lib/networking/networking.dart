@@ -14,6 +14,7 @@ class NetworkModule {
         .add(InterceptorsWrapper(onRequest: (options, handler) async {
       return handler.next(options
         ..queryParameters = {
+          ...options.queryParameters,
           'api_key': _apiKey,
         });
     }));

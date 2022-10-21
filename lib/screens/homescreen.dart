@@ -87,9 +87,15 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: ListView(
         children: [
-          OutInCinema(
-            title: 'out in cinema',
-          ),
+          Observer(builder: (context) {
+            return viewModel.outInCinema.map(
+                initial: (_) => Center(child: CircularProgressIndicator()),
+                loading: (_) => Center(child: CircularProgressIndicator()),
+                error: (value) => Text(value.error),
+                success: (value) =>
+                    OutInCinema(title: 'Out in Cinema', movies: value.data));
+            // MovieList(title: 'Out in Cinema', movies: value.data));
+          }),
           Stars(title: 'Stars'),
           Observer(builder: (context) {
             return viewModel.topRatedMovies.map(

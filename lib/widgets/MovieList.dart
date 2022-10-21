@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_app/movies/domain/movie.dart';
 // import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:movie_app/movies/presentation/movies_view_model.dart';
 
 class MovieList extends StatefulWidget {
   final String title;

@@ -1,23 +1,22 @@
+import 'package:movie_app/movies/domain/movie.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:movie_app/movies/data/constants.dart';
-import 'package:movie_app/movies/domain/movie.dart';
-
-part 'now_playing_movie_response.freezed.dart';
-part 'now_playing_movie_response.g.dart';
+part 'genre_movies_response.freezed.dart';
+part 'genre_movies_response.g.dart';
 
 @freezed
-class NowPlayingMovieResponse with _$NowPlayingMovieResponse {
-  const NowPlayingMovieResponse._();
+class GenreMovieResponse with _$GenreMovieResponse {
+  const GenreMovieResponse._();
 
-  const factory NowPlayingMovieResponse({
+  const factory GenreMovieResponse({
     required int page,
     @JsonKey(name: 'total_pages') required int totalPages,
     @JsonKey(name: 'total_results') required int totalResults,
     required List<MovieResponse> results,
-  }) = _NowPlayingMovieResponse;
+  }) = _GenreMoviesResponse;
 
-  factory NowPlayingMovieResponse.fromJson(Map<String, dynamic> json) =>
-      _$NowPlayingMovieResponseFromJson(json);
+  factory GenreMovieResponse.fromJson(Map<String, dynamic> json) =>
+      _$GenreMovieResponseFromJson(json);
 
   List<Movie> toDomainList() {
     return results.map((e) => e.toDomain()).toList();
@@ -44,8 +43,8 @@ class MovieResponse with _$MovieResponse {
         id: id,
         title: title,
         overview: overview,
-        backdropPath: backdropPath,
+        backdropPath: '${imageUrl}w500/$backdropPath',
         originalTitle: originalTitle,
-        posterPath: '${imageUrl}w500$posterPath');
+        posterPath: '${imageUrl}original/$posterPath');
   }
 }

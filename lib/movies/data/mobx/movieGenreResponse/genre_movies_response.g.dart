@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'now_playing_movie_response.dart';
+part of 'genre_movies_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_NowPlayingMovieResponse _$$_NowPlayingMovieResponseFromJson(
+_$_GenreMoviesResponse _$$_GenreMoviesResponseFromJson(
         Map<String, dynamic> json) =>
-    _$_NowPlayingMovieResponse(
+    _$_GenreMoviesResponse(
       page: json['page'] as int,
       totalPages: json['total_pages'] as int,
       totalResults: json['total_results'] as int,
@@ -17,8 +17,8 @@ _$_NowPlayingMovieResponse _$$_NowPlayingMovieResponseFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$_NowPlayingMovieResponseToJson(
-        _$_NowPlayingMovieResponse instance) =>
+Map<String, dynamic> _$$_GenreMoviesResponseToJson(
+        _$_GenreMoviesResponse instance) =>
     <String, dynamic>{
       'page': instance.page,
       'total_pages': instance.totalPages,

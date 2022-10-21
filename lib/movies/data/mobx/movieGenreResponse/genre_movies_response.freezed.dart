@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'now_playing_movie_response.dart';
+part of 'genre_movies_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-NowPlayingMovieResponse _$NowPlayingMovieResponseFromJson(
-    Map<String, dynamic> json) {
-  return _NowPlayingMovieResponse.fromJson(json);
+GenreMovieResponse _$GenreMovieResponseFromJson(Map<String, dynamic> json) {
+  return _GenreMoviesResponse.fromJson(json);
 }
 
 /// @nodoc
-mixin _$NowPlayingMovieResponse {
+mixin _$GenreMovieResponse {
   int get page => throw _privateConstructorUsedError;
   @JsonKey(name: 'total_pages')
   int get totalPages => throw _privateConstructorUsedError;
@@ -30,15 +29,15 @@ mixin _$NowPlayingMovieResponse {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $NowPlayingMovieResponseCopyWith<NowPlayingMovieResponse> get copyWith =>
+  $GenreMovieResponseCopyWith<GenreMovieResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NowPlayingMovieResponseCopyWith<$Res> {
-  factory $NowPlayingMovieResponseCopyWith(NowPlayingMovieResponse value,
-          $Res Function(NowPlayingMovieResponse) then) =
-      _$NowPlayingMovieResponseCopyWithImpl<$Res, NowPlayingMovieResponse>;
+abstract class $GenreMovieResponseCopyWith<$Res> {
+  factory $GenreMovieResponseCopyWith(
+          GenreMovieResponse value, $Res Function(GenreMovieResponse) then) =
+      _$GenreMovieResponseCopyWithImpl<$Res, GenreMovieResponse>;
   @useResult
   $Res call(
       {int page,
@@ -48,10 +47,9 @@ abstract class $NowPlayingMovieResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$NowPlayingMovieResponseCopyWithImpl<$Res,
-        $Val extends NowPlayingMovieResponse>
-    implements $NowPlayingMovieResponseCopyWith<$Res> {
-  _$NowPlayingMovieResponseCopyWithImpl(this._value, this._then);
+class _$GenreMovieResponseCopyWithImpl<$Res, $Val extends GenreMovieResponse>
+    implements $GenreMovieResponseCopyWith<$Res> {
+  _$GenreMovieResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -88,11 +86,11 @@ class _$NowPlayingMovieResponseCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_NowPlayingMovieResponseCopyWith<$Res>
-    implements $NowPlayingMovieResponseCopyWith<$Res> {
-  factory _$$_NowPlayingMovieResponseCopyWith(_$_NowPlayingMovieResponse value,
-          $Res Function(_$_NowPlayingMovieResponse) then) =
-      __$$_NowPlayingMovieResponseCopyWithImpl<$Res>;
+abstract class _$$_GenreMoviesResponseCopyWith<$Res>
+    implements $GenreMovieResponseCopyWith<$Res> {
+  factory _$$_GenreMoviesResponseCopyWith(_$_GenreMoviesResponse value,
+          $Res Function(_$_GenreMoviesResponse) then) =
+      __$$_GenreMoviesResponseCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -103,12 +101,11 @@ abstract class _$$_NowPlayingMovieResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_NowPlayingMovieResponseCopyWithImpl<$Res>
-    extends _$NowPlayingMovieResponseCopyWithImpl<$Res,
-        _$_NowPlayingMovieResponse>
-    implements _$$_NowPlayingMovieResponseCopyWith<$Res> {
-  __$$_NowPlayingMovieResponseCopyWithImpl(_$_NowPlayingMovieResponse _value,
-      $Res Function(_$_NowPlayingMovieResponse) _then)
+class __$$_GenreMoviesResponseCopyWithImpl<$Res>
+    extends _$GenreMovieResponseCopyWithImpl<$Res, _$_GenreMoviesResponse>
+    implements _$$_GenreMoviesResponseCopyWith<$Res> {
+  __$$_GenreMoviesResponseCopyWithImpl(_$_GenreMoviesResponse _value,
+      $Res Function(_$_GenreMoviesResponse) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -119,7 +116,7 @@ class __$$_NowPlayingMovieResponseCopyWithImpl<$Res>
     Object? totalResults = null,
     Object? results = null,
   }) {
-    return _then(_$_NowPlayingMovieResponse(
+    return _then(_$_GenreMoviesResponse(
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -142,8 +139,8 @@ class __$$_NowPlayingMovieResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_NowPlayingMovieResponse extends _NowPlayingMovieResponse {
-  const _$_NowPlayingMovieResponse(
+class _$_GenreMoviesResponse extends _GenreMoviesResponse {
+  const _$_GenreMoviesResponse(
       {required this.page,
       @JsonKey(name: 'total_pages') required this.totalPages,
       @JsonKey(name: 'total_results') required this.totalResults,
@@ -151,8 +148,8 @@ class _$_NowPlayingMovieResponse extends _NowPlayingMovieResponse {
       : _results = results,
         super._();
 
-  factory _$_NowPlayingMovieResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_NowPlayingMovieResponseFromJson(json);
+  factory _$_GenreMoviesResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_GenreMoviesResponseFromJson(json);
 
   @override
   final int page;
@@ -171,14 +168,14 @@ class _$_NowPlayingMovieResponse extends _NowPlayingMovieResponse {
 
   @override
   String toString() {
-    return 'NowPlayingMovieResponse(page: $page, totalPages: $totalPages, totalResults: $totalResults, results: $results)';
+    return 'GenreMovieResponse(page: $page, totalPages: $totalPages, totalResults: $totalResults, results: $results)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NowPlayingMovieResponse &&
+            other is _$_GenreMoviesResponse &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.totalPages, totalPages) ||
                 other.totalPages == totalPages) &&
@@ -195,29 +192,28 @@ class _$_NowPlayingMovieResponse extends _NowPlayingMovieResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NowPlayingMovieResponseCopyWith<_$_NowPlayingMovieResponse>
-      get copyWith =>
-          __$$_NowPlayingMovieResponseCopyWithImpl<_$_NowPlayingMovieResponse>(
-              this, _$identity);
+  _$$_GenreMoviesResponseCopyWith<_$_GenreMoviesResponse> get copyWith =>
+      __$$_GenreMoviesResponseCopyWithImpl<_$_GenreMoviesResponse>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_NowPlayingMovieResponseToJson(
+    return _$$_GenreMoviesResponseToJson(
       this,
     );
   }
 }
 
-abstract class _NowPlayingMovieResponse extends NowPlayingMovieResponse {
-  const factory _NowPlayingMovieResponse(
+abstract class _GenreMoviesResponse extends GenreMovieResponse {
+  const factory _GenreMoviesResponse(
       {required final int page,
       @JsonKey(name: 'total_pages') required final int totalPages,
       @JsonKey(name: 'total_results') required final int totalResults,
-      required final List<MovieResponse> results}) = _$_NowPlayingMovieResponse;
-  const _NowPlayingMovieResponse._() : super._();
+      required final List<MovieResponse> results}) = _$_GenreMoviesResponse;
+  const _GenreMoviesResponse._() : super._();
 
-  factory _NowPlayingMovieResponse.fromJson(Map<String, dynamic> json) =
-      _$_NowPlayingMovieResponse.fromJson;
+  factory _GenreMoviesResponse.fromJson(Map<String, dynamic> json) =
+      _$_GenreMoviesResponse.fromJson;
 
   @override
   int get page;
@@ -231,8 +227,8 @@ abstract class _NowPlayingMovieResponse extends NowPlayingMovieResponse {
   List<MovieResponse> get results;
   @override
   @JsonKey(ignore: true)
-  _$$_NowPlayingMovieResponseCopyWith<_$_NowPlayingMovieResponse>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_GenreMoviesResponseCopyWith<_$_GenreMoviesResponse> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 MovieResponse _$MovieResponseFromJson(Map<String, dynamic> json) {
