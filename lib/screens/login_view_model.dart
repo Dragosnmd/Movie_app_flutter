@@ -8,7 +8,7 @@ class LoginViewModel = LoginViewModelBase with _$LoginViewModel;
 
 abstract class LoginViewModelBase with Store {
   LoginViewModelBase() {
-    logIn();
+    // logIn();
   }
   final repository = LoginRepository();
   @observable
@@ -20,10 +20,14 @@ abstract class LoginViewModelBase with Store {
   @observable
   Resource<bool> login = Resource.initial();
 
-  Future<void> logIn() async {
+  Future<void> logIn(String username, String password) async {
     login = Resource.loading();
     try {
-      login = Resource.success(data: (await repository.login('', '')));
+      login = Resource.success(
+          data: (await repository.login(
+        'username',
+        'password',
+      )));
     } catch (ex) {
       login = Resource.error(error: ex.toString());
     }

@@ -1,10 +1,12 @@
 import 'package:movie_app/data/login_payload.dart';
+import 'package:movie_app/data/token_request.dart';
 import 'package:movie_app/login/get_request_token_api.dart';
 import 'package:movie_app/login/login_api_request.dart';
 import 'package:movie_app/storage_module/storage_module.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 
-const String test = 'test_1';
+// const String test = 'test_1';
 const String requestToken = 'requestToken';
 const String expiresTokenAt = 'expiredTokenAt';
 const String sesionToken = 'sesionToken';
@@ -21,27 +23,41 @@ class LoginRepository {
   }
 
   Future<bool> login(String username, String password) async {
-    final token = await getRequestTokenApi.getRequestToken();
-    final requestToken = token.value;
-    final expiresTokenAt = token.expiresAt;
-    print(expiresTokenAt);
-    print(requestToken);
+    final TokenRequest token = await getRequestTokenApi.getRequestToken();
+
+    await sharedPreferences.setString(requestToken, token.value);
+    await sharedPreferences.setString(
+        expiresTokenAt, token.expiresAt.toIso8601String());
+
     final sesionToken = await loginApi.login(LoginPayload(
         username: username, password: password, requestToken: token.value));
-    print(sesionToken);
+
     return true;
   }
 
   Future<void> checkAuth() async {
-    final result = sharedPreferences.getString(test);
-    final result1 = sharedPreferences.getString(requestToken);
-    final date = DateTime.now();
-    // print(date);
-    print(result1);
-    // final checkDuration = date.difference(result1);
+    final String? token = sharedPreferences.getString(requestToken);
 
-    // print(result);
-    await sharedPreferences.setString(test, '123');
-    await sharedPreferences.setString(requestToken, 'requestToken');
+    if (token == null) return;
+
+    final String? tokenExpiredString =
+        sharedPreferences.getString(expiresTokenAt);
+
+    if (tokenExpiredString == null) return;
+
+    final DateTime tokenExpiredDate = DateTime.parse(tokenExpiredString);
+    final DateTime now = DateTime.now().toUtc();
+
+    final Duration diff = tokenExpiredDate.difference(now);
+    print(now);
+    print(tokenExpiredDate);
+
+    if (diff.inMilliseconds <= 0) {
+      sharedPreferences.remove(requestToken);
+      sharedPreferences.remove(tokenExpiredString);
+      //ToDo also remove sesion token
+      return;
+    }
+    print('isLoggedIn');
   }
 }

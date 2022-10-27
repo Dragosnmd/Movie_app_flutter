@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobx/mobx.dart';
 import 'package:movie_app/assets.dart';
-import 'package:movie_app/helpers/resource.dart';
 import 'package:movie_app/screens/login_view_model.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -52,6 +49,22 @@ class LoginContent extends StatefulWidget {
 }
 
 class _LoginContentState extends State<LoginContent> {
+  late TextEditingController userNameController, passwordController;
+
+  @override
+  void initState() {
+    super.initState();
+    userNameController = TextEditingController();
+    passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    userNameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   final viewModel = LoginViewModel();
 
   @override
@@ -84,6 +97,7 @@ class _LoginContentState extends State<LoginContent> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 48),
                       child: TextFormField(
+                        controller: userNameController,
                         style: const TextStyle(color: Colors.white),
                         decoration: const InputDecoration(
                           labelText: 'Email',
@@ -100,6 +114,7 @@ class _LoginContentState extends State<LoginContent> {
                       padding: const EdgeInsets.only(
                           left: 48, right: 48, bottom: 60, top: 16),
                       child: TextFormField(
+                        controller: passwordController,
                         obscureText: true,
                         style: const TextStyle(color: Color(0xffb3b3b3)),
                         decoration: const InputDecoration(
@@ -123,26 +138,31 @@ class _LoginContentState extends State<LoginContent> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 60),
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xfff7c04a),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        child: const Text('Login'),
-                        onPressed: () => {context.goNamed('homescreen')},
-                        //   onPressed: () {
-                        //     ReactionBuilder(
-                        //       builder: (context){
-                        //     return reaction((_) => viewModel.logIn() is ResourceSuccess, (data){
-                        //   if (data) {
-                        //     final ResourceSuccess login response = (viewModel.isLoading as ResourceSuccess);
-                        //     if (response.data.TokenRequest && response.data.hadSessionToken){
-                        //       context.goNamed('homescreen');
-                        //     }
-                        //   }
-                        //     })}
-                        // )
-                        // },
-                      ),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xfff7c04a),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          child: const Text('Login'),
+                          onPressed: () => {
+                                viewModel.logIn(userNameController.text,
+                                    passwordController.text)
+                              }
+                          // {context.goNamed('homescreen')},
+
+                          //   onPressed: () {
+                          //     ReactionBuilder(
+                          //       builder: (context){
+                          //     return reaction((_) => viewModel.logIn() is ResourceSuccess, (data){
+                          //   if (data) {
+                          //     final ResourceSuccess login response = (viewModel.isLoading as ResourceSuccess);
+                          //     if (response.data.TokenRequest && response.data.hadSessionToken){
+                          //       context.goNamed('homescreen');
+                          //     }
+                          //   }
+                          //     })}
+                          // )
+                          // },
+                          ),
                     ),
                   ],
                 ),
