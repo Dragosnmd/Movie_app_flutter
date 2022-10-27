@@ -100,6 +100,7 @@ class _LoginContentState extends State<LoginContent> {
                       padding: const EdgeInsets.only(
                           left: 48, right: 48, bottom: 60, top: 16),
                       child: TextFormField(
+                        obscureText: true,
                         style: const TextStyle(color: Color(0xffb3b3b3)),
                         decoration: const InputDecoration(
                           labelText: 'Password',
@@ -127,13 +128,6 @@ class _LoginContentState extends State<LoginContent> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
                         child: const Text('Login'),
-                        // ReactionBuilder(
-                        //   builder: (context) {
-                        //     return Reaction(
-                        //       (_) => viewModel.login
-                        //     )
-                        //   },
-                        //     child: null,)
                         onPressed: () => {context.goNamed('homescreen')},
                         //   onPressed: () {
                         //     ReactionBuilder(

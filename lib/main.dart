@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_app/movies/models/favorite_model.dart';
 import 'package:movie_app/screens/screens.dart';
+import 'package:movie_app/storage_module/storage_module.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final StorageModule storageModule = StorageModule.getInstance();
+
+  await storageModule.initModule();
+
   runApp(ChangeNotifierProvider(
     create: (context) => FavoritesModel(),
     child: const MyApp(),

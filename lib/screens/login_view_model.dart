@@ -23,8 +23,7 @@ abstract class LoginViewModelBase with Store {
   Future<void> logIn() async {
     login = Resource.loading();
     try {
-      login =
-          Resource.success(data: (await repository.login('dragonsncs', '')));
+      login = Resource.success(data: (await repository.login('', '')));
     } catch (ex) {
       login = Resource.error(error: ex.toString());
     }

@@ -9,7 +9,6 @@ import 'package:movie_app/movies/presentation/movies_view_model.dart';
 import 'package:movie_app/screens/screens.dart';
 import 'package:movie_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:tmdb_api/tmdb_api.dart';
 
 import 'package:go_router/go_router.dart';
 
