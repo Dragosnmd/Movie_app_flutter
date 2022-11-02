@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobx/mobx.dart';
 import 'package:movie_app/assets.dart';
 import 'package:movie_app/screens/login_view_model.dart';
 
@@ -30,7 +32,6 @@ class HeaderComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      //fit: StackFit.expand,
       alignment: Alignment.center,
       children: [
         Image.asset(Assets.whiteAppScreen,
@@ -49,13 +50,20 @@ class LoginContent extends StatefulWidget {
 }
 
 class _LoginContentState extends State<LoginContent> {
-  late TextEditingController userNameController, passwordController;
+  late final TextEditingController userNameController, passwordController;
+  late final LoginViewModel viewModel;
 
   @override
   void initState() {
     super.initState();
     userNameController = TextEditingController();
     passwordController = TextEditingController();
+    viewModel = LoginViewModel();
+    when((_) => viewModel.succesLogin, () {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        context.goNamed('homescreen');
+      });
+    });
   }
 
   @override
@@ -64,8 +72,6 @@ class _LoginContentState extends State<LoginContent> {
     passwordController.dispose();
     super.dispose();
   }
-
-  final viewModel = LoginViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -143,10 +149,11 @@ class _LoginContentState extends State<LoginContent> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10))),
                           child: const Text('Login'),
-                          onPressed: () => {
-                                viewModel.logIn(userNameController.text,
-                                    passwordController.text)
-                              }
+                          onPressed: () {
+                            viewModel.logIn(userNameController.text,
+                                passwordController.text);
+                            // context.goNamed('homescreen')
+                          }
                           // {context.goNamed('homescreen')},
 
                           //   onPressed: () {

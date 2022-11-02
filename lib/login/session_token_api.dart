@@ -10,7 +10,6 @@ class SessionTokenApi {
     try {
       final response = await networkModule.dio
           .post('/authentication/session/new', data: load.toJson());
-      // print(response);
       return SessionReqeust.fromJson(response.data);
     } on DioError catch (ex) {
       if (ex.response?.statusCode == 401 || ex.response?.statusCode == 404) {

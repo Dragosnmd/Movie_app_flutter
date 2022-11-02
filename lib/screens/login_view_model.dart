@@ -7,13 +7,17 @@ part 'login_view_model.g.dart';
 class LoginViewModel = LoginViewModelBase with _$LoginViewModel;
 
 abstract class LoginViewModelBase with Store {
-  LoginViewModelBase() {}
+  late final LoginRepository repository;
 
-  // @computed
-  //  isLogin
-  final repository = LoginRepository();
+  LoginViewModelBase() {
+    repository = LoginRepository();
+  }
+
   @observable
   bool isLoading = false;
+
+  @computed
+  bool get succesLogin => repository.isLogin;
 
   @observable
   String? error;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:movie_app/assets.dart';
-import 'package:dio/dio.dart';
 import 'package:movie_app/movies/data/movie_mocked.dart';
 import 'package:movie_app/movies/models/favorite_model.dart';
 import 'package:movie_app/movies/presentation/movies_view_model.dart';
@@ -23,7 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final viewModel = MoviesViewModel();
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {

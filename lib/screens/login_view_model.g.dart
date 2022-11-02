@@ -9,6 +9,14 @@ part of 'login_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$LoginViewModel on LoginViewModelBase, Store {
+  Computed<bool>? _$succesLoginComputed;
+
+  @override
+  bool get succesLogin =>
+      (_$succesLoginComputed ??= Computed<bool>(() => super.succesLogin,
+              name: 'LoginViewModelBase.succesLogin'))
+          .value;
+
   late final _$isLoadingAtom =
       Atom(name: 'LoginViewModelBase.isLoading', context: context);
 
@@ -62,7 +70,8 @@ mixin _$LoginViewModel on LoginViewModelBase, Store {
     return '''
 isLoading: ${isLoading},
 error: ${error},
-login: ${login}
+login: ${login},
+succesLogin: ${succesLogin}
     ''';
   }
 }
