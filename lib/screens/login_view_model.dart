@@ -17,7 +17,7 @@ abstract class LoginViewModelBase with Store {
   bool isLoading = false;
 
   @computed
-  bool get succesLogin => repository.isLogin;
+  bool get succesLogin => repository.loginSucceed;
 
   @observable
   String? error;

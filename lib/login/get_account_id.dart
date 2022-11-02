@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:movie_app/data/token_request.dart';
-import 'package:movie_app/login/session_token_api.dart';
 import 'package:movie_app/networking/networking.dart';
 
 class AccountIdApi {
@@ -9,7 +8,6 @@ class AccountIdApi {
     try {
       final response = await networkModule.dio.get(
         'account',
-        //  data: sessionID
       );
       return TokenRequest.fromJson(response.data);
     } on DioError catch (ex) {

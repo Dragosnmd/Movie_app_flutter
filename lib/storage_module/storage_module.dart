@@ -1,3 +1,4 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageModule {
@@ -13,9 +14,17 @@ class StorageModule {
   }
 
   late final SharedPreferences _sharedPreference;
+
+  late final FlutterSecureStorage _secureStorage;
+
   Future<void> initModule() async {
     _sharedPreference = await SharedPreferences.getInstance();
+
+    _secureStorage =
+        const FlutterSecureStorage(); //Initalizing an instance of Secure Storage
   }
 
   SharedPreferences get sharedPreferences => _sharedPreference;
+
+  FlutterSecureStorage get secureStorage => _secureStorage;
 }
