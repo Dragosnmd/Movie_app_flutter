@@ -1,4 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:movie_app/storage_module/app_database/app_database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageModule {
@@ -17,14 +18,19 @@ class StorageModule {
 
   late final FlutterSecureStorage _secureStorage;
 
+  late final AppDatabase database;
+
   Future<void> initModule() async {
     _sharedPreference = await SharedPreferences.getInstance();
 
-    _secureStorage =
-        const FlutterSecureStorage(); //Initalizing an instance of Secure Storage
+    _secureStorage = const FlutterSecureStorage();
+
+    database = AppDatabase();
   }
 
   SharedPreferences get sharedPreferences => _sharedPreference;
 
   FlutterSecureStorage get secureStorage => _secureStorage;
+
+  // Database get database => _database;
 }

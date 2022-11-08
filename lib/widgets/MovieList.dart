@@ -14,6 +14,17 @@ class MovieList extends StatefulWidget {
 }
 
 class _MovieListState extends State<MovieList> {
+
+  // late final Database _database;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _database = Database();
+  // }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Padding(

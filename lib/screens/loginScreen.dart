@@ -152,24 +152,7 @@ class _LoginContentState extends State<LoginContent> {
                           onPressed: () {
                             viewModel.logIn(userNameController.text,
                                 passwordController.text);
-                            // context.goNamed('homescreen')
-                          }
-                          // {context.goNamed('homescreen')},
-
-                          //   onPressed: () {
-                          //     ReactionBuilder(
-                          //       builder: (context){
-                          //     return reaction((_) => viewModel.logIn() is ResourceSuccess, (data){
-                          //   if (data) {
-                          //     final ResourceSuccess login response = (viewModel.isLoading as ResourceSuccess);
-                          //     if (response.data.TokenRequest && response.data.hadSessionToken){
-                          //       context.goNamed('homescreen');
-                          //     }
-                          //   }
-                          //     })}
-                          // )
-                          // },
-                          ),
+                          }),
                     ),
                   ],
                 ),
