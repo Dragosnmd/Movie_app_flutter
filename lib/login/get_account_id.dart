@@ -3,7 +3,9 @@ import 'package:movie_app/data/token_request.dart';
 import 'package:movie_app/networking/networking.dart';
 
 class AccountIdApi {
-  final NetworkModule networkModule = NetworkModule();
+  final NetworkModule networkModule;
+  AccountIdApi(this.networkModule);
+
   Future<TokenRequest> accountId(String sessionId) async {
     try {
       final response = await networkModule.dio.get(

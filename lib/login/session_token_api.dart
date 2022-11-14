@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:movie_app/data/mobx/session.dart';
+import 'package:movie_app/data/session.dart';
 import 'package:movie_app/data/session_request.dart';
 import 'package:movie_app/networking/networking.dart';
 
 class SessionTokenApi {
-  final NetworkModule networkModule = NetworkModule();
+  final NetworkModule networkModule;
+  SessionTokenApi(this.networkModule);
 
   Future<SessionReqeust> newSession(final SessionLoad load) async {
     try {

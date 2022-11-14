@@ -1,8 +1,9 @@
 import 'package:mobx/mobx.dart';
 import 'package:movie_app/helpers/resource.dart';
-import '../data/movie_repository.dart';
-import '../domain/movie.dart';
-
+import 'package:movie_app/movies/data/movie_api.dart';
+import 'package:movie_app/movies/data/movie_repository.dart';
+import 'package:movie_app/movies/domain/movie.dart';
+import 'package:movie_app/storage_module/movie_dao.dart';
 part 'movies_view_model.g.dart';
 
 class MoviesViewModel = MoviesViewModelBase with _$MoviesViewModel;
@@ -15,7 +16,7 @@ abstract class MoviesViewModelBase with Store {
     getOutInCinema();
   }
 
-  final repository = MovieRepository();
+  final repository = MovieRepository(MoviesDao(), MoviesApi());
   @observable
   bool isLoading = false;
 
@@ -42,11 +43,16 @@ abstract class MoviesViewModelBase with Store {
     popularMovies = Resource.loading();
     try {
       await Future.delayed(const Duration(seconds: 1));
-      popularMovies = Resource.success(
-          data: (await repository.getPopularMovies()).asObservable());
+      repository.loadMovies();
+      // popularMovies = Resource.success(
+      //     data: (await repository.getPopularMovies()).asObservable());
     } catch (ex) {
       popularMovies = Resource.error(error: ex.toString());
     }
+  }
+
+  Stream<List<Movie>> movieStream() {
+    return repository.allMovies();
   }
 
   Future<void> getMoviesRated({final int page = 1}) async {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:movie_app/assets.dart';
 import 'package:movie_app/movies/data/movie_mocked.dart';
+import 'package:movie_app/movies/domain/movie.dart';
 import 'package:movie_app/movies/models/favorite_model.dart';
 import 'package:movie_app/movies/presentation/movies_view_model.dart';
 
@@ -20,6 +21,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final viewModel = MoviesViewModel();
+  late Stream<List<Movie>> _getMovieList;
+
+  @override
+  void initState() {
+    super.initState();
+    _getMovieList = viewModel.movieStream();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,14 +111,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 success: (value) =>
                     MovieList(title: 'Top Rated Movies', movies: value.data));
           }),
-          Observer(builder: (context) {
-            return viewModel.popularMovies.map(
-                initial: (_) => Center(child: CircularProgressIndicator()),
-                loading: (_) => Center(child: CircularProgressIndicator()),
-                error: (value) => Text(value.error),
-                success: (value) =>
-                    MovieList(title: 'Popular Movies', movies: value.data));
-          }),
+          StreamBuilder<List<Movie>>(
+              stream: _getMovieList,
+              builder: (context, snapshot) {
+                if (snapshot.hasError)
+                  return Text('There is an error');
+                else if (snapshot.connectionState == ConnectionState.waiting)
+                  return CircularProgressIndicator();
+                return MovieList(
+                    title: 'Get popular movies',
+                    movies: snapshot.requireData); //widget
+              }),
           Observer(builder: (context) {
             return viewModel.nowPlayingMovies.map(
                 initial: (_) => Center(child: CircularProgressIndicator()),

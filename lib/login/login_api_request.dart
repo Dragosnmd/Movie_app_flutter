@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:movie_app/data/login_payload.dart';
 import 'package:movie_app/data/token_request.dart';
+import 'package:movie_app/login/login_payload.dart';
 import 'package:movie_app/networking/networking.dart';
 
 class LoginApi {
-  final NetworkModule networkModule = NetworkModule();
+  final NetworkModule networkModule;
+  LoginApi(this.networkModule);
   Future<TokenRequest> login(final LoginPayload payload) async {
     try {
       final response = await networkModule.dio.post(

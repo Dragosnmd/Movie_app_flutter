@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobx/mobx.dart';
 import 'package:movie_app/assets.dart';
-import 'package:movie_app/screens/login_view_model.dart';
+import 'package:movie_app/movies/presentation/login_view_model.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_app/movies/domain/movie.dart';
@@ -14,7 +15,6 @@ class MovieList extends StatefulWidget {
 }
 
 class _MovieListState extends State<MovieList> {
-
   // late final Database _database;
 
   // @override
@@ -22,8 +22,6 @@ class _MovieListState extends State<MovieList> {
   //   super.initState();
   //   _database = Database();
   // }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +60,7 @@ class _MovieListState extends State<MovieList> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             image: DecorationImage(
-                                image: NetworkImage(
+                                image: CachedNetworkImageProvider(
                                     widget.movies[index].posterPath),
                                 fit: BoxFit.cover),
                           ),

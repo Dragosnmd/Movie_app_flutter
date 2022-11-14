@@ -1,10 +1,13 @@
-import 'package:movie_app/movies/data/mobx/movieGenreResponse/genre_movies_response.dart';
+import 'package:movie_app/movies/data/movieGenreResponse/genre_movies_response.dart';
 import 'package:movie_app/movies/domain/movie.dart';
 
 import 'package:movie_app/networking/networking.dart';
 
 class MoviesApi {
-  final NetworkModule networkModule = NetworkModule();
+  // final NetworkModule networkModule;
+  // MoviesApi(this.networkModule);
+  final NetworkModule networkModule;
+  MoviesApi(this.networkModule);
 
   Future<List<Movie>> getPopularMovies({int page = 1}) async {
     final response = await networkModule.dio

@@ -3,7 +3,8 @@ import 'package:movie_app/data/token_request.dart';
 import 'package:movie_app/networking/networking.dart';
 
 class GetRequestTokenApi {
-  final NetworkModule networkModule = NetworkModule();
+  final NetworkModule networkModule;
+  GetRequestTokenApi(this.networkModule);
 
   Future<TokenRequest> getRequestToken() async {
     try {

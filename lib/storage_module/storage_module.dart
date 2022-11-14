@@ -31,6 +31,4 @@ class StorageModule {
   SharedPreferences get sharedPreferences => _sharedPreference;
 
   FlutterSecureStorage get secureStorage => _secureStorage;
-
-  // Database get database => _database;
 }

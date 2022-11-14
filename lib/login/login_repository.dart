@@ -1,11 +1,12 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mobx/mobx.dart';
-import 'package:movie_app/data/login_payload.dart';
-import 'package:movie_app/data/mobx/session.dart';
+import 'package:movie_app/data/session.dart';
 import 'package:movie_app/data/token_request.dart';
 import 'package:movie_app/login/get_request_token_api.dart';
 import 'package:movie_app/login/login_api_request.dart';
+import 'package:movie_app/login/login_payload.dart';
 import 'package:movie_app/login/session_token_api.dart';
+import 'package:movie_app/networking/networking.dart';
 import 'package:movie_app/storage_module/storage_module.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,21 +27,27 @@ const String sessionId = 'sessionId';
 const String sessionId1 = 'sessionId1';
 
 abstract class _LoginRepository with Store {
-  _LoginRepository() {
-    checkAuthentification();
-  }
+  // _LoginRepository() {
+  //   checkAuthentification();
+  // }
 
   @observable
   bool loginSucceed = false;
 
-  final LoginApi loginApi = LoginApi();
-  final GetRequestTokenApi getRequestTokenApi = GetRequestTokenApi();
-  final SessionTokenApi newSessionToken = SessionTokenApi();
+  final LoginApi loginApi;
+  final GetRequestTokenApi getRequestTokenApi;
+  final SessionTokenApi newSessionToken;
+
   final SharedPreferences sharedPreferences =
       StorageModule.getInstance().sharedPreferences;
 
   final FlutterSecureStorage secureStorage =
       StorageModule.getInstance().secureStorage;
+
+  _LoginRepository(
+      this.loginApi, this.getRequestTokenApi, this.newSessionToken) {
+    checkAuthentification();
+  }
 
   Future<bool> login(String username, String password) async {
     try {
