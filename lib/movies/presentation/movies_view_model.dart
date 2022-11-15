@@ -1,9 +1,11 @@
+import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 import 'package:movie_app/helpers/resource.dart';
 import 'package:movie_app/movies/data/movie_repository.dart';
 import 'package:movie_app/movies/domain/movie.dart';
 part 'movies_view_model.g.dart';
 
+@injectable
 class MoviesViewModel extends MoviesViewModelBase with _$MoviesViewModel {
   MoviesViewModel(final MovieRepository repository) : super(repository);
 }

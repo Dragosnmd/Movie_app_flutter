@@ -18,12 +18,14 @@ import 'package:movie_app/storage_module/movie_dao.dart';
 import 'package:movie_app/storage_module/storage_module.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:movie_app/injecton/injection';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // final StorageModule storageModule = StorageModule.getInstance();
   // await storageModule.initModule();
-  await initModulde();
+  // await initModulde();
+  await configureDependencies();
 
   runApp(ChangeNotifierProvider(
     create: (context) => FavoritesModel(),
@@ -31,46 +33,46 @@ Future<void> main() async {
   ));
 }
 
-GetIt getIt = GetIt.instance;
+final getIt = GetIt.instance;
 
-Future<void> initModulde() async {
-  final StorageModule storageModule = await StorageModule.createModule();
-  getIt.registerSingleton<AppDatabase>(storageModule.database);
+// Future<void> initModulde() async {
+//   final StorageModule storageModule = await StorageModule.createModule();
+//   getIt.registerSingleton<AppDatabase>(storageModule.database);
 
-  getIt.registerSingleton<SharedPreferences>(storageModule.sharedPreferences);
+//   getIt.registerSingleton<SharedPreferences>(storageModule.sharedPreferences);
 
-  getIt.registerLazySingleton<MoviesDao>(
-      (() => MoviesDao(getIt<AppDatabase>())));
-  getIt.registerLazySingleton<NetworkModule>((() => NetworkModule()));
+//   getIt.registerLazySingleton<MoviesDao>(
+//       (() => MoviesDao(getIt<AppDatabase>())));
+//   getIt.registerLazySingleton<NetworkModule>((() => NetworkModule()));
 
-  getIt.registerLazySingleton<MoviesApi>(
-      (() => MoviesApi(getIt<NetworkModule>())));
-  getIt.registerLazySingleton<AccountIdApi>(
-      (() => AccountIdApi(getIt<NetworkModule>())));
+//   getIt.registerLazySingleton<MoviesApi>(
+//       (() => MoviesApi(getIt<NetworkModule>())));
+//   getIt.registerLazySingleton<AccountIdApi>(
+//       (() => AccountIdApi(getIt<NetworkModule>())));
 
-  getIt.registerLazySingleton<LoginApi>(
-      (() => LoginApi(getIt<NetworkModule>())));
+//   getIt.registerLazySingleton<LoginApi>(
+//       (() => LoginApi(getIt<NetworkModule>())));
 
-  getIt.registerLazySingleton<SessionTokenApi>(
-      (() => SessionTokenApi(getIt<NetworkModule>())));
+//   getIt.registerLazySingleton<SessionTokenApi>(
+//       (() => SessionTokenApi(getIt<NetworkModule>())));
 
-  getIt.registerLazySingleton<GetRequestTokenApi>(
-      (() => GetRequestTokenApi(getIt<NetworkModule>())));
+//   getIt.registerLazySingleton<GetRequestTokenApi>(
+//       (() => GetRequestTokenApi(getIt<NetworkModule>())));
 
-  getIt.registerLazySingleton<MovieRepository>(
-      () => MovieRepository(getIt<MoviesDao>(), getIt<MoviesApi>()));
+//   getIt.registerLazySingleton<MovieRepository>(
+//       () => MovieRepository(getIt<MoviesDao>(), getIt<MoviesApi>()));
 
-  getIt.registerLazySingleton<LoginRepository>(() => LoginRepository(
-      getIt<LoginApi>(),
-      getIt<GetRequestTokenApi>(),
-      getIt<SessionTokenApi>(),
-      getIt<SharedPreferences>()));
+//   getIt.registerLazySingleton<LoginRepository>(() => LoginRepository(
+//       getIt<LoginApi>(),
+//       getIt<GetRequestTokenApi>(),
+//       getIt<SessionTokenApi>(),
+//       getIt<SharedPreferences>()));
 
-  getIt.registerFactory<LoginViewModel>(
-      () => LoginViewModel(getIt<LoginRepository>()));
-  getIt.registerFactory<MoviesViewModel>(
-      () => MoviesViewModel(getIt<MovieRepository>()));
-}
+//   getIt.registerFactory<LoginViewModel>(
+//       () => LoginViewModel(getIt<LoginRepository>()));
+//   getIt.registerFactory<MoviesViewModel>(
+//       () => MoviesViewModel(getIt<MovieRepository>()));
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

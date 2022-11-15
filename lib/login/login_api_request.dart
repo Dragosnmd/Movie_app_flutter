@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/data/token_request.dart';
 import 'package:movie_app/login/login_payload.dart';
 import 'package:movie_app/networking/networking.dart';
 
+@injectable
 class LoginApi {
   final NetworkModule networkModule;
   LoginApi(this.networkModule);

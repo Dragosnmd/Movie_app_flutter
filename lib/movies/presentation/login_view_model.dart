@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 import 'package:movie_app/helpers/resource.dart';
 import 'package:movie_app/login/login_repository.dart';
 
 part 'login_view_model.g.dart';
 
+@injectable
 class LoginViewModel = LoginViewModelBase with _$LoginViewModel;
 
 abstract class LoginViewModelBase with Store {

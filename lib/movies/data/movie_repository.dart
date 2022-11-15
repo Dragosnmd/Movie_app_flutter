@@ -1,7 +1,9 @@
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/movies/data/movie_api.dart';
 import 'package:movie_app/movies/domain/movie.dart';
 import 'package:movie_app/storage_module/movie_dao.dart';
 
+@injectable
 class MovieRepository {
   final MoviesApi api;
   final MoviesDao _mDao;

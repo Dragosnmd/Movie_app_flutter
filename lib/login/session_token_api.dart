@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/data/session.dart';
 import 'package:movie_app/data/session_request.dart';
 import 'package:movie_app/networking/networking.dart';
 
+@injectable
 class SessionTokenApi {
   final NetworkModule networkModule;
   SessionTokenApi(this.networkModule);

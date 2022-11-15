@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 import 'package:movie_app/data/session.dart';
 import 'package:movie_app/data/token_request.dart';
@@ -9,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 part 'login_repository.g.dart';
 
+@injectable
 class LoginRepository = LoginRepositoryBase with _$LoginRepository;
 
 const String requestToken = 'requestToken';

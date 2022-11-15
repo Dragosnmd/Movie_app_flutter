@@ -1,7 +1,9 @@
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/movies/domain/movie.dart';
 import 'app_database/app_database.dart';
 export 'package:movie_app/movies/domain/movie_table.dart';
 
+@injectable
 class MoviesDao {
   final AppDatabase _db;
   MoviesDao(this._db);

@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/data/token_request.dart';
 import 'package:movie_app/networking/networking.dart';
 
+@injectable
 class AccountIdApi {
   final NetworkModule networkModule;
   AccountIdApi(this.networkModule);

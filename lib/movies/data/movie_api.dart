@@ -1,8 +1,10 @@
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/movies/data/movieGenreResponse/genre_movies_response.dart';
 import 'package:movie_app/movies/domain/movie.dart';
 
 import 'package:movie_app/networking/networking.dart';
 
+@singleton
 class MoviesApi {
   // final NetworkModule networkModule;
   // MoviesApi(this.networkModule);
