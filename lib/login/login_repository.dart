@@ -1,4 +1,3 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mobx/mobx.dart';
 import 'package:movie_app/data/session.dart';
 import 'package:movie_app/data/token_request.dart';
@@ -6,13 +5,11 @@ import 'package:movie_app/login/get_request_token_api.dart';
 import 'package:movie_app/login/login_api_request.dart';
 import 'package:movie_app/login/login_payload.dart';
 import 'package:movie_app/login/session_token_api.dart';
-import 'package:movie_app/networking/networking.dart';
-import 'package:movie_app/storage_module/storage_module.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'login_repository.g.dart';
 
-class LoginRepository = _LoginRepository with _$LoginRepository;
+class LoginRepository = LoginRepositoryBase with _$LoginRepository;
 
 const String requestToken = 'requestToken';
 const String requestToke1 = 'requestToken1';
@@ -26,26 +23,18 @@ const String sesionToken1 = 'sesionToken1';
 const String sessionId = 'sessionId';
 const String sessionId1 = 'sessionId1';
 
-abstract class _LoginRepository with Store {
-  // _LoginRepository() {
-  //   checkAuthentification();
-  // }
-
+abstract class LoginRepositoryBase with Store {
   @observable
   bool loginSucceed = false;
 
   final LoginApi loginApi;
   final GetRequestTokenApi getRequestTokenApi;
-  final SessionTokenApi newSessionToken;
+  final SessionTokenApi sessionTokenApi;
 
-  final SharedPreferences sharedPreferences =
-      StorageModule.getInstance().sharedPreferences;
+  final SharedPreferences sharedPreferences;
 
-  final FlutterSecureStorage secureStorage =
-      StorageModule.getInstance().secureStorage;
-
-  _LoginRepository(
-      this.loginApi, this.getRequestTokenApi, this.newSessionToken) {
+  LoginRepositoryBase(this.loginApi, this.getRequestTokenApi,
+      this.sessionTokenApi, this.sharedPreferences) {
     checkAuthentification();
   }
 
@@ -54,7 +43,7 @@ abstract class _LoginRepository with Store {
       final TokenRequest token = await getRequestTokenApi.getRequestToken();
       final sesionToken = await loginApi.login(LoginPayload(
           username: username, password: password, requestToken: token.value));
-      final session = await newSessionToken
+      final session = await sessionTokenApi
           .newSession(SessionLoad(requestToken: sesionToken.value));
 
       await sharedPreferences.setString(requestToken, token.value);
@@ -62,10 +51,10 @@ abstract class _LoginRepository with Store {
           expiresTokenAt, token.expiresAt.toIso8601String());
       await sharedPreferences.setString(sessionId, session.value);
 
-      await secureStorage.write(key: requestToke1, value: token.value);
-      await secureStorage.write(
-          key: expiresTokenAt1, value: token.expiresAt.toIso8601String());
-      await secureStorage.write(key: sessionId1, value: session.value);
+      // await secureStorage.write(key: requestToke1, value: token.value);
+      // await secureStorage.write(
+      //     key: expiresTokenAt1, value: token.expiresAt.toIso8601String());
+      // await secureStorage.write(key: sessionId1, value: session.value);
 
       checkAuthentification();
       return true;
@@ -96,39 +85,39 @@ abstract class _LoginRepository with Store {
     return true;
   }
 
-  Future<bool> checkAuth2() async {
-    final String? token2 = await secureStorage.read(key: requestToke1);
+  // Future<bool> checkAuth2() async {
+  //   final String? token2 = await secureStorage.read(key: requestToke1);
 
-    if (token2 == null) return false;
+  //   if (token2 == null) return false;
 
-    final String? tokenExpString =
-        await secureStorage.read(key: expiresTokenAt1);
+  //   final String? tokenExpString =
+  //       await secureStorage.read(key: expiresTokenAt1);
 
-    if (tokenExpString == null) return false;
+  //   if (tokenExpString == null) return false;
 
-    final DateTime tokenExpDate1 = DateTime.parse(tokenExpString);
-    final DateTime now1 = DateTime.now().toUtc();
+  //   final DateTime tokenExpDate1 = DateTime.parse(tokenExpString);
+  //   final DateTime now1 = DateTime.now().toUtc();
 
-    final Duration difference = tokenExpDate1.difference(now1);
+  //   final Duration difference = tokenExpDate1.difference(now1);
 
-    if (difference.inMilliseconds <= 0) {
-      return false;
-    }
-    // isLoginWithSecure = true;
-    return true;
-  }
+  //   if (difference.inMilliseconds <= 0) {
+  //     return false;
+  //   }
+  //   // isLoginWithSecure = true;
+  //   return true;
+  // }
 
   Future<void> clearExpiredData() async {
     sharedPreferences.remove(requestToken);
     sharedPreferences.remove(expiresTokenAt);
-    secureStorage.delete(key: requestToke1);
-    secureStorage.delete(key: expiresTokenAt1);
+    // secureStorage.delete(key: requestToke1);
+    // secureStorage.delete(key: expiresTokenAt1);
   }
 
   Future<bool> checkAuthentification() async {
     final bool isLoggedIn = await checkAuth1();
-    final bool isLoggedInSecured = await checkAuth2();
-    if (isLoggedIn & isLoggedInSecured) {
+    // final bool isLoggedInSecured = await checkAuth2();
+    if (isLoggedIn) {
       loginSucceed = true;
       return true;
     }

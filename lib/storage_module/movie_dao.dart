@@ -1,10 +1,10 @@
 import 'package:movie_app/movies/domain/movie.dart';
-import 'package:movie_app/storage_module/storage_module.dart';
 import 'app_database/app_database.dart';
 export 'package:movie_app/movies/domain/movie_table.dart';
 
 class MoviesDao {
-  final AppDatabase _db = StorageModule.getInstance().database;
+  final AppDatabase _db;
+  MoviesDao(this._db);
 
   Stream<List<Movie>> watchAllMovies() {
     return _db.select(_db.movieTables).watch();

@@ -1,22 +1,22 @@
 import 'package:mobx/mobx.dart';
 import 'package:movie_app/helpers/resource.dart';
-import 'package:movie_app/movies/data/movie_api.dart';
 import 'package:movie_app/movies/data/movie_repository.dart';
 import 'package:movie_app/movies/domain/movie.dart';
-import 'package:movie_app/storage_module/movie_dao.dart';
 part 'movies_view_model.g.dart';
 
-class MoviesViewModel = MoviesViewModelBase with _$MoviesViewModel;
+class MoviesViewModel extends MoviesViewModelBase with _$MoviesViewModel {
+  MoviesViewModel(final MovieRepository repository) : super(repository);
+}
 
 abstract class MoviesViewModelBase with Store {
-  MoviesViewModelBase() {
+  final MovieRepository repository;
+  MoviesViewModelBase(this.repository) {
     getMovies();
     getMoviesRated();
     getNowPlayingMovies();
     getOutInCinema();
   }
 
-  final repository = MovieRepository(MoviesDao(), MoviesApi());
   @observable
   bool isLoading = false;
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:movie_app/assets.dart';
+import 'package:movie_app/main.dart';
 import 'package:movie_app/movies/data/movie_mocked.dart';
 import 'package:movie_app/movies/domain/movie.dart';
 import 'package:movie_app/movies/models/favorite_model.dart';
@@ -20,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final viewModel = MoviesViewModel();
+  final viewModel = getIt<MoviesViewModel>();
   late Stream<List<Movie>> _getMovieList;
 
   @override

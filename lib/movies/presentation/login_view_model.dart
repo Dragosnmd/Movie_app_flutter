@@ -9,9 +9,6 @@ class LoginViewModel = LoginViewModelBase with _$LoginViewModel;
 abstract class LoginViewModelBase with Store {
   late final LoginRepository repository;
 
-  // LoginViewModelBase() {
-  //   repository = LoginRepository();
-  // }
   LoginViewModelBase(this.repository);
   @observable
   bool isLoading = false;

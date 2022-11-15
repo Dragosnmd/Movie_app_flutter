@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobx/mobx.dart';
 import 'package:movie_app/assets.dart';
+import 'package:movie_app/main.dart';
 import 'package:movie_app/movies/presentation/login_view_model.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -57,7 +58,7 @@ class _LoginContentState extends State<LoginContent> {
     super.initState();
     userNameController = TextEditingController();
     passwordController = TextEditingController();
-    viewModel = LoginViewModel();
+    viewModel = getIt<LoginViewModel>();
     when((_) => viewModel.succesLogin, () {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         context.goNamed('homescreen');
