@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:movie_app/assets.dart';
+import 'package:movie_app/injecton/injection.dart';
 import 'package:movie_app/main.dart';
 import 'package:movie_app/movies/data/movie_mocked.dart';
 import 'package:movie_app/movies/domain/movie.dart';

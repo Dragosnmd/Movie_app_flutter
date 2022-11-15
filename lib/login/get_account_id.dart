@@ -3,14 +3,15 @@ import 'package:injectable/injectable.dart';
 import 'package:movie_app/data/token_request.dart';
 import 'package:movie_app/networking/networking.dart';
 
-@injectable
+@lazySingleton
 class AccountIdApi {
-  final NetworkModule networkModule;
-  AccountIdApi(this.networkModule);
+  final Dio dio;
+  // final NetworkModule networkModule;
+  AccountIdApi(this.dio);
 
   Future<TokenRequest> accountId(String sessionId) async {
     try {
-      final response = await networkModule.dio.get(
+      final response = await dio.get(
         'account',
       );
       return TokenRequest.fromJson(response.data);

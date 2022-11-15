@@ -3,14 +3,15 @@ import 'package:injectable/injectable.dart';
 import 'package:movie_app/data/token_request.dart';
 import 'package:movie_app/networking/networking.dart';
 
-@injectable
+@lazySingleton
 class GetRequestTokenApi {
-  final NetworkModule networkModule;
-  GetRequestTokenApi(this.networkModule);
+  // final NetworkModule networkModule;
+  final Dio dio;
+  GetRequestTokenApi(this.dio);
 
   Future<TokenRequest> getRequestToken() async {
     try {
-      final response = await networkModule.dio.get('/authentication/token/new');
+      final response = await dio.get('/authentication/token/new');
       return TokenRequest.fromJson(response.data);
     } on DioError catch (ex) {
       if (ex.response?.statusCode == 401 || ex.response?.statusCode == 404) {

@@ -22,7 +22,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // final StorageModule storageModule = StorageModule.getInstance();
+  // final Future<SharedPreferences> sharedPreferences =
+  //     SharedPreferences.getInstance();
   // await storageModule.initModule();
   // await initModulde();
   await configureDependencies();
@@ -33,7 +34,7 @@ Future<void> main() async {
   ));
 }
 
-final getIt = GetIt.instance;
+// final getIt = GetIt.instance;
 
 // Future<void> initModulde() async {
 //   final StorageModule storageModule = await StorageModule.createModule();

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobx/mobx.dart';
 import 'package:movie_app/assets.dart';
+import 'package:movie_app/injecton/injection.dart';
 import 'package:movie_app/main.dart';
 import 'package:movie_app/movies/presentation/login_view_model.dart';
 

@@ -7,7 +7,9 @@ import 'package:movie_app/login/login_repository.dart';
 part 'login_view_model.g.dart';
 
 @injectable
-class LoginViewModel = LoginViewModelBase with _$LoginViewModel;
+class LoginViewModel extends LoginViewModelBase with _$LoginViewModel {
+  LoginViewModel(final LoginRepository repository) : super(repository);
+}
 
 abstract class LoginViewModelBase with Store {
   late final LoginRepository repository;

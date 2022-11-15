@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 part 'login_repository.g.dart';
 
-@injectable
+@lazySingleton
 class LoginRepository = LoginRepositoryBase with _$LoginRepository;
 
 const String requestToken = 'requestToken';
