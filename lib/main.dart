@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movie_app/injecton/injection.dart';
 import 'package:movie_app/login/get_account_id.dart';
 import 'package:movie_app/login/get_request_token_api.dart';
 import 'package:movie_app/login/login_api_request.dart';
@@ -18,7 +19,6 @@ import 'package:movie_app/storage_module/movie_dao.dart';
 import 'package:movie_app/storage_module/storage_module.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:movie_app/injecton/injection';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
