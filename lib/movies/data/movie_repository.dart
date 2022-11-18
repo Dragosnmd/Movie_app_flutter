@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/movies/data/movie_api.dart';
 import 'package:movie_app/movies/domain/movie.dart';
+import 'package:movie_app/movies/domain/movie_details.dart';
 import 'package:movie_app/storage_module/movie_dao.dart';
 
 @lazySingleton
@@ -24,6 +25,10 @@ class MovieRepository {
 
   Future<List<Movie>> getOutInCinema({int page = 1}) async {
     return await api.getOutInCinema(page: page);
+  }
+
+  Future<MovieDetails> getDetails(int movieId) async {
+    return await api.getDetails(movieId);
   }
 
   Stream<List<Movie>> allMovies() {

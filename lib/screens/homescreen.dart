@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:movie_app/assets.dart';
 import 'package:movie_app/injecton/injection.dart';
-import 'package:movie_app/main.dart';
 import 'package:movie_app/movies/data/movie_mocked.dart';
 import 'package:movie_app/movies/domain/movie.dart';
 import 'package:movie_app/movies/models/favorite_model.dart';
 import 'package:movie_app/movies/presentation/movies_view_model.dart';
-
 import 'package:movie_app/screens/screens.dart';
 import 'package:movie_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
@@ -45,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 5,
         leading: Container(
           child: GestureDetector(
+
             onTap: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const LoginScreen())),
             child: Image.asset(Assets.loginLogo),

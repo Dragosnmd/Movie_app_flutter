@@ -67,7 +67,9 @@ class _MovieListState extends State<MovieList> {
                           height: 160,
                           child: GestureDetector(
                             onTap: () {
-                              context.goNamed('detailPage');
+                              context.goNamed('detailPage', params: {
+                                'movieId': widget.movies[index].id.toString()
+                              });
                             },
                           ),
                         ),

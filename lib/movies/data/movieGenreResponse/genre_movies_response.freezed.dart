@@ -14,12 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-GenreMovieResponse _$GenreMovieResponseFromJson(Map<String, dynamic> json) {
+GenreMovieListResponse _$GenreMovieListResponseFromJson(
+    Map<String, dynamic> json) {
   return _GenreMoviesResponse.fromJson(json);
 }
 
 /// @nodoc
-mixin _$GenreMovieResponse {
+mixin _$GenreMovieListResponse {
   int get page => throw _privateConstructorUsedError;
   @JsonKey(name: 'total_pages')
   int get totalPages => throw _privateConstructorUsedError;
@@ -29,15 +30,15 @@ mixin _$GenreMovieResponse {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GenreMovieResponseCopyWith<GenreMovieResponse> get copyWith =>
+  $GenreMovieListResponseCopyWith<GenreMovieListResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GenreMovieResponseCopyWith<$Res> {
-  factory $GenreMovieResponseCopyWith(
-          GenreMovieResponse value, $Res Function(GenreMovieResponse) then) =
-      _$GenreMovieResponseCopyWithImpl<$Res, GenreMovieResponse>;
+abstract class $GenreMovieListResponseCopyWith<$Res> {
+  factory $GenreMovieListResponseCopyWith(GenreMovieListResponse value,
+          $Res Function(GenreMovieListResponse) then) =
+      _$GenreMovieListResponseCopyWithImpl<$Res, GenreMovieListResponse>;
   @useResult
   $Res call(
       {int page,
@@ -47,9 +48,10 @@ abstract class $GenreMovieResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GenreMovieResponseCopyWithImpl<$Res, $Val extends GenreMovieResponse>
-    implements $GenreMovieResponseCopyWith<$Res> {
-  _$GenreMovieResponseCopyWithImpl(this._value, this._then);
+class _$GenreMovieListResponseCopyWithImpl<$Res,
+        $Val extends GenreMovieListResponse>
+    implements $GenreMovieListResponseCopyWith<$Res> {
+  _$GenreMovieListResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -87,7 +89,7 @@ class _$GenreMovieResponseCopyWithImpl<$Res, $Val extends GenreMovieResponse>
 
 /// @nodoc
 abstract class _$$_GenreMoviesResponseCopyWith<$Res>
-    implements $GenreMovieResponseCopyWith<$Res> {
+    implements $GenreMovieListResponseCopyWith<$Res> {
   factory _$$_GenreMoviesResponseCopyWith(_$_GenreMoviesResponse value,
           $Res Function(_$_GenreMoviesResponse) then) =
       __$$_GenreMoviesResponseCopyWithImpl<$Res>;
@@ -102,7 +104,7 @@ abstract class _$$_GenreMoviesResponseCopyWith<$Res>
 
 /// @nodoc
 class __$$_GenreMoviesResponseCopyWithImpl<$Res>
-    extends _$GenreMovieResponseCopyWithImpl<$Res, _$_GenreMoviesResponse>
+    extends _$GenreMovieListResponseCopyWithImpl<$Res, _$_GenreMoviesResponse>
     implements _$$_GenreMoviesResponseCopyWith<$Res> {
   __$$_GenreMoviesResponseCopyWithImpl(_$_GenreMoviesResponse _value,
       $Res Function(_$_GenreMoviesResponse) _then)
@@ -168,7 +170,7 @@ class _$_GenreMoviesResponse extends _GenreMoviesResponse {
 
   @override
   String toString() {
-    return 'GenreMovieResponse(page: $page, totalPages: $totalPages, totalResults: $totalResults, results: $results)';
+    return 'GenreMovieListResponse(page: $page, totalPages: $totalPages, totalResults: $totalResults, results: $results)';
   }
 
   @override
@@ -204,7 +206,7 @@ class _$_GenreMoviesResponse extends _GenreMoviesResponse {
   }
 }
 
-abstract class _GenreMoviesResponse extends GenreMovieResponse {
+abstract class _GenreMoviesResponse extends GenreMovieListResponse {
   const factory _GenreMoviesResponse(
       {required final int page,
       @JsonKey(name: 'total_pages') required final int totalPages,

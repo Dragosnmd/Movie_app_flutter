@@ -5,18 +5,18 @@ part 'genre_movies_response.freezed.dart';
 part 'genre_movies_response.g.dart';
 
 @freezed
-class GenreMovieResponse with _$GenreMovieResponse {
-  const GenreMovieResponse._();
+class GenreMovieListResponse with _$GenreMovieListResponse {
+  const GenreMovieListResponse._();
 
-  const factory GenreMovieResponse({
+  const factory GenreMovieListResponse({
     required int page,
     @JsonKey(name: 'total_pages') required int totalPages,
     @JsonKey(name: 'total_results') required int totalResults,
     required List<MovieResponse> results,
   }) = _GenreMoviesResponse;
 
-  factory GenreMovieResponse.fromJson(Map<String, dynamic> json) =>
-      _$GenreMovieResponseFromJson(json);
+  factory GenreMovieListResponse.fromJson(Map<String, dynamic> json) =>
+      _$GenreMovieListResponseFromJson(json);
 
   List<Movie> toDomainList() {
     return results.map((e) => e.toDomain()).toList();
