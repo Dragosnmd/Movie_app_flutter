@@ -20,7 +20,7 @@ class _FavoritesState extends State<Favorites> {
           scrollDirection: Axis.vertical,
           itemCount: value.favoritesMovies.length,
           itemBuilder: (context, index) {
-            return Text(value.favoritesMovies[index].title);
+            return Text('value.favoritesMovies[index].title');
           },
         );
       }),

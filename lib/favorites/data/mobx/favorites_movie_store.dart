@@ -1,5 +1,8 @@
 import 'package:mobx/mobx.dart';
+
 import '../modelsMOCKED/movie_mocked.dart';
+
+
 part 'favorites_movie_store.g.dart';
 
 class FavoritesMovies = _FavoritesMovies with _$FavoritesMovies;

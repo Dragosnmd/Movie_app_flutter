@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:provider/provider.dart';
 import '../../../core/injection.dart';
-import '../../../favorites/data/modelsMOCKED/favorite_model.dart';
 import '../../domain/movie_details.dart';
 import '../movie_details_view_model.dart';
 
@@ -45,7 +43,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 }
 
 class MovieDetailsWidget extends StatelessWidget {
-  final viewModel = getIt<MovieDetailsViewModel>();
   final MovieDetails movie;
   MovieDetailsWidget({super.key, required this.movie});
 

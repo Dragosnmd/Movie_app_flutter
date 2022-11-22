@@ -10,7 +10,7 @@ import '../../movie/data/movie_table.dart';
 
 part 'app_database.g.dart';
 
-@DriftDatabase(tables: [MovieTables, FavoriteMovieTable])
+@DriftDatabase(tables: [MovieTables])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 

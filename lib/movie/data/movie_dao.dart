@@ -1,5 +1,4 @@
 import 'package:injectable/injectable.dart';
-
 import '../../core/storage/app_database.dart';
 import '../domain/movie.dart';
 

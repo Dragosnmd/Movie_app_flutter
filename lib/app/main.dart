@@ -7,7 +7,7 @@ import '../auth/data/login_repository.dart';
 import '../auth/presentation/loginScreen.dart';
 import '../favorites/data/modelsMOCKED/favorite_model.dart';
 import '../favorites/presentation/favorites.dart';
-import '../movie/presentation/screens/movieDetailPage.dart';
+import '../movie/presentation/screens/movie_Details_Page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

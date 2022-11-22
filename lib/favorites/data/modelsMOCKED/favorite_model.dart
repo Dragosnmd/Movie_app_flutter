@@ -1,16 +1,16 @@
 import 'dart:collection';
 import 'package:flutter/cupertino.dart';
-import 'package:movie_app/movie/domain/movie_details.dart';
+import 'package:movie_app/favorites/data/modelsMOCKED/movie_mocked.dart';
+
 
 class FavoritesModel extends ChangeNotifier {
   /// Internal, private state of the list
-  /// 
-  final List<MovieDetails> _favoritesMovies = [];
+  final List<MovieMocked> _favoritesMovies = [];
 
-  UnmodifiableListView<MovieDetails> get favoritesMovies =>
+  UnmodifiableListView<MovieMocked> get favoritesMovies =>
       UnmodifiableListView(_favoritesMovies);
 
-  void add(MovieDetails movie) {
+  void add(MovieMocked movie) {
     _favoritesMovies.add(movie);
     notifyListeners();
   }
@@ -21,7 +21,7 @@ class FavoritesModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void remove(MovieDetails movie) {
+  void remove(MovieMocked movie) {
     _favoritesMovies.remove(movie);
     notifyListeners();
   }
