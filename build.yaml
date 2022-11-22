@@ -1,0 +1,17 @@
+# targets:
+#   freezed_only:
+#     auto_apply_builders: false
+#     builders:
+#       freezed:
+#         enabled: true
+#   $default:
+#     dependencies: [":freezed_only"]
+#     builders:
+#       freezed:
+#         enabled: false
+#       json_serializable:
+#         options:
+#           # Options configure how source code is generated for every
+#           # `@JsonSerializable`-annotated class in the package.
+#           explicit_to_json: true
+#           include_if_null: false
