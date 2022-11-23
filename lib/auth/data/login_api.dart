@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movie_app/core/network/network_module.dart';
 
 import 'login_payload.dart';
 import 'token_request.dart';

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_app/core/injection.dart';
-import 'package:movie_app/movie/presentation/screens/movieListPage.dart';
+import 'package:movie_app/movie/presentation/screens/movie_List_Page.dart';
 import 'package:provider/provider.dart';
-import '../auth/data/login_repository.dart';
-import '../auth/presentation/loginScreen.dart';
-import '../favorites/data/modelsMOCKED/favorite_model.dart';
-import '../favorites/presentation/favorites.dart';
-import '../movie/presentation/screens/movie_Details_Page.dart';
+import 'auth/data/login_repository.dart';
+import 'auth/presentation/loginScreen.dart';
+import 'favorites/data/modelsMOCKED/favorite_model.dart';
+import 'favorites/presentation/favorites.dart';
+import 'movie/presentation/screens/movie_Details_Page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,4 +1,3 @@
-import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:movie_app/app/assets.dart';
@@ -8,7 +7,6 @@ import '../../../auth/data/login_repository.dart';
 import '../../../auth/presentation/loginScreen.dart';
 import '../../../core/injection.dart';
 import '../../../favorites/data/modelsMOCKED/favorite_model.dart';
-import '../../../favorites/data/modelsMOCKED/movie_mocked.dart';
 import '../../domain/movie.dart';
 import '../movies_view_model.dart';
 import '../widgets/MovieList.dart';

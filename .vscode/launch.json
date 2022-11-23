@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Dart & Flutter",
+            "type": "dart",
+            "request": "launch",
+            "program": "${workspaceFolder}/lib/main.dart"
+        },
+        
+        {
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
@@ -18,24 +25,14 @@
             "type": "chrome",
             "webRoot": "${workspaceFolder}"
         },
-        {
-            "name": "Flutter",
-            "type": "dart",
-            "request": "launch",
-            "program": "lib/main.dart"
-        },
+
+    
         {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
             "url": "http://localhost:8080",
             "webRoot": "${workspaceFolder}"
-        },
-        {
-            "name": "Flutter (lib/app/main.dart)",
-            "type": "dart",
-            "request": "launch",
-            "program": "lib/app/main.dart"
         }
     ]
 }

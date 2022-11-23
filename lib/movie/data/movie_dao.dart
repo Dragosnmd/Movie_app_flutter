@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
+import 'package:movie_app/movie/domain/movie_details.dart';
 import '../../core/storage/app_database.dart';
 import '../domain/movie.dart';
-
 
 @lazySingleton
 class MoviesDao {
@@ -12,6 +12,12 @@ class MoviesDao {
     return _db.select(_db.movieTables).watch();
   }
 
+//
+  // Stream<List<MovieDetails>> watchFavoritesMovie() {
+  //   return _db.select(_db.favoritesMovieTables).watch();
+  // }
+
+//
   Future<List<Movie>> getAllMovies() {
     return _db.select(_db.movieTables).get();
   }
