@@ -4,6 +4,9 @@ import '../../core/resource.dart';
 import '../data/movie_repository.dart';
 import '../domain/movie_details.dart';
 
+
+
+
 part 'movie_details_view_model.g.dart';
 
 @injectable
@@ -23,6 +26,7 @@ abstract class MovieDetailsViewModelBase with Store {
 
   @observable
   Resource<MovieDetails> movieDetails = Resource.initial();
+  
 
   Future<void> _getDetails(int id) async {
     movieDetails = Resource.loading();
@@ -35,7 +39,14 @@ abstract class MovieDetailsViewModelBase with Store {
     }
   }
 
-  Future<void> addToFavourites(MovieDetails movie) async {
-    await _repository.addFavouriteMovie(movie);
-  }
+  // Add to favourites
+  // Future<void> addFavouriteMovie(MovieDetails movie) async {
+  //   await _repository.addFavouriteMovie(movie);
+  // }
+
+// //
+//     Stream<List<MovieDetails>> movieStream() {
+//     return _repository.favoritesMovies();
+//   }
+//   //
 }

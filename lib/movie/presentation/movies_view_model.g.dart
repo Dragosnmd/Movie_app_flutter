@@ -9,53 +9,20 @@ part of 'movies_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$MoviesViewModel on MoviesViewModelBase, Store {
-  late final _$isLoadingAtom =
-      Atom(name: 'MoviesViewModelBase.isLoading', context: context);
+  Computed<bool>? _$isLoadingComputed;
 
   @override
-  bool get isLoading {
-    _$isLoadingAtom.reportRead();
-    return super.isLoading;
-  }
+  bool get isLoading =>
+      (_$isLoadingComputed ??= Computed<bool>(() => super.isLoading,
+              name: 'MoviesViewModelBase.isLoading'))
+          .value;
+  Computed<String?>? _$loadingErrorComputed;
 
   @override
-  set isLoading(bool value) {
-    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
-      super.isLoading = value;
-    });
-  }
-
-  late final _$errorAtom =
-      Atom(name: 'MoviesViewModelBase.error', context: context);
-
-  @override
-  String? get error {
-    _$errorAtom.reportRead();
-    return super.error;
-  }
-
-  @override
-  set error(String? value) {
-    _$errorAtom.reportWrite(value, super.error, () {
-      super.error = value;
-    });
-  }
-
-  late final _$moviesAtom =
-      Atom(name: 'MoviesViewModelBase.movies', context: context);
-
-  @override
-  ObservableList<Movie> get movies {
-    _$moviesAtom.reportRead();
-    return super.movies;
-  }
-
-  @override
-  set movies(ObservableList<Movie> value) {
-    _$moviesAtom.reportWrite(value, super.movies, () {
-      super.movies = value;
-    });
-  }
+  String? get loadingError =>
+      (_$loadingErrorComputed ??= Computed<String?>(() => super.loadingError,
+              name: 'MoviesViewModelBase.loadingError'))
+          .value;
 
   late final _$popularMoviesAtom =
       Atom(name: 'MoviesViewModelBase.popularMovies', context: context);
@@ -124,13 +91,12 @@ mixin _$MoviesViewModel on MoviesViewModelBase, Store {
   @override
   String toString() {
     return '''
-isLoading: ${isLoading},
-error: ${error},
-movies: ${movies},
 popularMovies: ${popularMovies},
 topRatedMovies: ${topRatedMovies},
 nowPlayingMovies: ${nowPlayingMovies},
-outInCinema: ${outInCinema}
+outInCinema: ${outInCinema},
+isLoading: ${isLoading},
+loadingError: ${loadingError}
     ''';
   }
 }

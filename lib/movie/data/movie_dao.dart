@@ -1,7 +1,6 @@
 import 'package:injectable/injectable.dart';
 import '../../core/storage/app_database.dart';
 import '../domain/movie.dart';
-import '../domain/movie_details.dart';
 
 @lazySingleton
 class MoviesDao {
@@ -37,11 +36,5 @@ class MoviesDao {
       // }
     }
   }
-
-//  insert fav  movies
-  Future<int> insertFavouriteMovie(MovieDetails movie) {
-    return _db.into(_db.favoritesMovieTable).insert(movie.toInsertable());
-  }
-
 
 }

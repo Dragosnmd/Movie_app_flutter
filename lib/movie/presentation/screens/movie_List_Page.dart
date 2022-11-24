@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../auth/data/login_repository.dart';
 import '../../../auth/presentation/loginScreen.dart';
 import '../../../core/injection.dart';
-import '../../../favorites/data/modelsMOCKED/favorite_model.dart';
+import '../../../favorites_movie/data/modelsMOCKED/favorite_model.dart';
 import '../../domain/movie.dart';
 import '../movies_view_model.dart';
 import '../widgets/MovieList.dart';
@@ -28,7 +28,7 @@ class _MovieListPageState extends State<MovieListPage> {
     await signOut.clearToken();
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const LoginScreen()));
-  } // mmove to movie _view
+  } // MOVE  TO MOVIE VIEW MODEL
 
   @override
   void initState() {

@@ -5,8 +5,8 @@ import 'package:movie_app/movie/presentation/screens/movie_list_page.dart';
 import 'package:provider/provider.dart';
 import 'auth/data/login_repository.dart';
 import 'auth/presentation/loginScreen.dart';
-import 'favorites/data/modelsMOCKED/favorite_model.dart';
-import 'favorites/presentation/favorites.dart';
+import 'favorites_movie/data/modelsMOCKED/favorite_model.dart';
+import 'favorites_movie/presentation/favorites.dart';
 import 'movie/presentation/screens/movie_details_page.dart';
 
 Future<void> main() async {

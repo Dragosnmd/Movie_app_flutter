@@ -19,14 +19,22 @@ abstract class MoviesViewModelBase with Store {
     getOutInCinema();
   }
 
-  @observable
-  bool isLoading = false;
+  @computed
+  bool get isLoading =>
+      popularMovies is ResourceLoading ||
+      topRatedMovies is ResourceLoading ||
+      nowPlayingMovies is ResourceLoading ||
+      outInCinema is ResourceLoading;
 
-  @observable
-  String? error;
+  @computed
+  String? get loadingError =>
+      popularMovies.mapOrNull(error: (value) => value.error) ??
+      topRatedMovies.mapOrNull(error: (value) => value.error) ??
+      nowPlayingMovies.mapOrNull(error: (value) => value.error) ??
+      outInCinema.mapOrNull(error: (value) => value.error);
 
-  @observable
-  ObservableList<Movie> movies = <Movie>[].asObservable();
+  // @observable
+  // ObservableList<Movie> movies = <Movie>[].asObservable();
 
   @observable
   Resource<List<Movie>> popularMovies = Resource.initial();

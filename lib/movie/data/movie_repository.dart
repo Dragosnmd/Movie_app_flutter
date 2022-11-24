@@ -35,7 +35,13 @@ class MovieRepository {
     return _mDao.watchAllMovies();
   }
 
-  Future<void> addFavouriteMovie(MovieDetails movie) async {
-    await _mDao.insertFavouriteMovie(movie);
-  }
+  // //Add favorite movie 
+  // Future<void> addFavouriteMovie(MovieDetails movie) async {
+  //   await _mDao.insertFavouriteMovie(movie);
+
+  // }
+  // Stream<List<MovieDetails>> favoritesMovies() {
+  //   return _mDao.watchAllFavoritesMovies();
+  // }
+
 }

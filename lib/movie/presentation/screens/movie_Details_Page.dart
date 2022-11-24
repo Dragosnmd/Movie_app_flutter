@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../core/injection.dart';
+import '../../../favorites_movie/data/favorites_movie_view_model.dart';
 import '../../domain/movie_details.dart';
 import '../movie_details_view_model.dart';
 
@@ -44,7 +45,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
 class MovieDetailsWidget extends StatelessWidget {
   final MovieDetails movie;
-  late final viewModel = getIt<MovieDetailsViewModel>(param1: movie.id);
+  late final viewModel = getIt<FavourtiesMovieViewModel>(param1: movie.id);
   MovieDetailsWidget({super.key, required this.movie});
 
   @override
@@ -58,7 +59,7 @@ class MovieDetailsWidget extends StatelessWidget {
               padding: EdgeInsets.only(right: 10),
               child: GestureDetector(
                   onTap: () {
-                    viewModel.addToFavourites(movie);
+                    viewModel.addFavouriteMovie(movie);
                   },
                   child: Icon(Icons.favorite_border, size: 28)),
             )
