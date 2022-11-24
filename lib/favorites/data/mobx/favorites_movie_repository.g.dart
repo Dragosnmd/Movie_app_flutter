@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'favorites_movie_store.dart';
+part of 'favorites_movie_repository.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -13,7 +13,7 @@ mixin _$FavoritesMovies on _FavoritesMovies, Store {
       ActionController(name: '_FavoritesMovies', context: context);
 
   @override
-  void add(MovieMocked movie) {
+  void add(Movie movie) {
     final _$actionInfo = _$_FavoritesMoviesActionController.startAction(
         name: '_FavoritesMovies.add');
     try {

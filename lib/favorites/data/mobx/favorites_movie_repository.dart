@@ -1,19 +1,17 @@
 import 'package:mobx/mobx.dart';
+import 'package:movie_app/movie/domain/movie.dart';
 
-import '../modelsMOCKED/movie_mocked.dart';
-
-
-part 'favorites_movie_store.g.dart';
+part 'favorites_movie_repository.g.dart';
 
 class FavoritesMovies = _FavoritesMovies with _$FavoritesMovies;
 
 //The store-class
 
 abstract class _FavoritesMovies with Store {
-  ObservableList<MovieMocked> favoritesMovies = <MovieMocked>[].asObservable();
+  ObservableList<Movie> favoritesMovies = <Movie>[].asObservable();
 
   @action
-  void add(MovieMocked movie) {
+  void add(Movie movie) {
     favoritesMovies.add(movie);
   }
 
@@ -21,7 +19,7 @@ abstract class _FavoritesMovies with Store {
     favoritesMovies.clear();
   }
 
-  void remove(MovieMocked movie) {
+  void remove(Movie movie) {
     favoritesMovies.remove(movie);
   }
 }

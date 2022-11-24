@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../data/modelsMOCKED/favorite_model.dart';
 
-
 class Favorites extends StatefulWidget {
   const Favorites({super.key});
   @override
@@ -27,3 +26,4 @@ class _FavoritesState extends State<Favorites> {
     );
   }
 }
+ 

@@ -4,7 +4,6 @@ import 'package:movie_app/movie/data/movie_dao.dart';
 import '../domain/movie.dart';
 import '../domain/movie_details.dart';
 
-
 @lazySingleton
 class MovieRepository {
   final MoviesApi api;
@@ -28,11 +27,15 @@ class MovieRepository {
     return await api.getOutInCinema(page: page);
   }
 
-  Future<MovieDetails> getDetails(int movieId) async {
+  Future<MovieDetails> getMovieDetails(int movieId) async {
     return await api.getDetails(movieId);
   }
 
   Stream<List<Movie>> allMovies() {
     return _mDao.watchAllMovies();
+  }
+
+  Future<void> addFavouriteMovie(MovieDetails movie) async {
+    await _mDao.insertFavouriteMovie(movie);
   }
 }

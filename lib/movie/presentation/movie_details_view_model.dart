@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
-
 import '../../core/resource.dart';
 import '../data/movie_repository.dart';
 import '../domain/movie_details.dart';
@@ -16,10 +15,10 @@ class MovieDetailsViewModel extends MovieDetailsViewModelBase
 }
 
 abstract class MovieDetailsViewModelBase with Store {
-  final MovieRepository repository;
-  final int movieId;
-  MovieDetailsViewModelBase(this.repository, this.movieId) {
-    _getDetails(movieId);
+  final MovieRepository _repository;
+  final int _movieId;
+  MovieDetailsViewModelBase(this._repository, this._movieId) {
+    _getDetails(_movieId);
   }
 
   @observable
@@ -28,10 +27,15 @@ abstract class MovieDetailsViewModelBase with Store {
   Future<void> _getDetails(int id) async {
     movieDetails = Resource.loading();
     try {
-      movieDetails = Resource.success(data: (await repository.getDetails(id)));
+      movieDetails =
+          Resource.success(data: (await _repository.getMovieDetails(id)));
       // repository.getDetails(id);
     } catch (ex) {
       movieDetails = Resource.error(error: ex.toString());
     }
+  }
+
+  Future<void> addToFavourites(MovieDetails movie) async {
+    await _repository.addFavouriteMovie(movie);
   }
 }

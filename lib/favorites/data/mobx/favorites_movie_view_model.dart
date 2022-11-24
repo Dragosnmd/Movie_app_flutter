@@ -1,11 +1,13 @@
+
+
 import 'dart:collection';
 import 'package:flutter/cupertino.dart';
+import 'package:movie_app/movie/domain/movie.dart';
 
-import '../../../movie/domain/movie.dart';
-
-class FavoritesModel extends ChangeNotifier {
+class FavoritesMovieViewModel extends ChangeNotifier {
   /// Internal, private state of the list
-  final List<Movie> _favoritesMovies = [];
+  // final List<MovieMocked> _favoritesMovies = [];
+    final List<Movie> _favoritesMovies = [];
 
   UnmodifiableListView<Movie> get favoritesMovies =>
       UnmodifiableListView(_favoritesMovies);
@@ -17,7 +19,7 @@ class FavoritesModel extends ChangeNotifier {
 
   void removeAll() {
     _favoritesMovies.clear();
-    // This call tells the widgets that are listening to this model to rebuild.
+  
     notifyListeners();
   }
 
@@ -26,3 +28,4 @@ class FavoritesModel extends ChangeNotifier {
     notifyListeners();
   }
 }
+

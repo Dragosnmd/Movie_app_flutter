@@ -44,6 +44,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
 class MovieDetailsWidget extends StatelessWidget {
   final MovieDetails movie;
+  late final viewModel = getIt<MovieDetailsViewModel>(param1: movie.id);
   MovieDetailsWidget({super.key, required this.movie});
 
   @override
@@ -53,16 +54,14 @@ class MovieDetailsWidget extends StatelessWidget {
           backgroundColor: const Color(0xFFE41F2D),
           title: (Text(movie.title)),
           actions: [
-            Icon(
-              Icons.favorite_border,
-              size: 28,
-            ),
-            // GestureDetector(
-            //   onTap: () {
-            //       Provider.of<FavoritesModel>(context, listen: false)
-            //   .add(viewModel.);
-            //   },
-            // )
+            Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: GestureDetector(
+                  onTap: () {
+                    viewModel.addToFavourites(movie);
+                  },
+                  child: Icon(Icons.favorite_border, size: 28)),
+            )
           ],
         ),
         body: Column(children: [

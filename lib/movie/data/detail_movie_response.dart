@@ -31,6 +31,6 @@ class DetailMovieResponse with _$DetailMovieResponse {
         status: status,
         backdropPath: '${imageUrl}w500/$backdropPath',
         originalTitle: originalTitle,
-        posterPath: '${imageUrl}original/$posterPath');
+        posterPath: '${imageUrl}original/$posterPath',);
   }
 }
