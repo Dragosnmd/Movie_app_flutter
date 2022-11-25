@@ -39,6 +39,10 @@ abstract class MovieDetailsViewModelBase with Store {
     }
   }
 
+  //   Future<void> addFavouriteMovie(int id) async {
+  //   await _repository.addFavouriteMovie(id);
+  // }
+
   // Add to favourites
   // Future<void> addFavouriteMovie(MovieDetails movie) async {
   //   await _repository.addFavouriteMovie(movie);

@@ -10,8 +10,8 @@ class FavoritesMovieRepository {
   FavoritesMovieRepository(this._mDao);
 
   //Add favorite movie
-  Future<void> addFavouriteMovie(MovieDetails movie) async {
-    await _mDao.insertFavouriteMovie(movie);
+  Future<void> addFavouriteMovie(int id ) async {
+    await _mDao.insertFavouriteMovie(id);
   }
 
   Stream<List<FavoritesMovieTableData>> favoritesMovies() {

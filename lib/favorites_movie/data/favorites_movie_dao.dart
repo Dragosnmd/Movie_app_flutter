@@ -13,17 +13,17 @@ class MoviesDao {
   }
 
 //  Insert in favourite movies
-  Future<int> insertFavouriteMovie(MovieDetails movie) {
+  Future<int> insertFavouriteMovie(int id) {
     return _db
         .into(_db.favoritesMovieTable)
-        .insert(FavoritesMovieTableData(id: movie.id));
+        .insert(FavoritesMovieTableData(id:id));
   }
 
-  Future<void> deleteFavoriteMovie(MovieDetails movie) {
+  Future<void> deleteFavoriteMovie( int id) {
     return _db.transaction(() async {
       await _db
           .delete(_db.favoritesMovieTable)
-          .delete(FavoritesMovieTableData(id: movie.id));
+          .delete(FavoritesMovieTableData(id: id));
     });
   }
 }

@@ -31,7 +31,7 @@ _$_MovieResponse _$$_MovieResponseFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int,
       title: json['title'] as String,
       overview: json['overview'] as String,
-      backdropPath: json['backdrop_path'] as String,
+      backdropPath: json['backdrop_path'] as String?,
       originalTitle: json['original_title'] as String,
       posterPath: json['poster_path'] as String,
     );

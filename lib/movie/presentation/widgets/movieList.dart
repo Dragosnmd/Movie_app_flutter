@@ -4,21 +4,17 @@ import 'package:go_router/go_router.dart';
 import '../../../core/injection.dart';
 import '../../../favorites_movie/data/favorites_movie_view_model.dart';
 import '../../domain/movie.dart';
-import '../../domain/movie_details.dart';
 
-// import 'package:flutter_mobx/flutter_mobx.dart';
 
 class MovieList extends StatelessWidget {
   final String title;
   final List<Movie> movies;
-  // final MovieDetails movie;
-  // late final viewModel = getIt<FavourtiesMovieViewModel>(param1: movie.id);
+  late final viewModel = getIt<FavourtiesMovieViewModel>(param1: movies);
 
   MovieList({
     super.key,
     required this.title,
-    required this.movies, 
-    // required this.movie,
+    required this.movies,
   });
 
   @override
@@ -80,8 +76,7 @@ class MovieList extends StatelessWidget {
                                   BoxDecoration(color: Colors.transparent),
                               child: GestureDetector(
                                 onTap: () {
-                                  print(movies[index].id.toString());
-                                  // viewModel.addFavoriteMovie('movie.id':movies[index].id);
+                                  viewModel.addFavouriteMovie(movies[index].id);
                                 },
                                 child: Icon(
                                   Icons.favorite,

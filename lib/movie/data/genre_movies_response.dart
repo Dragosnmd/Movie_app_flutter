@@ -30,7 +30,7 @@ class MovieResponse with _$MovieResponse {
     required int id,
     required String title,
     required String overview,
-    @JsonKey(name: 'backdrop_path') required String backdropPath,
+    @JsonKey(name: 'backdrop_path') String? backdropPath,
     @JsonKey(name: 'original_title') required String originalTitle,
     @JsonKey(name: 'poster_path') required String posterPath,
   }) = _MovieResponse;

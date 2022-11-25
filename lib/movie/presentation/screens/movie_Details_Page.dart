@@ -59,7 +59,7 @@ class MovieDetailsWidget extends StatelessWidget {
               padding: EdgeInsets.only(right: 10),
               child: GestureDetector(
                   onTap: () {
-                    viewModel.addFavouriteMovie(movie);
+                    viewModel.addFavouriteMovie(movie.id);
                   },
                   child: Icon(Icons.favorite_border, size: 28)),
             )

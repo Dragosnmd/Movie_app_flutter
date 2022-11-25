@@ -97,4 +97,8 @@ abstract class MoviesViewModelBase with Store {
       outInCinema = Resource.error(error: ex.toString());
     }
   }
+
+  //   Future<void> addFavouriteMovie(int id) async {
+  //   await repository.addFavouriteMovie(id);
+  // }
 }
