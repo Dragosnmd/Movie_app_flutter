@@ -10,7 +10,7 @@ class MovieRepository {
   final MoviesDao _mDao;
   MovieRepository(this._mDao, this.api);
 
-  Future<void> loadMovies({int page = 1}) async {
+  Future<void> loadPopularMovies({int page = 1}) async {
     final List<Movie> result = await api.getPopularMovies(page: page);
     await _mDao.replaceAll(result);
   }
@@ -31,11 +31,11 @@ class MovieRepository {
     return await api.getDetails(movieId);
   }
 
-  Stream<List<Movie>> allMovies() {
+  Stream<List<Movie>> allPopularMovies() {
     return _mDao.watchAllMovies();
   }
 
-  // //Add favorite movie 
+  // //Add favorite movie
   // Future<void> addFavouriteMovie(MovieDetails movie) async {
   //   await _mDao.insertFavouriteMovie(movie);
 

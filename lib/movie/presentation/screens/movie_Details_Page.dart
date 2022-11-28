@@ -32,12 +32,25 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: viewModel.toggleFavorite,
+              icon: Observer(
+                builder: (BuildContext context) => viewModel.isFavorite
+                    ? const Icon(Icons.favorite)
+                    : const Icon(Icons.favorite_border),
+              ))
+        ],
+      ),
       body: Observer(builder: (context) {
         return viewModel.movieDetails.map(
             initial: (_) => Center(child: CircularProgressIndicator()),
             loading: (_) => Center(child: CircularProgressIndicator()),
             error: (value) => Text(value.error),
-            success: (value) => MovieDetailsWidget(movie: value.data));
+            success: (value) => MovieDetailsWidget(
+                  movie: value.data,
+                ));
       }),
     );
   }
@@ -45,93 +58,79 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
 class MovieDetailsWidget extends StatelessWidget {
   final MovieDetails movie;
-  late final viewModel = getIt<FavourtiesMovieViewModel>(param1: movie.id);
-  MovieDetailsWidget({super.key, required this.movie});
+  MovieDetailsWidget({
+    super.key,
+    required this.movie,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color(0xFFE41F2D),
-          title: (Text(movie.title)),
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 10),
-              child: GestureDetector(
-                  onTap: () {
-                    viewModel.addFavouriteMovie(movie.id);
-                  },
-                  child: Icon(Icons.favorite_border, size: 28)),
-            )
-          ],
-        ),
         body: Column(children: [
+      Container(
+        margin: EdgeInsets.symmetric(vertical: 16),
+        height: 300,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover, image: NetworkImage(movie.backdropPath))),
+      ),
+      SizedBox(height: 8),
+      Padding(padding: EdgeInsets.symmetric(horizontal: 8)),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
           Container(
-            margin: EdgeInsets.symmetric(vertical: 16),
-            height: 300,
-            decoration: BoxDecoration(
-                // borderRadius: BorderRadius.circular(8),
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(movie.backdropPath))),
-          ),
-          SizedBox(height: 8),
-          Padding(padding: EdgeInsets.symmetric(horizontal: 8)),
-          Column(
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Text('Overview'.toUpperCase()),
+              SizedBox(height: 4),
+              Text(
+                movie.overview,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text('Overview'.toUpperCase()),
-                  SizedBox(height: 4),
-                  Text(
-                    movie.overview,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text('Release date'.toUpperCase(),
-                              style: Theme.of(context).textTheme.caption),
-                          Text(movie.releaseDate,
-                              style: Theme.of(context).textTheme.subtitle2),
-                        ],
+                      Text('Release date'.toUpperCase(),
+                          style: Theme.of(context).textTheme.caption),
+                      Text(movie.releaseDate,
+                          style: Theme.of(context).textTheme.subtitle2),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('bugdet'.toUpperCase(),
+                          style: Theme.of(context).textTheme.caption),
+                      Text(movie.budget.toString(),
+                          style: Theme.of(context).textTheme.subtitle2),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'status'.toUpperCase(),
+                        style: Theme.of(context).textTheme.caption,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text('bugdet'.toUpperCase(),
-                              style: Theme.of(context).textTheme.caption),
-                          Text(movie.budget.toString(),
-                              style: Theme.of(context).textTheme.subtitle2),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'status'.toUpperCase(),
-                            style: Theme.of(context).textTheme.caption,
-                          ),
-                          Text(
-                            movie.status,
-                            style: Theme.of(context).textTheme.subtitle2,
-                          ),
-                        ],
+                      Text(
+                        movie.status,
+                        style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ],
                   ),
                 ],
-              ))
+              ),
             ],
-          )
-        ]));
+          ))
+        ],
+      )
+    ]));
   }
 }

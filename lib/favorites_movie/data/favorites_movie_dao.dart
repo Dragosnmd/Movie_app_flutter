@@ -1,29 +1,35 @@
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import '../../core/storage/app_database.dart';
-import '../../movie/domain/movie_details.dart';
+
 
 @lazySingleton
 class MoviesDao {
   final AppDatabase _db;
   MoviesDao(this._db);
 
-  Stream<List<FavoritesMovieTableData>> watchAllFavoritesMovies() {
-    return _db.select(_db.favoritesMovieTable).watch();
+  Stream<List<FavoriteMovie>> watchAllFavoritesMovies() {
+    return _db.select(_db.favoriteMovies).watch();
   }
 
-//  Insert in favourite movies
+// Insert into table
   Future<int> insertFavouriteMovie(int id) {
     return _db
-        .into(_db.favoritesMovieTable)
-        .insert(FavoritesMovieTableData(id:id));
+        .into(_db.favoriteMovies)
+        .insert(FavoriteMovie(id:id));
   }
 
+// Delete Id from table
   Future<void> deleteFavoriteMovie( int id) {
-    return _db.transaction(() async {
-      await _db
-          .delete(_db.favoritesMovieTable)
-          .delete(FavoritesMovieTableData(id: id));
-    });
+    return (_db.delete(_db.favoriteMovies)
+          ..where((tbl) => tbl.id.equals(id)))
+        .go();
   }
+
+  Stream<bool> getFavouriteMovieById(int id) {
+    return (_db.select(_db.favoriteMovies)
+          ..where((tbl) => tbl.id.equals(id)))
+        .watchSingleOrNull()
+        .map((event) => event != null);
+  }
+
 }

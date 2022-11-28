@@ -252,10 +252,9 @@ class $MovieTablesTable extends MovieTables
   }
 }
 
-class FavoritesMovieTableData extends DataClass
-    implements Insertable<FavoritesMovieTableData> {
+class FavoriteMovie extends DataClass implements Insertable<FavoriteMovie> {
   final int id;
-  const FavoritesMovieTableData({required this.id});
+  const FavoriteMovie({required this.id});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -263,16 +262,16 @@ class FavoritesMovieTableData extends DataClass
     return map;
   }
 
-  FavoritesMovieTableCompanion toCompanion(bool nullToAbsent) {
-    return FavoritesMovieTableCompanion(
+  FavoriteMoviesCompanion toCompanion(bool nullToAbsent) {
+    return FavoriteMoviesCompanion(
       id: Value(id),
     );
   }
 
-  factory FavoritesMovieTableData.fromJson(Map<String, dynamic> json,
+  factory FavoriteMovie.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return FavoritesMovieTableData(
+    return FavoriteMovie(
       id: serializer.fromJson<int>(json['id']),
     );
   }
@@ -284,12 +283,12 @@ class FavoritesMovieTableData extends DataClass
     };
   }
 
-  FavoritesMovieTableData copyWith({int? id}) => FavoritesMovieTableData(
+  FavoriteMovie copyWith({int? id}) => FavoriteMovie(
         id: id ?? this.id,
       );
   @override
   String toString() {
-    return (StringBuffer('FavoritesMovieTableData(')
+    return (StringBuffer('FavoriteMovie(')
           ..write('id: $id')
           ..write(')'))
         .toString();
@@ -299,20 +298,18 @@ class FavoritesMovieTableData extends DataClass
   int get hashCode => id.hashCode;
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is FavoritesMovieTableData && other.id == this.id);
+      identical(this, other) || (other is FavoriteMovie && other.id == this.id);
 }
 
-class FavoritesMovieTableCompanion
-    extends UpdateCompanion<FavoritesMovieTableData> {
+class FavoriteMoviesCompanion extends UpdateCompanion<FavoriteMovie> {
   final Value<int> id;
-  const FavoritesMovieTableCompanion({
+  const FavoriteMoviesCompanion({
     this.id = const Value.absent(),
   });
-  FavoritesMovieTableCompanion.insert({
+  FavoriteMoviesCompanion.insert({
     required int id,
   }) : id = Value(id);
-  static Insertable<FavoritesMovieTableData> custom({
+  static Insertable<FavoriteMovie> custom({
     Expression<int>? id,
   }) {
     return RawValuesInsertable({
@@ -320,8 +317,8 @@ class FavoritesMovieTableCompanion
     });
   }
 
-  FavoritesMovieTableCompanion copyWith({Value<int>? id}) {
-    return FavoritesMovieTableCompanion(
+  FavoriteMoviesCompanion copyWith({Value<int>? id}) {
+    return FavoriteMoviesCompanion(
       id: id ?? this.id,
     );
   }
@@ -337,19 +334,19 @@ class FavoritesMovieTableCompanion
 
   @override
   String toString() {
-    return (StringBuffer('FavoritesMovieTableCompanion(')
+    return (StringBuffer('FavoriteMoviesCompanion(')
           ..write('id: $id')
           ..write(')'))
         .toString();
   }
 }
 
-class $FavoritesMovieTableTable extends FavoritesMovieTable
-    with TableInfo<$FavoritesMovieTableTable, FavoritesMovieTableData> {
+class $FavoriteMoviesTable extends FavoriteMovies
+    with TableInfo<$FavoriteMoviesTable, FavoriteMovie> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $FavoritesMovieTableTable(this.attachedDatabase, [this._alias]);
+  $FavoriteMoviesTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
@@ -358,12 +355,11 @@ class $FavoritesMovieTableTable extends FavoritesMovieTable
   @override
   List<GeneratedColumn> get $columns => [id];
   @override
-  String get aliasedName => _alias ?? 'favorites_movie_table';
+  String get aliasedName => _alias ?? 'favorite_movies';
   @override
-  String get actualTableName => 'favorites_movie_table';
+  String get actualTableName => 'favorite_movies';
   @override
-  VerificationContext validateIntegrity(
-      Insertable<FavoritesMovieTableData> instance,
+  VerificationContext validateIntegrity(Insertable<FavoriteMovie> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -378,30 +374,28 @@ class $FavoritesMovieTableTable extends FavoritesMovieTable
   @override
   Set<GeneratedColumn> get $primaryKey => <GeneratedColumn>{};
   @override
-  FavoritesMovieTableData map(Map<String, dynamic> data,
-      {String? tablePrefix}) {
+  FavoriteMovie map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return FavoritesMovieTableData(
+    return FavoriteMovie(
       id: attachedDatabase.options.types
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
     );
   }
 
   @override
-  $FavoritesMovieTableTable createAlias(String alias) {
-    return $FavoritesMovieTableTable(attachedDatabase, alias);
+  $FavoriteMoviesTable createAlias(String alias) {
+    return $FavoriteMoviesTable(attachedDatabase, alias);
   }
 }
 
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   late final $MovieTablesTable movieTables = $MovieTablesTable(this);
-  late final $FavoritesMovieTableTable favoritesMovieTable =
-      $FavoritesMovieTableTable(this);
+  late final $FavoriteMoviesTable favoriteMovies = $FavoriteMoviesTable(this);
   @override
   Iterable<TableInfo<Table, dynamic>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [movieTables, favoritesMovieTable];
+      [movieTables, favoriteMovies];
 }

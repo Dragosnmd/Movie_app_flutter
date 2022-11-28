@@ -4,12 +4,12 @@ import 'package:go_router/go_router.dart';
 import '../../../core/injection.dart';
 import '../../../favorites_movie/data/favorites_movie_view_model.dart';
 import '../../domain/movie.dart';
-
+import '../movie_details_view_model.dart';
 
 class MovieList extends StatelessWidget {
   final String title;
   final List<Movie> movies;
-  late final viewModel = getIt<FavourtiesMovieViewModel>(param1: movies);
+  // late final viewModel = getIt<MovieDetailsViewModel>(param1: movies);
 
   MovieList({
     super.key,
@@ -71,12 +71,20 @@ class MovieList extends StatelessWidget {
                             ),
                             Container(
                               margin: EdgeInsets.only(left: 60, top: 128),
-                              // padding: EdgeInsets.only(right: 0, bottom: 0),
                               decoration:
                                   BoxDecoration(color: Colors.transparent),
-                              child: GestureDetector(
+                              child:
+                                  //                 IconButton(
+                                  // onPressed: viewModel.toggleFavorite,
+                                  // icon: Observer(
+                                  //   builder: (BuildContext context) => viewModel.isFavorite
+                                  //       ? const Icon(Icons.favorite)
+                                  //       : const Icon(Icons.favorite_border),
+                                  // ))
+
+                                  GestureDetector(
                                 onTap: () {
-                                  viewModel.addFavouriteMovie(movies[index].id);
+                                  // viewModel.toggleFavorite();
                                 },
                                 child: Icon(
                                   Icons.favorite,

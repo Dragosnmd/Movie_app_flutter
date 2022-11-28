@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
-import '../../movie/domain/movie_details.dart';
+import '../../core/storage/app_database.dart';
 import 'favorites_movie_repository.dart';
 
 part 'favorites_movie_view_model.g.dart';
@@ -17,11 +17,17 @@ abstract class FavourtiesMovieViewModelBase with Store {
 
   FavourtiesMovieViewModelBase(this._repository) {}
 
-// @observable
 
-  // Add to favourites
   Future<void> addFavouriteMovie(int id) async {
     await _repository.addFavouriteMovie(id);
+  }
+
+  Future<void> removeFavoriteMovie(int id) async {
+    await _repository.removeFavoriteMovie(id);
+  }
+
+  Stream<Set<int>> movieFavoritesStream() {
+    return _repository.favoritesMovies();
   }
 }
 

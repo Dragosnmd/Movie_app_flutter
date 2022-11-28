@@ -39,14 +39,6 @@ class _MovieListPageState extends State<MovieListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     Provider.of<FavoritesModel>(context, listen: false)
-      //         .add(viewModel.movie[index].id)
-      //           // MovieMocked(id: 1, name: 'Movie 1', posterPath: 'abcd')
-      //     );
-        // },
-      // ),
       appBar: AppBar(
         backgroundColor: const Color(0xFFE41F2D),
         leading: Container(

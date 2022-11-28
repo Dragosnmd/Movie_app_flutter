@@ -77,8 +77,10 @@ Future<_i1.GetIt> $initGetIt(
         get<_i8.MoviesDao>(),
         get<_i7.MoviesApi>(),
       ));
-  gh.factory<_i18.MoviesViewModel>(
-      () => _i18.MoviesViewModel(get<_i17.MovieRepository>()));
+  gh.factory<_i18.MoviesViewModel>(() => _i18.MoviesViewModel(
+        get<_i17.MovieRepository>(),
+        get<_i13.FavoritesMovieRepository>(),
+      ));
   gh.factoryParam<_i19.MovieDetailsViewModel, int, dynamic>((
     movieId,
     _,
@@ -86,6 +88,7 @@ Future<_i1.GetIt> $initGetIt(
       _i19.MovieDetailsViewModel(
         get<_i17.MovieRepository>(),
         movieId,
+        get<_i13.FavoritesMovieRepository>(),
       ));
   return get;
 }
