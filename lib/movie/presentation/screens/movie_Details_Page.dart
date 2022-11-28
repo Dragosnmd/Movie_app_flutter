@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../core/injection.dart';
-import '../../../favorites_movie/data/favorites_movie_view_model.dart';
 import '../../domain/movie_details.dart';
 import '../movie_details_view_model.dart';
 

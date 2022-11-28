@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/movie/domain/movie_details.dart';
 import '../../core/injection.dart';
 import '../../movie/domain/movie.dart';
-import '../data/favorites_movie_view_model.dart';
 
 class Favorites extends StatefulWidget {
   const Favorites({super.key});

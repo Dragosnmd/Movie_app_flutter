@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/injection.dart';
-import '../../../favorites_movie/data/favorites_movie_view_model.dart';
 import '../../domain/movie.dart';
 import '../movie_details_view_model.dart';
 
