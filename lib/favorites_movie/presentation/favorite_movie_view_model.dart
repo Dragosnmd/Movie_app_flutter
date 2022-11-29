@@ -30,7 +30,11 @@ abstract class FavoriteViewModelBase with Store {
     return repository.allFavoriteMovies();
   }
 
-  Future<List<Movie>> getFavoriteMovies() {
+  Stream<List<Movie>> getFavoriteMovies() {
     return favoritesMovieRepository.getFavoriteMovies();
+  }
+
+  Future<void> removeFavoriteMovie(int movieId) async {
+    await favoritesMovieRepository.removeFavoriteMovie(movieId);
   }
 }

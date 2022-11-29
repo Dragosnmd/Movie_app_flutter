@@ -27,44 +27,57 @@ class _FavoritesState extends State<Favorites> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder(
-      future: favoriteViewModel.getFavoriteMovies(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData &&
-            snapshot.connectionState == ConnectionState.done) {
-          return FavoritesWidget(movies: snapshot.requireData);
-        }
-        return Center(child: const CircularProgressIndicator());
-      },
-    )
+      body: StreamBuilder<List<Movie>>(
+          stream: favoriteViewModel.getFavoriteMovies(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError)
+              return Text('There is an error');
+            else if (snapshot.connectionState == ConnectionState.waiting)
+              return CircularProgressIndicator();
+            return FavoritesWidget(
+              movies: snapshot.requireData,
+              removeFavoriteMovie: favoriteViewModel.removeFavoriteMovie,
+            ); //widget
+          }),
 
-        // Observer(builder: (context) {
-        //       return favoriteViewModel.getFavoriteMovies().map(;
-        //           initial: (_) => Center(child: CircularProgressIndicator()),
-        //           loading: (_) => Center(child: CircularProgressIndicator()),
-        //           error: (value) => Text(value.error),
-        //           success: (value) => FavoritesWidget(movies: [],));
-        // body: StreamBuilder<List<FavoriteMovie>>(
-        //     stream: favoriteViewModel.getFavoriteMovies(),
-        //     builder: (context, snapshot) {
-        //       if (snapshot.hasError)
-        //         return Text('There is an error');
-        //       else if (snapshot.connectionState == ConnectionState.waiting)
-        //         return CircularProgressIndicator();
-        //       return FavoritesWidget(movies: snapshot.requireData); //widget
-        //     }),
-        );
+      //   FutureBuilder(
+      // future: favoriteViewModel.getFavoriteMovies(),
+      // builder: (context, snapshot) {
+      // if (snapshot.hasData &&
+      //     snapshot.connectionState == ConnectionState.done) {
+      //   return FavoritesWidget(
+      //     movies: snapshot.requireData,
+      //     removeFavoriteMovie: favoriteViewModel.removeFavoriteMovie,
+      //   );
+      // }
+      // return Center(child: const CircularProgressIndicator());
+      //   },
+      // )
+
+      // Observer(builder: (context) {
+      //       return favoriteViewModel.getFavoriteMovies().map(;
+      //           initial: (_) => Center(child: CircularProgressIndicator()),
+      //           loading: (_) => Center(child: CircularProgressIndicator()),
+      //           error: (value) => Text(value.error),
+      //           success: (value) => FavoritesWidget(movies: [],));
+      // body: StreamBuilder<List<FavoriteMovie>>(
+      //     stream: favoriteViewModel.getFavoriteMovies(),
+      //     builder: (context, snapshot) {
+      //       if (snapshot.hasError)
+      //         return Text('There is an error');
+      //       else if (snapshot.connectionState == ConnectionState.waiting)
+      //         return CircularProgressIndicator();
+      //       return FavoritesWidget(movies: snapshot.requireData); //widget
+      //     }),
+    );
   }
 }
 
 class FavoritesWidget extends StatelessWidget {
   final List<Movie> movies;
-  // final Function(int movieId) toggleFavorite;
-  const FavoritesWidget({
-    super.key,
-    required this.movies,
-    // required this.toggleFavorite
-  });
+  final Function(int movieId) removeFavoriteMovie;
+  const FavoritesWidget(
+      {super.key, required this.movies, required this.removeFavoriteMovie});
 
   @override
   Widget build(BuildContext context) {
@@ -103,26 +116,18 @@ class FavoritesWidget extends StatelessWidget {
                       Expanded(
                           child: Text(
                         movies[index].title,
-                        style: TextStyle(fontSize: 20),
                       )),
                       SizedBox(
                         width: 16,
                       ),
-                      Icon(Icons.favorite
-                          // onPressed: () =>
-                          //     toggleFavorite(movies[index].movie.id),
-                          // icon: movies[index].isFavorite
-                          //     ? const Icon(
-                          //         Icons.favorite,
-                          //         size: 28,
-                          //         color: Colors.red,
-                          //       )
-                          //     : const Icon(
-                          //         Icons.favorite,
-                          //         size: 28,
-                          //         color: Colors.white,
-                          //       )
-                          ),
+                      IconButton(
+                          onPressed: () =>
+                              removeFavoriteMovie(movies[index].id),
+                          icon: const Icon(
+                            Icons.favorite,
+                            size: 28,
+                            color: Colors.red,
+                          )),
                     ],
                   ),
                   SizedBox(

@@ -49,7 +49,6 @@ abstract class MovieDetailsViewModelBase with Store {
   @computed
   bool get isFavorite => isFavouriteObs.value ?? false;
 
-
   Future<void> toggleFavorite() async {
     if (isFavorite == false) {
       await _favoriteRepository.addFavouriteMovie(_movieId);
@@ -58,8 +57,7 @@ abstract class MovieDetailsViewModelBase with Store {
     }
   }
 
-    Stream<List<FavoriteMovie>> favoriteMovieStrem() {
+  Stream<List<FavoriteMovie>> favoriteMovieStrem() {
     return _movieRepository.allFavoriteMovies();
   }
-
 }

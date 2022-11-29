@@ -77,14 +77,11 @@ abstract class MoviesViewModelBase with Store {
     }).toList());
   }
 
-  Future<void> toggleFavorite(int movieId) async {
-    if (allMovies.data
-            ?.firstWhereOrNull((movieModel) => movieModel.movie.id == movieId)
-            ?.isFavorite ??
-        false) {
-      await _favoriteRepository.removeFavoriteMovie(movieId);
-    } else {
+  Future<void> toggleFavorite(int movieId, bool favorite) async {
+    if (favorite) {
       await _favoriteRepository.addFavouriteMovie(movieId);
+    } else {
+      await _favoriteRepository.removeFavoriteMovie(movieId);
     }
   }
 

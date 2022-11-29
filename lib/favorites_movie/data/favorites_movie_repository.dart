@@ -28,7 +28,7 @@ class FavoritesMovieRepository {
     return _fDao.getFavouriteMovieById(id);
   }
 
-  Future<List<Movie>> getFavoriteMovies() {
+  Stream<List<Movie>> getFavoriteMovies() {
     return _fDao.getAllFavoriteMovies();
   }
 }

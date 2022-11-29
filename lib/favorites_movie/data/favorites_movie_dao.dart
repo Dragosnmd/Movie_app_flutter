@@ -30,12 +30,12 @@ class FavoriteMoviesDao {
         .map((event) => event != null);
   }
 
-  Future<List<Movie>> getAllFavoriteMovies() {
+  Stream<List<Movie>> getAllFavoriteMovies() {
     final query = _db.select(_db.favoriteMovies).join([
       innerJoin(
           _db.movieTables, _db.movieTables.id.equalsExp(_db.favoriteMovies.id))
     ]).map((row) => row.readTable(_db.movieTables));
 
-    return query.get();
+    return query.watch();
   }
 }
