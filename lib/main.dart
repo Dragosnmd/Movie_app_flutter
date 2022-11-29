@@ -13,10 +13,12 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
 
-  runApp(ChangeNotifierProvider(
-    create: (context) => FavoritesModel(),
-    child: const MyApp(),
-  ));
+  runApp(MyApp());
+
+  // runApp(ChangeNotifierProvider(
+  //   create: (context) => FavoritesModel(),
+  //   child: const MyApp(),
+  // ));
 }
 
 class MyApp extends StatelessWidget {

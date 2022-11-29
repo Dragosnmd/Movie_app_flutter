@@ -358,6 +358,8 @@ class $FavoriteMoviesTable extends FavoriteMovies
   String get aliasedName => _alias ?? 'favorite_movies';
   @override
   String get actualTableName => 'favorite_movies';
+
+  get title => null;
   @override
   VerificationContext validateIntegrity(Insertable<FavoriteMovie> instance,
       {bool isInserting = false}) {

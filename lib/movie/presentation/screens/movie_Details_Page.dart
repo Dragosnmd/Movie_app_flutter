@@ -32,13 +32,21 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // title: Text('MovieTitle'),
         actions: [
           IconButton(
               onPressed: viewModel.toggleFavorite,
               icon: Observer(
                 builder: (BuildContext context) => viewModel.isFavorite
-                    ? const Icon(Icons.favorite)
-                    : const Icon(Icons.favorite_border),
+                    ? const Icon(
+                        Icons.favorite,
+                        size: 28,
+                        color: Colors.red,
+                      )
+                    : const Icon(
+                        Icons.favorite_border,
+                        size: 28,
+                      ),
               ))
         ],
       ),

@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 import 'package:movie_app/favorites_movie/data/favorites_movie_repository.dart';
 import '../../core/resource.dart';
+import '../../core/storage/app_database.dart';
 import '../data/movie_repository.dart';
 import '../domain/movie_details.dart';
 
@@ -45,7 +46,6 @@ abstract class MovieDetailsViewModelBase with Store {
   late ObservableStream<bool> isFavouriteObs =
       _favoriteRepository.isFavorite(_movieId).asObservable();
 
-
   @computed
   bool get isFavorite => isFavouriteObs.value ?? false;
 
@@ -56,6 +56,10 @@ abstract class MovieDetailsViewModelBase with Store {
     } else {
       await _favoriteRepository.removeFavoriteMovie(_movieId);
     }
+  }
+
+    Stream<List<FavoriteMovie>> favoriteMovieStrem() {
+    return _movieRepository.allFavoriteMovies();
   }
 
 }

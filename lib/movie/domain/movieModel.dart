@@ -1,4 +1,4 @@
-import 'package:movie_app/movie/domain/movie.dart';
+import '../domain/movie.dart';
 
 class MovieModel {
   final Movie movie;

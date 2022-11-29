@@ -1,22 +1,22 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/injection.dart';
+import 'package:movie_app/movie/domain/movieModel.dart';
+import 'package:movie_app/movie/domain/movieModel.dart';
+
 import '../../domain/movie.dart';
-import '../movie_details_view_model.dart';
 
 class MovieList extends StatelessWidget {
   final String title;
-  final List<Movie> movies;
-  // late final viewModel = getIt<MovieDetailsViewModel>(param1: movies);
+  final List<MovieModel> movies;
+  final Function(int movieId) toggleFavorite;
 
-  MovieList({
-    super.key,
-    required this.title,
-    required this.movies,
-  });
+  MovieList(
+      {super.key,
+      required this.title,
+      required this.movies,
+      required this.toggleFavorite});
 
-  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6.0),
@@ -53,45 +53,41 @@ class MovieList extends StatelessWidget {
                           children: [
                             Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(10),
                                 image: DecorationImage(
                                     image: CachedNetworkImageProvider(
-                                        movies[index].posterPath),
+                                        movies[index].movie.posterPath),
                                     fit: BoxFit.cover),
                               ),
                               height: 160,
                               child: GestureDetector(
                                 onTap: () {
                                   context.goNamed('detailPage', params: {
-                                    'movieId': movies[index].id.toString()
+                                    'movieId': movies[index].movie.id.toString()
                                   });
                                 },
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.only(left: 60, top: 128),
-                              decoration:
-                                  BoxDecoration(color: Colors.transparent),
-                              child:
-                                  //                 IconButton(
-                                  // onPressed: viewModel.toggleFavorite,
-                                  // icon: Observer(
-                                  //   builder: (BuildContext context) => viewModel.isFavorite
-                                  //       ? const Icon(Icons.favorite)
-                                  //       : const Icon(Icons.favorite_border),
-                                  // ))
-
-                                  GestureDetector(
-                                onTap: () {
-                                  // viewModel.toggleFavorite();
-                                },
-                                child: Icon(
-                                  Icons.favorite,
-                                  size: 28,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            )
+                                // height: 160,
+                                // alignment: Alignment.bottomRight,
+                                margin: EdgeInsets.only(left: 50, top: 110),
+                                decoration:
+                                    BoxDecoration(color: Colors.transparent),
+                                child: IconButton(
+                                    onPressed: () =>
+                                        toggleFavorite(movies[index].movie.id),
+                                    icon: movies[index].isFavorite
+                                        ? const Icon(
+                                            Icons.favorite,
+                                            size: 28,
+                                            color: Colors.red,
+                                          )
+                                        : const Icon(
+                                            Icons.favorite,
+                                            size: 28,
+                                            color: Colors.white,
+                                          )))
                           ],
                         ),
                         SizedBox(height: 4),

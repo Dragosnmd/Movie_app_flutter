@@ -1,32 +1,42 @@
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
+import 'package:movie_app/auth/data/login_repository.dart';
+import 'package:rxdart/rxdart.dart';
 import '../../core/resource.dart';
 import '../../favorites_movie/data/favorites_movie_repository.dart';
 import '../data/movie_repository.dart';
 import '../domain/movie.dart';
+import '../domain/movieModel.dart';
+import 'package:collection/collection.dart';
 part 'movies_view_model.g.dart';
 
 @injectable
 class MoviesViewModel extends MoviesViewModelBase with _$MoviesViewModel {
-  MoviesViewModel(final MovieRepository movieRepository, FavoritesMovieRepository favoriteRepository) : super(movieRepository,favoriteRepository );
+  MoviesViewModel(
+      final MovieRepository movieRepository,
+      FavoritesMovieRepository favoriteRepository,
+      LoginRepository loginRepository)
+      : super(movieRepository, favoriteRepository, loginRepository);
 }
 
 abstract class MoviesViewModelBase with Store {
   final MovieRepository _movieRepository;
   final FavoritesMovieRepository _favoriteRepository;
-  MoviesViewModelBase(this._movieRepository, this._favoriteRepository) {
+  final LoginRepository _loginRepository;
+  MoviesViewModelBase(
+      this._movieRepository, this._favoriteRepository, this._loginRepository) {
     getPopularMovies();
     getMoviesRated();
     getNowPlayingMovies();
     getOutInCinema();
   }
 
-  @computed
-  bool get isLoading =>
-      popularMovies is ResourceLoading ||
-      topRatedMovies is ResourceLoading ||
-      nowPlayingMovies is ResourceLoading ||
-      outInCinema is ResourceLoading;
+  // @computed
+  // bool get isLoading =>
+  //     popularMovies is ResourceLoading ||
+  //     topRatedMovies is ResourceLoading ||
+  //     nowPlayingMovies is ResourceLoading ||
+  //     outInCinema is ResourceLoading;
 
   @computed
   String? get loadingError =>
@@ -47,27 +57,36 @@ abstract class MoviesViewModelBase with Store {
   @observable
   Resource<List<Movie>> outInCinema = Resource.initial();
 
-  // late ObservableStream<List<Movie>> moviesObs =
-  //     _movieRepository.allPopularMovies().asObservable();
+  late ObservableStream<List<Movie>> moviesObs =
+      _movieRepository.allPopularMovies().asObservable();
 
-  // late ObservableStream<Set<int>> favoriteMovoieObs =
-  //     _favoriteRepository.favoritesMovies().asObservable();
+  late ObservableStream<Set<int>> favoriteMovoieObs =
+      _favoriteRepository.favoritesMovies().asObservable();
 
+  @computed
+  Resource<List<MovieModel>> get allMovies {
+    final movies = moviesObs.value;
+    final favorite = favoriteMovoieObs.value;
+    if (movies == null || favorite == null) {
+      return Resource.loading();
+    }
+    return Resource.success(
+        data: movies.map((movie) {
+      final bool favoriteMovie = favorite.contains(movie.id);
+      return MovieModel(movie, favoriteMovie);
+    }).toList());
+  }
 
-  // @computed
-  // List<MovieModel> get allMovies {
-  //   final movies = moviesObs.value;
-  //   final favorite = favoriteMovoieObs.value;
-  //   if (movies == null || favorite == null) {
-  //     return [];
-  //     }
-  //     return movies.map((movie) {
-  //       final bool favoriteMovie = favorite.contains(movie.id);
-  //       return MovieModel(movie, favoriteMovie);
-  //     }).toList();
-  // }
-
-
+  Future<void> toggleFavorite(int movieId) async {
+    if (allMovies.data
+            ?.firstWhereOrNull((movieModel) => movieModel.movie.id == movieId)
+            ?.isFavorite ??
+        false) {
+      await _favoriteRepository.removeFavoriteMovie(movieId);
+    } else {
+      await _favoriteRepository.addFavouriteMovie(movieId);
+    }
+  }
 
   Future<void> getPopularMovies({final int page = 1}) async {
     popularMovies = Resource.loading();
@@ -116,7 +135,7 @@ abstract class MoviesViewModelBase with Store {
     }
   }
 
-  //   Future<void> addFavouriteMovie(int id) async {
-  //   await repository.addFavouriteMovie(id);
-  // }
+  Future<void> logout() async {
+    await _loginRepository.clearToken();
+  }
 }
