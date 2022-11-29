@@ -72,8 +72,6 @@ class MovieList extends StatelessWidget {
                                 // height: 160,
                                 // alignment: Alignment.bottomRight,
                                 margin: EdgeInsets.only(left: 50, top: 110),
-                                decoration:
-                                    BoxDecoration(color: Colors.transparent),
                                 child: IconButton(
                                     onPressed: () =>
                                         toggleFavorite(movies[index].movie.id),

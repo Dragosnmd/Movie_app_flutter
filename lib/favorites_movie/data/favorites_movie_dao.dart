@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/movie/domain/movie.dart';
 import '../../core/storage/app_database.dart';
@@ -29,11 +30,12 @@ class FavoriteMoviesDao {
         .map((event) => event != null);
   }
 
-  Future<List<FavoriteMovie>> getAllFavoriteMovies() {
+  Future<List<Movie>> getAllFavoriteMovies() {
     final query = _db.select(_db.favoriteMovies).join([
-      innerJoin(_db.movieTables,
-          _db.movieTables.title.equalsExp(_db.favoriteMovies.title))
-    ]);
-    return _db.select(_db.favoriteMovies).get();
+      innerJoin(
+          _db.movieTables, _db.movieTables.id.equalsExp(_db.favoriteMovies.id))
+    ]).map((row) => row.readTable(_db.movieTables));
+
+    return query.get();
   }
 }

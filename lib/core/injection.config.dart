@@ -83,8 +83,10 @@ Future<_i1.GetIt> $initGetIt(
         get<_i6.FavoritesMovieRepository>(),
         get<_i14.LoginRepository>(),
       ));
-  gh.factory<_i18.FavoriteViewModel>(
-      () => _i18.FavoriteViewModel(get<_i16.MovieRepository>()));
+  gh.factory<_i18.FavoriteViewModel>(() => _i18.FavoriteViewModel(
+        get<_i16.MovieRepository>(),
+        get<_i6.FavoritesMovieRepository>(),
+      ));
   gh.factoryParam<_i19.MovieDetailsViewModel, int, dynamic>((
     movieId,
     _,
