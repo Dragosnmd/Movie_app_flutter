@@ -45,11 +45,4 @@ class MovieRepository {
   Stream<List<FavoriteMovie>> allFavoriteMovies() {
     return _fDao.watchAllFavoritesMovies();
   }
-
-// fake data from json
-  Future<List<Movie>> readFakePopularMovieJson() async {
-    final response = await rootBundle.loadString('assets/popularMovies.json');
-    final data = await json.decode(response);
-    return GenreMovieListResponse.fromJson(data).toDomainList();
-  }
 }

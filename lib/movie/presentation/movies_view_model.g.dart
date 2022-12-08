@@ -88,6 +88,22 @@ mixin _$MoviesViewModel on MoviesViewModelBase, Store {
     });
   }
 
+  late final _$fakePopularMoviesAtom =
+      Atom(name: 'MoviesViewModelBase.fakePopularMovies', context: context);
+
+  @override
+  Resource<List<Movie>> get fakePopularMovies {
+    _$fakePopularMoviesAtom.reportRead();
+    return super.fakePopularMovies;
+  }
+
+  @override
+  set fakePopularMovies(Resource<List<Movie>> value) {
+    _$fakePopularMoviesAtom.reportWrite(value, super.fakePopularMovies, () {
+      super.fakePopularMovies = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
@@ -95,6 +111,7 @@ popularMovies: ${popularMovies},
 topRatedMovies: ${topRatedMovies},
 nowPlayingMovies: ${nowPlayingMovies},
 outInCinema: ${outInCinema},
+fakePopularMovies: ${fakePopularMovies},
 loadingError: ${loadingError},
 allMovies: ${allMovies}
     ''';

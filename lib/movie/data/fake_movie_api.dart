@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/src/dio.dart';
 import 'package:flutter/services.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/movie/data/genre_movies_response.dart';
 import 'package:movie_app/movie/data/movie_api.dart';
 import 'package:movie_app/movie/domain/movie_details.dart';
@@ -9,6 +10,8 @@ import 'package:movie_app/movie/domain/movie.dart';
 
 
 
+@LazySingleton(as: MoviesApi)
+@test
 class FakeMovieApi implements MoviesApi{
 
   @override
@@ -17,9 +20,6 @@ class FakeMovieApi implements MoviesApi{
     final data = await json.decode(response);
     return GenreMovieListResponse.fromJson(data).toDomainList();
   }
-  @override
-  // TODO: implement dio
-  Dio get dio => throw UnimplementedError();
 
   @override
   Future<MovieDetails> getDetails(int movieId) {

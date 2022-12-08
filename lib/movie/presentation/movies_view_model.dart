@@ -31,7 +31,6 @@ abstract class MoviesViewModelBase with Store {
     getMoviesRated();
     getNowPlayingMovies();
     getOutInCinema();
-    getFakePopularMovie();
   }
 
   // @computed
@@ -96,17 +95,6 @@ abstract class MoviesViewModelBase with Store {
     try {
       await Future.delayed(const Duration(seconds: 1));
       _movieRepository.loadPopularMovies();
-    } catch (ex) {
-      popularMovies = Resource.error(error: ex.toString());
-    }
-  }
-
-// Fake API call
-  Future<void> getFakePopularMovie({final int page = 1}) async {
-    fakePopularMovies = Resource.loading();
-    try {
-      await Future.delayed(const Duration(seconds: 1));
-      _movieRepository.readFakePopularMovieJson();
     } catch (ex) {
       popularMovies = Resource.error(error: ex.toString());
     }

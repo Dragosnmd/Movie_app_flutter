@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:movie_app/movie/data/movie_dao.dart';
 import 'package:movie_app/movie/domain/movie.dart';
 
-import 'mobx.dart';
+import '../../utils/test_mobx.dart';
 
 class FakeMovieDao implements MoviesDao {
   StreamController<List<Movie>> movieStream = StreamController();

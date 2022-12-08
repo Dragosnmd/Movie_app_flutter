@@ -3,14 +3,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app_database.dart';
 
 @module
+@dev
 abstract class StorageModule {
 
   @preResolve
+  @dev
   Future<SharedPreferences> get sharedPreferences =>
       SharedPreferences.getInstance();
 
   // late final FlutterSecureStorage _secureStorage;
   @lazySingleton
+  @dev
   AppDatabase get database => AppDatabase();
 
   // static Future<StorageModule> createModule() async {

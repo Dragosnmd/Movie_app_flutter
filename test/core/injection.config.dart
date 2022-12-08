@@ -8,27 +8,29 @@
 import 'package:dio/dio.dart' as _i5;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
+import 'package:movie_app/auth/data/account_id_api.dart' as _i15;
+import 'package:movie_app/auth/data/get_request_token_api.dart' as _i8;
+import 'package:movie_app/auth/data/login_api.dart' as _i9;
+import 'package:movie_app/auth/data/login_repository.dart' as _i16;
+import 'package:movie_app/auth/presentation/login_view_model.dart' as _i17;
+import 'package:movie_app/core/network/network_module.dart' as _i23;
+import 'package:movie_app/core/storage/app_database.dart' as _i3;
+import 'package:movie_app/core/storage/fake_storage_module.dart' as _i4;
+import 'package:movie_app/core/storage/storage_module.dart' as _i22;
+import 'package:movie_app/favorites_movie/data/favorites_movie_dao.dart' as _i6;
+import 'package:movie_app/favorites_movie/data/favorites_movie_repository.dart'
+    as _i7;
+import 'package:movie_app/favorites_movie/presentation/favorite_movie_view_model.dart'
+    as _i20;
+import 'package:movie_app/movie/data/fake_movie_api.dart' as _i11;
+import 'package:movie_app/movie/data/movie_api.dart' as _i10;
+import 'package:movie_app/movie/data/movie_dao.dart' as _i12;
+import 'package:movie_app/movie/data/movie_repository.dart' as _i18;
+import 'package:movie_app/movie/presentation/movie_details_view_model.dart'
+    as _i21;
+import 'package:movie_app/movie/presentation/movies_view_model.dart' as _i19;
+import 'package:movie_app/user/data/session_token_api.dart' as _i13;
 import 'package:shared_preferences/shared_preferences.dart' as _i14;
-
-import '../auth/data/account_id_api.dart' as _i15;
-import '../auth/data/get_request_token_api.dart' as _i8;
-import '../auth/data/login_api.dart' as _i9;
-import '../auth/data/login_repository.dart' as _i16;
-import '../auth/presentation/login_view_model.dart' as _i17;
-import '../favorites_movie/data/favorites_movie_dao.dart' as _i6;
-import '../favorites_movie/data/favorites_movie_repository.dart' as _i7;
-import '../favorites_movie/presentation/favorite_movie_view_model.dart' as _i20;
-import '../movie/data/fake_movie_api.dart' as _i11;
-import '../movie/data/movie_api.dart' as _i10;
-import '../movie/data/movie_dao.dart' as _i12;
-import '../movie/data/movie_repository.dart' as _i18;
-import '../movie/presentation/movie_details_view_model.dart' as _i21;
-import '../movie/presentation/movies_view_model.dart' as _i19;
-import '../user/data/session_token_api.dart' as _i13;
-import 'network/network_module.dart' as _i23;
-import 'storage/app_database.dart' as _i3;
-import 'storage/fake_storage_module.dart' as _i4;
-import 'storage/storage_module.dart' as _i22;
 
 const String _dev = 'dev';
 const String _test = 'test';
