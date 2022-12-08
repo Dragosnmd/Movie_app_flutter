@@ -45,8 +45,8 @@ class _MovieListPageState extends State<MovieListPage> {
         leading: Container(
           child: GestureDetector(
             onTap: () {
-              viewModel.logout();
-              context.goNamed('login');
+              // viewModel.logout();
+              // context.goNamed('login');
             },
             child: Image.asset(Assets.loginLogo),
           ),

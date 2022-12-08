@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:movie_app/favorites_movie/data/favorite_movie.dart';
 import 'package:movie_app/movie/domain/movieModel.dart';
 import 'package:movie_app/movie/domain/movie_details.dart';
 import '../../app/assets.dart';
@@ -39,36 +38,6 @@ class _FavoritesState extends State<Favorites> {
               removeFavoriteMovie: favoriteViewModel.removeFavoriteMovie,
             ); //widget
           }),
-
-      //   FutureBuilder(
-      // future: favoriteViewModel.getFavoriteMovies(),
-      // builder: (context, snapshot) {
-      // if (snapshot.hasData &&
-      //     snapshot.connectionState == ConnectionState.done) {
-      //   return FavoritesWidget(
-      //     movies: snapshot.requireData,
-      //     removeFavoriteMovie: favoriteViewModel.removeFavoriteMovie,
-      //   );
-      // }
-      // return Center(child: const CircularProgressIndicator());
-      //   },
-      // )
-
-      // Observer(builder: (context) {
-      //       return favoriteViewModel.getFavoriteMovies().map(;
-      //           initial: (_) => Center(child: CircularProgressIndicator()),
-      //           loading: (_) => Center(child: CircularProgressIndicator()),
-      //           error: (value) => Text(value.error),
-      //           success: (value) => FavoritesWidget(movies: [],));
-      // body: StreamBuilder<List<FavoriteMovie>>(
-      //     stream: favoriteViewModel.getFavoriteMovies(),
-      //     builder: (context, snapshot) {
-      //       if (snapshot.hasError)
-      //         return Text('There is an error');
-      //       else if (snapshot.connectionState == ConnectionState.waiting)
-      //         return CircularProgressIndicator();
-      //       return FavoritesWidget(movies: snapshot.requireData); //widget
-      //     }),
     );
   }
 }

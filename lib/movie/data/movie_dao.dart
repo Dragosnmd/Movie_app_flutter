@@ -27,8 +27,6 @@ class MoviesDao {
   }
 
   Future<void> upsertMovies(final List<Movie> movies) async {
-    // await _db.batch ((batch) {
-    //   batch.insertAll(table, rows)
     for (final movie in movies) {
       await _db
           .into(_db.movieTables)
@@ -36,5 +34,4 @@ class MoviesDao {
       // }
     }
   }
-
 }

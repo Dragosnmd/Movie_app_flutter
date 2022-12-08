@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movie_app/movie/data/genre_movies_response.dart';
 import 'package:movie_app/movie/data/movie_api.dart';
 import 'package:movie_app/movie/data/movie_dao.dart';
 import '../../core/storage/app_database.dart';
@@ -40,5 +44,12 @@ class MovieRepository {
 
   Stream<List<FavoriteMovie>> allFavoriteMovies() {
     return _fDao.watchAllFavoritesMovies();
+  }
+
+// fake data from json
+  Future<List<Movie>> readFakePopularMovieJson() async {
+    final response = await rootBundle.loadString('assets/popularMovies.json');
+    final data = await json.decode(response);
+    return GenreMovieListResponse.fromJson(data).toDomainList();
   }
 }

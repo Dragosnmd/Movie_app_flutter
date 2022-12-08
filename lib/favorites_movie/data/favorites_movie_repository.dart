@@ -1,5 +1,4 @@
 import 'package:injectable/injectable.dart';
-import 'package:movie_app/favorites_movie/data/favorite_movie.dart';
 import 'package:movie_app/favorites_movie/data/favorites_movie_dao.dart';
 
 import '../../movie/domain/movie.dart';

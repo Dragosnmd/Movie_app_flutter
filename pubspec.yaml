@@ -50,6 +50,10 @@ dev_dependencies:
   json_serializable: ^6.5.1
   drift_dev: ^2.1.0
   injectable_generator: ^1.5.5
+
+  integration_test:           
+    sdk: flutter              
+  test: ^1.14.4 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -58,7 +62,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-
+    - assets/popularMovies.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

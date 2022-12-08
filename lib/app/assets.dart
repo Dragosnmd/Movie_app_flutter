@@ -10,4 +10,5 @@ class Assets {
   static const String avengers = '${_images}avengers.png';
   static const String marvel = '${_images}marvel.png';
   static const String stars = '${_images}stars.png';
+  
 }
