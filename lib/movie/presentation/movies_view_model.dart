@@ -27,10 +27,10 @@ abstract class MoviesViewModelBase with Store {
   final LoginRepository _loginRepository;
   MoviesViewModelBase(
       this._movieRepository, this._favoriteRepository, this._loginRepository) {
-    getPopularMovies();
     getMoviesRated();
     getNowPlayingMovies();
     getOutInCinema();
+    refreshPopularMovies();
   }
 
   // @computed
@@ -72,14 +72,28 @@ abstract class MoviesViewModelBase with Store {
   Resource<List<MovieModel>> get allMovies {
     final movies = moviesObs.value;
     final favorite = favoriteMovoieObs.value;
-    if (movies == null || favorite == null) {
+    final request = popularMovieReqeust;
+
+    if (movies == null || favorite == null || request == null) {
+      return Resource.initial();
+    }
+
+    final data = movies.map((movie) {
+      final bool favoriteMovie = favorite.contains(movie.id);
+      return MovieModel(movie: movie, isFavorite: favoriteMovie);
+    }).toList();
+
+    if (request.error != null) {
+      return Resource.error(error: request.error, data: data);
+    }
+    if (request.status == FutureStatus.pending) {
+      return Resource.loading(data: data.isEmpty ? null : data);
+    }
+    if (request.value != data.length) {
       return Resource.loading();
     }
-    return Resource.success(
-        data: movies.map((movie) {
-      final bool favoriteMovie = favorite.contains(movie.id);
-      return MovieModel(movie, favoriteMovie);
-    }).toList());
+
+    return Resource.success(data: data);
   }
 
   Future<void> toggleFavorite(int movieId, bool favorite) async {
@@ -90,14 +104,12 @@ abstract class MoviesViewModelBase with Store {
     }
   }
 
-  Future<void> getPopularMovies({final int page = 1}) async {
-    popularMovies = Resource.loading();
-    try {
-      await Future.delayed(const Duration(seconds: 1));
-      _movieRepository.loadPopularMovies();
-    } catch (ex) {
-      popularMovies = Resource.error(error: ex.toString());
-    }
+  @observable
+  ObservableFuture<int>? popularMovieReqeust;
+
+  void refreshPopularMovies() {
+    popularMovieReqeust =
+        ObservableFuture(_movieRepository.loadPopularMovies());
   }
 
   Stream<List<Movie>> movieStream() {

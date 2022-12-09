@@ -43,8 +43,8 @@ class MovieResponse with _$MovieResponse {
         id: id,
         title: title,
         overview: overview,
-        backdropPath: '${imageUrl}w500/$backdropPath',
+        backdropPath: '${imageUrl}w500$backdropPath',
         originalTitle: originalTitle,
-        posterPath: '${imageUrl}original/$posterPath');
+        posterPath: '${imageUrl}original$posterPath');
   }
 }

@@ -27,11 +27,12 @@ class MoviesDao {
   }
 
   Future<void> upsertMovies(final List<Movie> movies) async {
-    for (final movie in movies) {
-      await _db
-          .into(_db.movieTables)
-          .insertOnConflictUpdate(movie.toInsertable());
-      // }
-    }
+    await _db.batch((batch) => batch.insertAllOnConflictUpdate(
+        _db.movieTables, movies.map((e) => e.toInsertable())));
+    // for (final movie in movies) {
+    //   await _db
+    //       .into(_db.movieTables)
+    //       .insertOnConflictUpdate(movie.toInsertable());
+    // }
   }
 }

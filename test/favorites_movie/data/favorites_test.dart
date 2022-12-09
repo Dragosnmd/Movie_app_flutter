@@ -11,9 +11,6 @@ void main() {
 
   group('Favorites Page Widget Tests', () {
     testWidgets('Test if home ListView shows up', (tester) async {
-    //     final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized()
-    //     as IntegrationTestWidgetsFlutterBinding;
-    // binding.framePolicy = LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
       await tester.pumpWidget(MaterialApp(home: MovieListPage()));
       expect(find.byType(ListView), findsOneWidget);
     //Add to favorite
@@ -22,16 +19,5 @@ void main() {
     //Remove from favorite
       await tester.tap(find.byIcon(Icons.favorite).first);
     });
-
-    // testWidgets('Testing Remove Button', (tester) async {
-    //   await tester.pumpWidget(const Favorites());
-    //   await tester.pumpAndSettle();
-    //   var totalItems = tester.widgetList(find.byIcon(Icons.close)).length;
-    //   await tester.tap(find.byIcon(Icons.close).first);
-    //   await tester.pumpAndSettle();
-    //   expect(tester.widgetList(find.byIcon(Icons.close)).length,
-    //       lessThan(totalItems));
-    //   expect(find.text('Removed from favorites.'), findsOneWidget);
-    // });
   });
 }

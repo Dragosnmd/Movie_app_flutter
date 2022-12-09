@@ -17,9 +17,11 @@ class MovieRepository {
   final FavoriteMoviesDao _fDao;
   MovieRepository(this._mDao, this.api, this._fDao);
 
-  Future<void> loadPopularMovies({int page = 1}) async {
+  Future<int> loadPopularMovies({int page = 1}) async {
     final List<Movie> result = await api.getPopularMovies(page: page);
     await _mDao.replaceAll(result);
+    return result.length;
+    // await Future.delayed(const Duration(milliseconds: 10));
   }
 
   Future<List<Movie>> getTopRatedMovies({int page = 1}) async {
