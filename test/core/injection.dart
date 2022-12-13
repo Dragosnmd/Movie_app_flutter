@@ -4,4 +4,4 @@ import 'package:movie_app/core/injection.dart';
 import 'injection.config.dart';
 
 @injectableInit
-Future<void> configureTestDependencies({Environment environment = test}) async => $initGetIt(getIt, environment: environment.name);
+Future<void> configureTestDependencies({Environment environment = test}) async => getIt.init(environment: environment.name);
