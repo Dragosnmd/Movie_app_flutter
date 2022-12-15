@@ -75,7 +75,6 @@ abstract class MoviesViewModelBase with Store {
 
   @computed
   Resource<List<MovieModel>> get allMovies {
-
     final movies = moviesObs.value;
     final favorite = favoriteMovoieObs.value;
     final request = popularMovieRequest;
@@ -84,7 +83,7 @@ abstract class MoviesViewModelBase with Store {
     final status = request.status;
     final number = request.value;
 
-    print("XXX allMovies $movies, $favorite ${request?.status}");
+    // print("XXX allMovies $movies, $favorite ${request?.status}");
 
     if (movies == null || favorite == null || request == null) {
       return const Resource.initial();
@@ -116,8 +115,6 @@ abstract class MoviesViewModelBase with Store {
       await _favoriteRepository.removeFavoriteMovie(movieId);
     }
   }
-
-
 
   void refreshPopularMovies() {
     popularMovieRequest =

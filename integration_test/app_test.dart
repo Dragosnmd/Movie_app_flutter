@@ -28,32 +28,33 @@ void main() {
       matching: find.byType(TextFormField),
     );
     await tester.enterText(usernameField, "dragosncs");
-    await tester.pumpAndSettle(Duration(seconds: 1));
+    await tester.pumpAndSettle(Duration(milliseconds: 20));
     final passwordField = find.ancestor(
       of: find.text('Password'),
       matching: find.byType(TextFormField),
     );
     await tester.enterText(passwordField, "kHziM@S8Cpynut7");
-    // await tester.tap(find.text('Login'));
-    // await tester.tap(find.text('Email'),warnIfMissed: false);
-    await tester.pumpAndSettle(Duration(seconds: 1));
-    // await tester.enterText(find.byElementType(TextFormField), 'dragosncs');
-    // await tester.enterText(find.byElementType(TextFormField), 'kHziM@S8Cpynut7');
-    await tester.tap(find.text('Login'));
-    await tester.pumpAndSettle(Duration(seconds: 3));
-    await Future.delayed(const Duration(seconds: 3));
-  });
 
+    await tester.pumpAndSettle(Duration(milliseconds: 20));
+    await tester.tap(find.text('Login'));
+    await tester.pumpAndSettle(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
+
+    await tester.tap(find.byIcon(Icons.favorite_border).first);
+
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.tap(find.byIcon(Icons.favorite));
+    await tester.pumpAndSettle(const Duration(seconds: 15));
+  });
+}
   // testWidgets('Testing movie List', (tester) async {
   //   await tester.pumpWidget(const MyApp());
 
-  //   await tester.pumpAndSettle(const Duration(seconds: 5));
-  //   await tester.pumpAndSettle(const Duration(seconds: 5));
-  //   final listFinder = find.byType(ListView);
-  //   for (var icon in listFinder) {
-  //     await tester.tap(find.byIcon(Icons.favorite));
-  //     await tester.pumpAndSettle(Duration(seconds: 1));
-  //   }
+
+  //   // for (var icon in listFinder) {
+  //   //   await tester.tap(find.byIcon(Icons.favorite));
+  //   //   await tester.pumpAndSettle(Duration(seconds: 1));
+  //   // }
 
   //   await tester.tap(find.byIcon(Icons.favorite_border));
   //   await tester.tap(find.byIcon(Icons.favorite));
@@ -68,4 +69,3 @@ void main() {
   // await tester.pumpAndSettle();
   // await tester.fling(listFinder, const Offset(-50, 0), 0);
   //   await tester.pumpAndSettle()
-}
