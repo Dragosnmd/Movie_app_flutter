@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:movie_app/core/injection.dart';
 import 'package:movie_app/movie/presentation/movie_details_view_model.dart';
-import 'package:movie_app/movie/presentation/movies_view_model.dart';
 import '../../core/injection.dart';
 import '../../utils/test_mobx.dart';
 
@@ -21,8 +20,6 @@ void main() {
     final viewModel = getIt<MovieDetailsViewModel>(param1:436270);
 
     streamOf((_) => viewModel.isFavorite);
-
-    await Future.delayed(Duration(milliseconds: 10));
 
     expect(viewModel.isFavorite, false);
 

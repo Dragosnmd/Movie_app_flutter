@@ -91,7 +91,7 @@ void main() {
   });
   test('remove from favorties',() async{
       final viewModel = getIt<MoviesViewModel>();
-     streamOf((_) => viewModel.allMovies);
+    streamOf((_) => viewModel.allMovies);
     expect(viewModel.allMovies, isA<ResourceInitial>());
     expect(
         await asyncValue((_) => viewModel.allMovies), isA<ResourceLoading>());

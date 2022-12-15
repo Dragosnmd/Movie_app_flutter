@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:movie_app/app/assets.dart';
-import 'package:movie_app/movie/domain/movieModel.dart';
 import 'package:movie_app/movie/presentation/widgets/movieList.dart';
-import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
-import '../../../auth/data/login_repository.dart';
-import '../../../auth/presentation/loginScreen.dart';
 import '../../../core/injection.dart';
-import '../../../favorites_movie/data/modelsMOCKED/favorite_model.dart';
-import '../../domain/movie.dart';
 import '../movies_view_model.dart';
-import '../widgets/movieStars.dart';
 import '../widgets/outInCinema.dart';
 
 class MovieListPage extends StatefulWidget {

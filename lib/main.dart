@@ -3,10 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:mobx/mobx.dart';
 import 'package:movie_app/core/injection.dart';
 import 'package:movie_app/movie/presentation/screens/movie_list_page.dart';
-import 'package:provider/provider.dart';
 import 'auth/data/login_repository.dart';
 import 'auth/presentation/loginScreen.dart';
-import 'favorites_movie/data/modelsMOCKED/favorite_model.dart';
 import 'favorites_movie/presentation/favorites.dart';
 import 'movie/presentation/screens/movie_details_page.dart';
 
@@ -84,4 +82,5 @@ final GoRouter _router = GoRouter(
         return null;
       else
         return '/login';
-    });
+    }
+    );
