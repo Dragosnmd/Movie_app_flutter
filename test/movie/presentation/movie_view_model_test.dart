@@ -13,7 +13,7 @@ import '../../utils/test_mobx.dart';
 
 void main() {
   setUpAll(() async {
-    TestWidgetsFlutterBinding.ensureInitialized();
+    await TestWidgetsFlutterBinding.ensureInitialized();
 
     mainContext.config = mainContext.config.clone(
       isSpyEnabled: true,
@@ -61,6 +61,59 @@ void main() {
         ]));
   });
 
+  test('add movie to favorite', () async {
+  final viewModel = getIt<MoviesViewModel>();
+
+    viewModel.toggleFavorite(436270, true);
+    streamOf((_) => viewModel.allMovies);
+    expect(viewModel.allMovies, isA<ResourceInitial>());
+    expect(
+        await asyncValue((_) => viewModel.allMovies), isA<ResourceLoading>());
+    expect(
+        await asyncValue((_) => viewModel.allMovies),
+        Resource<List<MovieModel>>.success(data: [
+          MovieModel(
+              movie: Movie(
+                backdropPath:
+                    "https://image.tmdb.org/t/p/w500/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg",
+                id: 436270,
+                originalTitle: "Black Adam",
+                overview:
+                    "Nearly 5,000 years after he was bestowed with the almighty powers of the Egyptian gods—and imprisoned just as quickly—Black Adam is freed from his earthly tomb, ready to unleash his unique form of justice on the modern world.",
+                posterPath:
+                    "https://image.tmdb.org/t/p/original/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg",
+                title: "Black Adam",
+              ),
+              isFavorite: true),
+
+        ]));
+
+  });
+  test('remove from favorties',() async{
+      final viewModel = getIt<MoviesViewModel>();
+     streamOf((_) => viewModel.allMovies);
+    expect(viewModel.allMovies, isA<ResourceInitial>());
+    expect(
+        await asyncValue((_) => viewModel.allMovies), isA<ResourceLoading>());
+      expect(
+        await asyncValue((_) => viewModel.allMovies),
+        Resource<List<MovieModel>>.success(data: [
+          MovieModel(
+              movie: Movie(
+                backdropPath:
+                    "https://image.tmdb.org/t/p/w500/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg",
+                id: 436270,
+                originalTitle: "Black Adam",
+                overview:
+                    "Nearly 5,000 years after he was bestowed with the almighty powers of the Egyptian gods—and imprisoned just as quickly—Black Adam is freed from his earthly tomb, ready to unleash his unique form of justice on the modern world.",
+                posterPath:
+                    "https://image.tmdb.org/t/p/original/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg",
+                title: "Black Adam",
+              ),
+              isFavorite: false),
+
+        ]));
+  });
   test('movie list failed', () async {
     final fakeApi = getIt<MoviesApi>() as FakeMovieApi;
     fakeApi.exception = Exception('Dragos');

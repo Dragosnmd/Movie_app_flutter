@@ -23,13 +23,6 @@ class MovieListPage extends StatefulWidget {
 
 class _MovieListPageState extends State<MovieListPage> {
   final viewModel = getIt<MoviesViewModel>();
-  // late Stream<List<MovieModel>> _getMovieList;
-  // final signOut = getIt<LoginRepository>();
-  // logout() async {
-  //   await signOut.clearToken();
-  //   Navigator.push(
-  //       context, MaterialPageRoute(builder: (context) => const LoginScreen()));
-  // } // MOVE  TO MOVIE VIEW MODEL
 
   @override
   void initState() {
