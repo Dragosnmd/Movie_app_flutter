@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobx/mobx.dart';
 import 'package:movie_app/core/injection.dart';
 import 'package:movie_app/movie/presentation/screens/movie_list_page.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,16 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
 
+  mainContext.config = mainContext.config.clone(
+    isSpyEnabled: true,
+  );
+
+  mainContext.spy((event) {
+    if (event.type == 'reaction-error') {
+      print('Error!!!! $event');
+    }
+  });
+
   runApp(MyApp());
 
   // runApp(ChangeNotifierProvider(
@@ -23,6 +34,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(

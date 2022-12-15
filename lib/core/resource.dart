@@ -6,7 +6,7 @@ part 'resource.freezed.dart';
 class Resource<T> with _$Resource {
   const factory Resource.initial() = ResourceInitial;
   const factory Resource.loading({T? data, String? test}) = ResourceLoading;
-  const factory Resource.error({required String error, T? data}) =
+  const factory Resource.error({required Exception error, T? data}) =
       ResourceError;
   const factory Resource.success({required T data}) = ResourceSuccess;
 }

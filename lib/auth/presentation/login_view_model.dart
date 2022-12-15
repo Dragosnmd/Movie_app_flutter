@@ -34,8 +34,8 @@ abstract class LoginViewModelBase with Store {
         username,
         password,
       )));
-    } catch (ex) {
-      login = Resource.error(error: ex.toString());
+    } on Exception catch (ex, st) {
+      login = Resource.error(error: ex);
     }
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 import 'package:movie_app/auth/data/login_repository.dart';
@@ -41,7 +43,7 @@ abstract class MoviesViewModelBase with Store {
   //     outInCinema is ResourceLoading;
 
   @computed
-  String? get loadingError =>
+  Exception? get loadingError =>
       popularMovies.mapOrNull(error: (value) => value.error) ??
       topRatedMovies.mapOrNull(error: (value) => value.error) ??
       nowPlayingMovies.mapOrNull(error: (value) => value.error) ??
@@ -68,29 +70,40 @@ abstract class MoviesViewModelBase with Store {
   late ObservableStream<Set<int>> favoriteMovoieObs =
       _favoriteRepository.favoritesMovies().asObservable();
 
+  //@observable
+  late ObservableFuture<int> popularMovieRequest;
+
   @computed
   Resource<List<MovieModel>> get allMovies {
+
     final movies = moviesObs.value;
     final favorite = favoriteMovoieObs.value;
-    final request = popularMovieReqeust;
+    final request = popularMovieRequest;
+
+    final error = request.error;
+    final status = request.status;
+    final number = request.value;
+
+    print("XXX allMovies $movies, $favorite ${request?.status}");
 
     if (movies == null || favorite == null || request == null) {
-      return Resource.initial();
+      return const Resource.initial();
     }
 
     final data = movies.map((movie) {
       final bool favoriteMovie = favorite.contains(movie.id);
       return MovieModel(movie: movie, isFavorite: favoriteMovie);
     }).toList();
-
-    if (request.error != null) {
-      return Resource.error(error: request.error, data: data);
+    if (error != null) {
+      print("XXX create Resource error");
+      //throw Error();
+      return Resource.error(error: error, data: data);
     }
-    if (request.status == FutureStatus.pending) {
+    if (status == FutureStatus.pending) {
       return Resource.loading(data: data.isEmpty ? null : data);
     }
-    if (request.value != data.length) {
-      return Resource.loading();
+    if (number != data.length) {
+      return const Resource.loading();
     }
 
     return Resource.success(data: data);
@@ -104,11 +117,10 @@ abstract class MoviesViewModelBase with Store {
     }
   }
 
-  @observable
-  ObservableFuture<int>? popularMovieReqeust;
+
 
   void refreshPopularMovies() {
-    popularMovieReqeust =
+    popularMovieRequest =
         ObservableFuture(_movieRepository.loadPopularMovies());
   }
 
@@ -122,8 +134,8 @@ abstract class MoviesViewModelBase with Store {
       await Future.delayed(const Duration(seconds: 1));
       topRatedMovies = Resource.success(
           data: (await _movieRepository.getTopRatedMovies()).asObservable());
-    } catch (ex) {
-      topRatedMovies = Resource.error(error: ex.toString());
+    } on Exception catch (ex, st) {
+      topRatedMovies = Resource.error(error: ex);
     }
   }
 
@@ -133,8 +145,8 @@ abstract class MoviesViewModelBase with Store {
       await Future.delayed(const Duration(seconds: 1));
       nowPlayingMovies = Resource.success(
           data: (await _movieRepository.getNowPlayingMovies()).asObservable());
-    } catch (ex) {
-      nowPlayingMovies = Resource.error(error: ex.toString());
+    } on Exception catch (ex, st) {
+      nowPlayingMovies = Resource.error(error: ex);
     }
   }
 
@@ -144,8 +156,8 @@ abstract class MoviesViewModelBase with Store {
       await Future.delayed(const Duration(seconds: 1));
       outInCinema = Resource.success(
           data: (await _movieRepository.getOutInCinema()).asObservable());
-    } catch (ex) {
-      outInCinema = Resource.error(error: ex.toString());
+    } on Exception catch (ex, st) {
+      outInCinema = Resource.error(error: ex);
     }
   }
 

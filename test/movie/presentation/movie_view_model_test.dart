@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mobx/mobx.dart';
 import 'package:movie_app/core/injection.dart';
 import 'package:movie_app/core/resource.dart';
 import 'package:movie_app/movie/data/movie_api.dart';
@@ -13,6 +14,19 @@ import '../../utils/test_mobx.dart';
 void main() {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
+
+    mainContext.config = mainContext.config.clone(
+      isSpyEnabled: true,
+      disableErrorBoundaries: true,
+      readPolicy: ReactiveReadPolicy.always,
+      writePolicy: ReactiveWritePolicy.always,
+    );
+
+    mainContext.spy((event) {
+      if (event.type == 'reaction-error') {
+        print('Error!!!! $event');
+      }
+    });
   });
 
   setUp(() async {
@@ -52,9 +66,13 @@ void main() {
     fakeApi.exception = Exception('Dragos');
     final viewModel = getIt<MoviesViewModel>();
     expect(viewModel.allMovies, isA<ResourceInitial>());
+
+    reaction((fn) => viewModel.allMovies, (resource) {
+      print("XXX full-reaction $resource");
+    }, fireImmediately: true);
+
     expect(
         await asyncValue((_) => viewModel.allMovies), isA<ResourceLoading>());
-    expect(await asyncValue((_) => viewModel.allMovies),
-        Resource.error(error: fakeApi.exception.toString()));
+    expect(await asyncValue((_) => viewModel.allMovies), isA<ResourceError>());
   });
 }

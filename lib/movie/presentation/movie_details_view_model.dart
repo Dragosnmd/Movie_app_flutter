@@ -38,8 +38,8 @@ abstract class MovieDetailsViewModelBase with Store {
       movieDetails =
           Resource.success(data: (await _movieRepository.getMovieDetails(id)));
       // repository.getDetails(id);
-    } catch (ex) {
-      movieDetails = Resource.error(error: ex.toString());
+    } on Exception catch (ex, st) {
+      movieDetails = Resource.error(error: ex);
     }
   }
 

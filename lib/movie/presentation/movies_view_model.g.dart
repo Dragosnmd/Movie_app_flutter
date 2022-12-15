@@ -9,11 +9,11 @@ part of 'movies_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$MoviesViewModel on MoviesViewModelBase, Store {
-  Computed<String?>? _$loadingErrorComputed;
+  Computed<Exception?>? _$loadingErrorComputed;
 
   @override
-  String? get loadingError =>
-      (_$loadingErrorComputed ??= Computed<String?>(() => super.loadingError,
+  Exception? get loadingError =>
+      (_$loadingErrorComputed ??= Computed<Exception?>(() => super.loadingError,
               name: 'MoviesViewModelBase.loadingError'))
           .value;
   Computed<Resource<List<MovieModel>>>? _$allMoviesComputed;
@@ -104,22 +104,6 @@ mixin _$MoviesViewModel on MoviesViewModelBase, Store {
     });
   }
 
-  late final _$popularMovieReqeustAtom =
-      Atom(name: 'MoviesViewModelBase.popularMovieReqeust', context: context);
-
-  @override
-  ObservableFuture<int>? get popularMovieReqeust {
-    _$popularMovieReqeustAtom.reportRead();
-    return super.popularMovieReqeust;
-  }
-
-  @override
-  set popularMovieReqeust(ObservableFuture<int>? value) {
-    _$popularMovieReqeustAtom.reportWrite(value, super.popularMovieReqeust, () {
-      super.popularMovieReqeust = value;
-    });
-  }
-
   @override
   String toString() {
     return '''
@@ -128,7 +112,6 @@ topRatedMovies: ${topRatedMovies},
 nowPlayingMovies: ${nowPlayingMovies},
 outInCinema: ${outInCinema},
 fakePopularMovies: ${fakePopularMovies},
-popularMovieReqeust: ${popularMovieReqeust},
 loadingError: ${loadingError},
 allMovies: ${allMovies}
     ''';

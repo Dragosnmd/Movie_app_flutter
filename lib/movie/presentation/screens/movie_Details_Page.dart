@@ -54,7 +54,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
         return viewModel.movieDetails.map(
             initial: (_) => Center(child: CircularProgressIndicator()),
             loading: (_) => Center(child: CircularProgressIndicator()),
-            error: (value) => Text(value.error),
+            error: (value) => Text(value.error.toString()),
             success: (value) => MovieDetailsWidget(
                   movie: value.data,
                 ));

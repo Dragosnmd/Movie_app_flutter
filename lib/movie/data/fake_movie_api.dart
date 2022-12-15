@@ -31,20 +31,17 @@ class FakeMovieApi implements MoviesApi {
   }
 
   @override
-  Future<List<Movie>> getNowPlayingMovies({int page = 1}) {
-    // TODO: implement getNowPlayingMovies
-    throw UnimplementedError();
+  Future<List<Movie>> getNowPlayingMovies({int page = 1}) async {
+    return [];
   }
 
   @override
-  Future<List<Movie>> getOutInCinema({int page = 1}) {
-    // TODO: implement getOutInCinema
-    throw UnimplementedError();
+  Future<List<Movie>> getOutInCinema({int page = 1}) async {
+    return [];
   }
 
   @override
-  Future<List<Movie>> getTopRatedMovies({int page = 1}) {
-    // TODO: implement getTopRatedMovies
-    throw UnimplementedError();
+  Future<List<Movie>> getTopRatedMovies({int page = 1}) async {
+    return [];
   }
 }

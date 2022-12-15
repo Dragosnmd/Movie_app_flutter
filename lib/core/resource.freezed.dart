@@ -20,7 +20,7 @@ mixin _$Resource<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(T? data, String? test) loading,
-    required TResult Function(String error, T? data) error,
+    required TResult Function(Exception error, T? data) error,
     required TResult Function(T data) success,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$Resource<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(T? data, String? test)? loading,
-    TResult? Function(String error, T? data)? error,
+    TResult? Function(Exception error, T? data)? error,
     TResult? Function(T data)? success,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$Resource<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(T? data, String? test)? loading,
-    TResult Function(String error, T? data)? error,
+    TResult Function(Exception error, T? data)? error,
     TResult Function(T data)? success,
     required TResult orElse(),
   }) =>
@@ -126,7 +126,7 @@ class _$ResourceInitial<T> implements ResourceInitial<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(T? data, String? test) loading,
-    required TResult Function(String error, T? data) error,
+    required TResult Function(Exception error, T? data) error,
     required TResult Function(T data) success,
   }) {
     return initial();
@@ -137,7 +137,7 @@ class _$ResourceInitial<T> implements ResourceInitial<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(T? data, String? test)? loading,
-    TResult? Function(String error, T? data)? error,
+    TResult? Function(Exception error, T? data)? error,
     TResult? Function(T data)? success,
   }) {
     return initial?.call();
@@ -148,7 +148,7 @@ class _$ResourceInitial<T> implements ResourceInitial<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(T? data, String? test)? loading,
-    TResult Function(String error, T? data)? error,
+    TResult Function(Exception error, T? data)? error,
     TResult Function(T data)? success,
     required TResult orElse(),
   }) {
@@ -276,7 +276,7 @@ class _$ResourceLoading<T> implements ResourceLoading<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(T? data, String? test) loading,
-    required TResult Function(String error, T? data) error,
+    required TResult Function(Exception error, T? data) error,
     required TResult Function(T data) success,
   }) {
     return loading(data, test);
@@ -287,7 +287,7 @@ class _$ResourceLoading<T> implements ResourceLoading<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(T? data, String? test)? loading,
-    TResult? Function(String error, T? data)? error,
+    TResult? Function(Exception error, T? data)? error,
     TResult? Function(T data)? success,
   }) {
     return loading?.call(data, test);
@@ -298,7 +298,7 @@ class _$ResourceLoading<T> implements ResourceLoading<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(T? data, String? test)? loading,
-    TResult Function(String error, T? data)? error,
+    TResult Function(Exception error, T? data)? error,
     TResult Function(T data)? success,
     required TResult orElse(),
   }) {
@@ -363,7 +363,7 @@ abstract class _$$ResourceErrorCopyWith<T, $Res> {
           _$ResourceError<T> value, $Res Function(_$ResourceError<T>) then) =
       __$$ResourceErrorCopyWithImpl<T, $Res>;
   @useResult
-  $Res call({String error, T? data});
+  $Res call({Exception error, T? data});
 }
 
 /// @nodoc
@@ -384,7 +384,7 @@ class __$$ResourceErrorCopyWithImpl<T, $Res>
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Exception,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -399,7 +399,7 @@ class _$ResourceError<T> implements ResourceError<T> {
   const _$ResourceError({required this.error, this.data});
 
   @override
-  final String error;
+  final Exception error;
   @override
   final T? data;
 
@@ -432,7 +432,7 @@ class _$ResourceError<T> implements ResourceError<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(T? data, String? test) loading,
-    required TResult Function(String error, T? data) error,
+    required TResult Function(Exception error, T? data) error,
     required TResult Function(T data) success,
   }) {
     return error(this.error, data);
@@ -443,7 +443,7 @@ class _$ResourceError<T> implements ResourceError<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(T? data, String? test)? loading,
-    TResult? Function(String error, T? data)? error,
+    TResult? Function(Exception error, T? data)? error,
     TResult? Function(T data)? success,
   }) {
     return error?.call(this.error, data);
@@ -454,7 +454,7 @@ class _$ResourceError<T> implements ResourceError<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(T? data, String? test)? loading,
-    TResult Function(String error, T? data)? error,
+    TResult Function(Exception error, T? data)? error,
     TResult Function(T data)? success,
     required TResult orElse(),
   }) {
@@ -503,10 +503,10 @@ class _$ResourceError<T> implements ResourceError<T> {
 }
 
 abstract class ResourceError<T> implements Resource<T> {
-  const factory ResourceError({required final String error, final T? data}) =
+  const factory ResourceError({required final Exception error, final T? data}) =
       _$ResourceError<T>;
 
-  String get error;
+  Exception get error;
   T? get data;
   @JsonKey(ignore: true)
   _$$ResourceErrorCopyWith<T, _$ResourceError<T>> get copyWith =>
@@ -581,7 +581,7 @@ class _$ResourceSuccess<T> implements ResourceSuccess<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(T? data, String? test) loading,
-    required TResult Function(String error, T? data) error,
+    required TResult Function(Exception error, T? data) error,
     required TResult Function(T data) success,
   }) {
     return success(data);
@@ -592,7 +592,7 @@ class _$ResourceSuccess<T> implements ResourceSuccess<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(T? data, String? test)? loading,
-    TResult? Function(String error, T? data)? error,
+    TResult? Function(Exception error, T? data)? error,
     TResult? Function(T data)? success,
   }) {
     return success?.call(data);
@@ -603,7 +603,7 @@ class _$ResourceSuccess<T> implements ResourceSuccess<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(T? data, String? test)? loading,
-    TResult Function(String error, T? data)? error,
+    TResult Function(Exception error, T? data)? error,
     TResult Function(T data)? success,
     required TResult orElse(),
   }) {

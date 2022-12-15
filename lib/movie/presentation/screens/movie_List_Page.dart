@@ -100,7 +100,7 @@ class _MovieListPageState extends State<MovieListPage> {
             return viewModel.outInCinema.map(
                 initial: (_) => Center(child: CircularProgressIndicator()),
                 loading: (_) => Center(child: CircularProgressIndicator()),
-                error: (value) => Text(value.error),
+                error: (value) => Text(value.error.toString()),
                 success: (value) =>
                     OutInCinema(title: 'Out in Cinema', movies: value.data));
           }),
@@ -117,7 +117,7 @@ class _MovieListPageState extends State<MovieListPage> {
             return viewModel.allMovies.map(
                 initial: (_) => Center(child: CircularProgressIndicator()),
                 loading: (_) => Center(child: CircularProgressIndicator()),
-                error: (value) => Text(value.error),
+                error: (value) => Text(value.error.toString()),
                 success: (value) => MovieList(
                     title: 'Popular',
                     movies: value.data,
