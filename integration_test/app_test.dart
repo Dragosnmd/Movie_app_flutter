@@ -40,6 +40,9 @@ void main() {
     await tester.pumpAndSettle(Duration(seconds: 1));
     await Future.delayed(const Duration(seconds: 1));
 
+    // await tester.tap(find.ancestor(
+    //     of: find.byType(IconButton),
+    //     matching: find.byIcon(Icons.favorite)));
     await tester.tap(find.byIcon(Icons.favorite_border).first);
 
     await tester.pumpAndSettle(const Duration(seconds: 5));
