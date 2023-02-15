@@ -83,8 +83,6 @@ abstract class MoviesViewModelBase with Store {
     final status = request.status;
     final number = request.value;
 
-    // print("XXX allMovies $movies, $favorite ${request?.status}");
-
     if (movies == null || favorite == null || request == null) {
       return const Resource.initial();
     }

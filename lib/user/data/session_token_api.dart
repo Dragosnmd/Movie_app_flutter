@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/core/network/network_module.dart';
 import 'package:movie_app/user/data/session.dart';
@@ -23,3 +24,4 @@ class SessionTokenApi {
     }
   }
 }
+final sessionTokenApi = Provider((ref) => SessionTokenApi);

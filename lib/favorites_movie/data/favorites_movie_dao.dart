@@ -1,8 +1,10 @@
 import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/movie/domain/movie.dart';
 import '../../core/storage/app_database.dart';
+import '../../core/storage/storage_module.dart';
 
 @lazySingleton
 class FavoriteMoviesDao {
@@ -39,3 +41,5 @@ class FavoriteMoviesDao {
     return query.watch();
   }
 }
+
+final favoriteMovieDaoProvider = Provider((ref) => FavoriteMoviesDao((ref.watch(appDatabaseProvider))));

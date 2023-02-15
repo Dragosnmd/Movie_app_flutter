@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/movie/data/genre_movies_response.dart';
 import 'package:movie_app/movie/data/movie_api.dart';
@@ -15,7 +16,7 @@ class MovieRepository {
   final MoviesApi api;
   final MoviesDao _mDao;
   final FavoriteMoviesDao _fDao;
-  MovieRepository(this._mDao, this.api, this._fDao);
+  MovieRepository( this.api,this._mDao, this._fDao);
 
   Future<int> loadPopularMovies({int page = 1}) async {
     final List<Movie> result = await api.getPopularMovies(page: page);
@@ -48,3 +49,5 @@ class MovieRepository {
     return _fDao.watchAllFavoritesMovies();
   }
 }
+
+final movieRepositoryProvider = Provider((ref) => MovieRepository(ref.watch(movieApiProvider),ref.watch(movieDaoProvider),ref.watch(favoriteMovieDaoProvider)));

@@ -1,17 +1,16 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/movie/domain/movie.dart';
+import '../../core/network/network_module.dart';
 import '../domain/movie_details.dart';
 import 'detail_movie_response.dart';
 import 'genre_movies_response.dart';
-
-
 
 @lazySingleton
 @dev
 class MoviesApi {
   final Dio _dio;
-
   MoviesApi(this._dio);
 
   Future<List<Movie>> getPopularMovies({int page = 1}) async {
@@ -39,7 +38,9 @@ class MoviesApi {
   }
 
   Future<MovieDetails> getDetails(int movieId) async {
-    final respone = await _dio.get('/movie/$movieId');
-    return DetailMovieResponse.fromJson(respone.data).toDomain();
+    final response = await _dio.get('/movie/$movieId');
+    return DetailMovieResponse.fromJson(response.data).toDomain();
   }
 }
+
+final movieApiProvider = Provider((ref) => MoviesApi(ref.watch(dioProvider)));

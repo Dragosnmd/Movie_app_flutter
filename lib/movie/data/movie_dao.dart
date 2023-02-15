@@ -1,5 +1,7 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
 import '../../core/storage/app_database.dart';
+import '../../core/storage/storage_module.dart';
 import '../domain/movie.dart';
 
 @lazySingleton
@@ -36,3 +38,4 @@ class MoviesDao {
     // }
   }
 }
+final movieDaoProvider = Provider((ref) => MoviesDao((ref.watch(appDatabaseProvider))));

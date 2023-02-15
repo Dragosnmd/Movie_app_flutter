@@ -1,14 +1,16 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
+
 
 import 'login_payload.dart';
 import 'token_request.dart';
 
 @lazySingleton
 class LoginApi {
-  final Dio dio;
+  late  Dio dio;
   // final NetworkModule networkModule;
-  LoginApi(this.dio);
+  // LoginApi(this.dio);
   Future<TokenRequest> login(final LoginPayload payload) async {
     try {
       final response = await dio.post(
@@ -23,3 +25,6 @@ class LoginApi {
     }
   }
 }
+final loginApi = Provider((ref) => LoginApi);
+
+

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobx/mobx.dart';
 import 'package:movie_app/core/injection.dart';
@@ -22,7 +23,7 @@ Future<void> main() async {
     }
   });
 
-  runApp(MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 
   // runApp(ChangeNotifierProvider(
   //   create: (context) => FavoritesModel(),
@@ -82,5 +83,4 @@ final GoRouter _router = GoRouter(
         return null;
       else
         return '/login';
-    }
-    );
+    });

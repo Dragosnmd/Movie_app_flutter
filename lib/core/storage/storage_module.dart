@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app_database.dart';
@@ -26,3 +27,6 @@ abstract class StorageModule {
   // SharedPreferences get sharedPreferences => _sharedPreference;
   // FlutterSecureStorage get secureStorage => _secureStorage;
 }
+
+final appDatabaseProvider = Provider((ref) =>AppDatabase());
+

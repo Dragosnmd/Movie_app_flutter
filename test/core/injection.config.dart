@@ -67,7 +67,7 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i7.FavoritesMovieRepository(gh<_i6.FavoriteMoviesDao>()));
     gh.lazySingleton<_i8.GetRequestTokenApi>(
         () => _i8.GetRequestTokenApi(gh<_i5.Dio>()));
-    gh.lazySingleton<_i9.LoginApi>(() => _i9.LoginApi(gh<_i5.Dio>()));
+    gh.lazySingleton<_i9.LoginApi>(() => _i9.LoginApi());
     gh.lazySingleton<_i10.MoviesApi>(
       () => _i10.MoviesApi(gh<_i5.Dio>()),
       registerFor: {_dev},
@@ -103,8 +103,8 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i17.LoginViewModel>(
         () => _i17.LoginViewModel(gh<_i16.LoginRepository>()));
     gh.lazySingleton<_i18.MovieRepository>(() => _i18.MovieRepository(
-          gh<_i12.MoviesDao>(),
           gh<_i10.MoviesApi>(),
+          gh<_i12.MoviesDao>(),
           gh<_i6.FavoriteMoviesDao>(),
         ));
     gh.factory<_i19.MoviesViewModel>(() => _i19.MoviesViewModel(

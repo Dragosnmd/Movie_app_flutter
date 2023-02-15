@@ -7,23 +7,28 @@ import 'package:movie_app/auth/data/token_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../user/data/session.dart';
 import '../../user/data/session_token_api.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 part 'login_repository.g.dart';
 
+//
 @singleton
 @preResolve
 class LoginRepository extends LoginRepositoryBase with _$LoginRepository {
   LoginRepository._(
-    LoginApi loginApi,
-    GetRequestTokenApi getRequestTokenApi,
-    SessionTokenApi sessionTokenApi,
-    SharedPreferences sharedPreferences,
+ loginApi,
+ getRequestTokenApi,
+ sessionTokenApi,
+     sharedPreferences,
   ) : super(
           loginApi,
           getRequestTokenApi,
           sessionTokenApi,
           sharedPreferences,
         );
+  // LoginRepository(this.loginApi,this.getRequestTokenApi, this.sessionTokenApi, this.sharedPreferences) : super(  loginApi,
+  //             getRequestTokenApi,
+  //             sessionTokenApi,
+  //             sharedPreferences,);
   @factoryMethod
   static Future<LoginRepository> create(
     LoginApi loginApi,
@@ -154,3 +159,5 @@ abstract class LoginRepositoryBase with Store {
     }
   }
 }
+
+// final loginRepository = Provider((ref) => LoginRepository(ref.watch(loginApi)));
